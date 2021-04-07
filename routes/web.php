@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Painel\Admin\HomeAdminController;
+use App\Http\Controllers\Painel\Admin\DashboardAdminController;
 use App\Http\Controllers\Site\HomeSiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeSiteController::class, 'index']);
 
 Route::prefix('/painel')->group(function(){
-    Route::get('/', [HomeAdminController::class, 'index']);
+    Route::get('/', [DashboardAdminController::class, 'index']);
+
 });
 
 

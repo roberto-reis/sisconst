@@ -1,1 +1,3 @@
-<h1>LOGIN</h1>
+@extends('adminlte::auth.login')
+
+@section('title', 'Login')

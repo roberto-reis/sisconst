@@ -187,7 +187,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'painel',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -226,86 +226,83 @@ return [
     'menu' => [
         [
             'text' => 'search',
-            'search' => true,
+            'search' => false,
             'topnav' => true,
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
+            'text' => 'Usuários',
+            'url'  => 'painel/usuarios',
             'icon' => 'fas fa-fw fa-user',
         ],
+        ['header' => 'Operacional'],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Projetos',
+            'url'  => 'painel/projetos',
+            'icon' => 'fas fa-project-diagram',
         ],
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
+            'text' => 'Obras',
+            'url'  => 'painel/obras',
+            'icon' => 'fas fa-pencil-ruler',
         ],
         [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
+            'text' => 'Estação',
+            'url'  => 'painel/estacao',
+            'icon' => 'fas fa-copy',
         ],
         [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
+            'text' => 'Empreiteiros',
+            'url'  => 'painel/empreiteiros',
+            'icon' => 'fas fa-users',
         ],
+        [
+            'text' => 'Clientes',
+            'url'  => 'painel/clentes',
+            'icon' => 'fas fa-user-tie',
+        ],
+        [
+            'text' => 'Status',
+            'url'  => 'painel/status',
+            'icon' => 'fas fa-info-circle',
+        ],
+        [
+            'text' => 'Tipo de Serviços',
+            'url'  => 'painel/tipo_servico',
+            'icon' => 'fas fa-tenge',
+        ],
+
+
+        ['header' => 'Almoxarifado'],
+        [
+            'text' => 'Materiais ',
+            'url'  => 'painel/materiais',
+            'icon' => 'fas fa-paint-roller',
+        ],
+        [
+            'text' => 'Saída de Material',
+            'url'  => 'painel/siada_materiais',
+            'icon' => 'fas fa-sign-out-alt',
+        ],
+        [
+            'text' => 'Devolução de Material',
+            'url'  => 'painel/devolucao_material',
+            'icon' => 'fas fa-sign-in-alt',
+        ],
+        [
+            'text' => 'Saída de EPI',
+            'url'  => 'painel/saida_epi',
+            'icon' => 'fas fa-sign-out-alt',
+        ],
+        [
+            'text' => 'Devolução de EPI',
+            'url'  => 'painel/devolucao_epi',
+            'icon' => 'fas fa-sign-in-alt',
+        ],
+        [
+            'text' => 'Fornecedores',
+            'url'  => 'painel/fornecedores',
+            'icon' => 'fas fa-user-tie',
+        ]        
     ],
 
     /*

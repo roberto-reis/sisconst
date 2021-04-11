@@ -1,3 +1,8 @@
+:root {
+    --blue-primary: #17A2B8;
+    --blue-secundary: #137281;
+}
+
 .content-header {
     color: #4e4e4e;
     background-color: #E9ECEF;
@@ -8,4 +13,23 @@
     padding: 0;
     margin: 0;
     font-size: 20px;
+}
+
+.title_custom h2{
+    color: #4e4e4e;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 26px;
+}
+
+.card_custom {
+    background-color: var(--blue-secundary);
+    color: #fff;
+}
+.card_custom h3 {
+    font-size: 24px;
+}
+.card_custom span {
+    font-size: 48px;
+    font-weight: 600;
 }

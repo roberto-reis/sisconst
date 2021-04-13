@@ -15,6 +15,7 @@
     font-size: 20px;
 }
 
+/* title_custom */
 .title_custom h2{
     color: #4e4e4e;
     font-weight: 600;
@@ -22,6 +23,7 @@
     font-size: 26px;
 }
 
+/* card_custom */
 .card_custom {
     background-color: var(--blue-secundary);
     color: #fff;
@@ -32,4 +34,50 @@
 .card_custom span {
     font-size: 48px;
     font-weight: 600;
+}
+
+/* modal_custom */
+.modal_custom .modal-header{
+    background-color: #C4C4C4;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.modal_custom .modal-header .modal-title {
+    color: #4e4e4e;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* form_custom */
+.form_custom .form-group label{
+    color: #4e4e4e;
+}
+.form_custom input,
+.form_custom select {
+    border: 2px solid var(--blue-primary);
+}
+
+/* table_custom */
+.table_custom tbody{
+    color: #4e4e4e;
+}
+.btn_table {
+    display: flex;
+}
+.btn_table i {
+    font-size: 1.5rem;
+}
+.btn_table i.fa-edit{
+    color: #FF7A00;
+}
+.btn_table i.fa-trash{
+    color: #FF0000;
+}
+
+/* alerta_custom */
+.alerta_custom {
+    z-index: 999;
+    position: absolute;
+    top: 60px;
+    right: 5px;
 }

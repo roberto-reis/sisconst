@@ -20,8 +20,8 @@ Route::get('/', [HomeSiteController::class, 'index']);
 
 Route::prefix('/painel')->group(function(){
     //Rotas Admin
-    Route::get('/', [DashboardAdminController::class, 'index']);
-    Route::get('/usuarios', [UsuariosController::class, 'index']);
+    Route::get('/', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
+    Route::resource('usuarios', UsuariosController::class);
 
     // Rotas Operacional
 

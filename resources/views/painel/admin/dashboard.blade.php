@@ -14,10 +14,10 @@
     <!-- Seção nav btn's -->
     <div class="row my-4">
         <div class="col">
-            <a href="#" class="btn btn-info">Usuários</a>
+            <a href="{{ route('usuarios.index') }}" class="btn btn-info">Usuários</a>
         </div>
     </div>
-    
+
     <!-- Seção Operacional -->
     <div class="row my-4">
         <div class="title_custom col-12">

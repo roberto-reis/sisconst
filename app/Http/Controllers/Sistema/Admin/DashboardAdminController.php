@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Painel\Admin;
+namespace App\Http\Controllers\Sistema\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,6 +13,6 @@ class DashboardAdminController extends Controller
  
      public function index() {
          
-         return view('painel.admin.dashboard');
+         return view('sistema.admin.dashboard');
      }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Painel\Admin;
+namespace App\Http\Controllers\Sistema\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -26,7 +26,7 @@ class UsuariosController extends Controller
         $users = User::paginate(12);
         $loggedId = intval(Auth::id());
 
-        return view('painel.admin.usuarios', [
+        return view('sistema.admin.usuarios', [
             'users' => $users,
             'loggedId' => $loggedId
         ]);
@@ -103,7 +103,7 @@ class UsuariosController extends Controller
     {
         $user = User::find($id);
         if($user) {
-            return view('painel.admin.edit', [
+            return view('sistema.admin.edit', [
                 'user'=>$user
             ]);
         }

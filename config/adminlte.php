@@ -128,7 +128,7 @@ return [
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-white navbar-dark menu_top',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -187,7 +187,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'painel',
+    'dashboard_url' => 'sistema',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -231,77 +231,51 @@ return [
         ],
         [
             'text' => 'Usuários',
-            'url'  => 'painel/usuarios',
+            'url'  => 'sistema/usuarios',
             'icon' => 'fas fa-fw fa-user',
         ],
-        ['header' => 'Operacional'],
+        [
+            'header' => 'OPERACIONAL',
+        ],
+        [
+            'text' => 'Dashboard',
+            'url'  => 'sistema/operacional',
+            'icon' => 'fas fa-columns'
+        ],
         [
             'text' => 'Projetos',
-            'url'  => 'painel/projetos',
-            'icon' => 'fas fa-project-diagram',
+            'url'  => 'sistema/projetos',
+            'icon' => 'fas fa-project-diagram'
         ],
         [
             'text' => 'Obras',
-            'url'  => 'painel/obras',
-            'icon' => 'fas fa-pencil-ruler',
+            'url'  => 'sistema/obras',
+            'icon' => 'fas fa-pencil-ruler'
         ],
         [
             'text' => 'Estação',
-            'url'  => 'painel/estacao',
-            'icon' => 'fas fa-copy',
+            'url'  => 'sistema/estacao',
+            'icon' => 'fas fa-copy'
         ],
         [
             'text' => 'Empreiteiros',
-            'url'  => 'painel/empreiteiros',
-            'icon' => 'fas fa-users',
+            'url'  => 'sistema/empreiteiros',
+            'icon' => 'fas fa-users'
         ],
         [
             'text' => 'Clientes',
-            'url'  => 'painel/clentes',
-            'icon' => 'fas fa-user-tie',
+            'url'  => 'sistema/clentes',
+            'icon' => 'fas fa-user-tie'
         ],
         [
             'text' => 'Status',
-            'url'  => 'painel/status',
+            'url'  => 'sistema/status',
             'icon' => 'fas fa-info-circle',
         ],
         [
             'text' => 'Tipo de Serviços',
-            'url'  => 'painel/tipo_servico',
-            'icon' => 'fas fa-tenge',
-        ],
-
-
-        ['header' => 'Almoxarifado'],
-        [
-            'text' => 'Materiais ',
-            'url'  => 'painel/materiais',
-            'icon' => 'fas fa-paint-roller',
-        ],
-        [
-            'text' => 'Saída de Material',
-            'url'  => 'painel/siada_materiais',
-            'icon' => 'fas fa-sign-out-alt',
-        ],
-        [
-            'text' => 'Devolução de Material',
-            'url'  => 'painel/devolucao_material',
-            'icon' => 'fas fa-sign-in-alt',
-        ],
-        [
-            'text' => 'Saída de EPI',
-            'url'  => 'painel/saida_epi',
-            'icon' => 'fas fa-sign-out-alt',
-        ],
-        [
-            'text' => 'Devolução de EPI',
-            'url'  => 'painel/devolucao_epi',
-            'icon' => 'fas fa-sign-in-alt',
-        ],
-        [
-            'text' => 'Fornecedores',
-            'url'  => 'painel/fornecedores',
-            'icon' => 'fas fa-user-tie',
+            'url'  => 'sistema/tipo_servico',
+            'icon' => 'fas fa-tenge'
         ]        
     ],
 

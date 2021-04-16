@@ -21,7 +21,7 @@
     <!-- Seção Operacional -->
     <div class="row my-4">
         <div class="title_custom col-12">
-            <h2>Operacional</h2>
+            <h3>Operacional</h3>
         </div>
 
         <div class="col-md-3 col-sm-6">
@@ -61,23 +61,6 @@
                 <div class="card-body text-center">
                     <span>50</span>
                     <h3>Obras Faturada</h3>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Seção Almoxarifado -->
-    <div class="row">
-        <div class="title_custom col-12">
-            <h2>Almoxarifado</h2>
-        </div>
-
-        <div class="col-md-3 col-sm-6">
-            <div class="card card_custom">
-                <div class="card-body text-center">
-                    <span>05</span>
-                    <h3>Fornecedores Cadastrados</h3>
                 </div>
             </div>
         </div>

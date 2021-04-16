@@ -9,7 +9,6 @@
         </div>
 @stop
 
-
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger alert-dismissible fade show alerta_custom" role="alert">
@@ -35,55 +34,56 @@
         </div>
     @endif
 
-<div class="row justify-content-center">
-    <div class="col-md-8 mt-4 mb-3">
-        <!-- Button trigger modal adicionar -->
-        <button type="button" data-toggle="modal" data-target="#ModalAdicionar" class="btn btn-info">Adicionar</button>
-    </div>
-    <div class="table-responsive-md col-md-8">
-        <table class="table table-hover table_custom">
-            <thead>
-                <tr>
-                    <th>
-                        Nome
-                    </th>
-                    <th>
-                        Email
-                    </th>
-                    <th>
-                        Nivel
-                    </th>
-                    <th>
-                        Ação
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
+    <div class="row justify-content-center">
+        <div class="col-md-10 mt-4 mb-3">
+            <!-- Button trigger modal adicionar -->
+            <button type="button" data-toggle="modal" data-target="#ModalAdicionar" class="btn btn-info">Novo Usuário</button>
+        </div>
+        <div class="table-responsive-md col-md-10 col-sm-12">
+            <table class="table table-hover table_custom">
+                <thead>
+                    <tr>
+                        <th>
+                            Nome
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Nivel
+                        </th>
+                        <th>
+                            Ação
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                @foreach ($users as $user)
-                <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->nivel }}</td>
-                    <td>
-                        <div class="btn_table">
-                            <a href="{{ route('usuarios.edit', $user->id) }}" class="btn"><i class="fas fa-edit"></i></a>                        
-                            @if ($user->id !== $loggedId)
-                                <form class="d-inline" action="{{ route('usuarios.destroy', $user->id) }}" method="POST" onclick="return confirm('Tem certeza que deseja excluir?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn"><i class="fas fa-trash"></i></button>
-                                </form>
-                            @endif
-                        </div>                        
-                    </td>
-                </tr>
-                @endforeach
+                    @foreach ($users as $user)
+                    <tr>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->nivel }}</td>
+                        <td>
+                            <div class="btn_table">
+                                <a href="{{ route('usuarios.edit', $user->id) }}" class="btn"><i class="fas fa-edit"></i></a>                        
+                                @if ($user->id !== $loggedId)
+                                    <form class="d-inline" action="{{ route('usuarios.destroy', $user->id) }}" method="POST" onclick="return confirm('Tem certeza que deseja excluir?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                @endif
+                            </div>                        
+                        </td>
+                    </tr>
+                    @endforeach
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+                {{ $users->links('pagination::bootstrap-4') }}
+        </div>
     </div>
-</div>
 
     <!-- Modal Cadastrar usuários-->
     <div class="modal fade modal_custom" id="ModalAdicionar" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

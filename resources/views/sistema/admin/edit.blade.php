@@ -50,13 +50,12 @@
                 <div class="form-group">
                     <label for="nivel">Nivel:*</label>
                     <select name="nivel" class="form-control" id="nivel">
-                        <option value="{{ $user->nivel }}">{{ $user->nivel }}</option>
-                        <option value="convidado">convidado</option>
-                        <option value="adm">adm</option>
-                        <option value="rh">rh</option>
-                        <option value="almoxarife">almoxarife</option>
-                        <option value="operacional">operacional</option>
-                        <option value="admin">admin</option>
+                        <option value="convidado" {{ $user->nivel === "convidado" ? "selected" : null }} >convidado</option>
+                        <option value="adm" {{ $user->nivel === "adm" ? "selected" : null }}>adm</option>
+                        <option value="rh" {{ $user->nivel === "rh" ? "selected" : null }}>rh</option>
+                        <option value="almoxarife" {{ $user->nivel === "almoxarife" ? "selected" : null }}>almoxarife</option>
+                        <option value="operacional" {{ $user->nivel === "operacional" ? "selected" : null }}>operacional</option>
+                        <option value="admin" {{ $user->nivel === "admin" ? "selected" : null }}>admin</option>
                     </select>
                 </div>
         

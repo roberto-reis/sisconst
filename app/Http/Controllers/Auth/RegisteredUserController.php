@@ -19,7 +19,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('painel.register');
+        return view('sistema.register');
     }
 
     /**

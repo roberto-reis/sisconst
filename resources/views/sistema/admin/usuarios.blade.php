@@ -25,11 +25,11 @@
         </div>
     @endif
 
-    @if (session('messagem_sucesso'))
+    @if (session('mensagem_sucesso'))
         <div class="alert alert-success alert-dismissible alerta_custom">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
             
-                {{ session('messagem_sucesso') }}
+                {{ session('mensagem_sucesso') }}
             
         </div>
     @endif
@@ -37,7 +37,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10 mt-4 mb-3">
             <!-- Button trigger modal adicionar -->
-            <button type="button" data-toggle="modal" data-target="#ModalAdicionar" class="btn btn-info">Novo Usuário</button>
+            <button type="button" data-toggle="modal" data-target="#modalAdicionar" class="btn btn-info">Novo Usuário</button>
         </div>
         <div class="table-responsive-md col-md-10 col-sm-12">
             <table class="table table-hover table_custom">
@@ -86,7 +86,7 @@
     </div>
 
     <!-- Modal Cadastrar usuários-->
-    <div class="modal fade modal_custom" id="ModalAdicionar" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal_custom" id="modalAdicionar" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 

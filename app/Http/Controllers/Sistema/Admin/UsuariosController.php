@@ -187,7 +187,7 @@ class UsuariosController extends Controller
 
             $user->save();
 
-            return redirect()->route('usuarios.index')->with('messagem_sucesso', 'Usuário alterado com sucesso!');
+            return redirect()->route('usuarios.index')->with('mensagem_sucesso', 'Usuário alterado com sucesso!');
         }
         return redirect()->route('usuarios.index');
     }

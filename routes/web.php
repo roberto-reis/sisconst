@@ -3,6 +3,7 @@
 use App\Http\Controllers\Sistema\Admin\DashboardAdminController;
 use App\Http\Controllers\Sistema\Admin\UsuariosController;
 use App\Http\Controllers\Sistema\Operacional\DashboardOperacionalController;
+use App\Http\Controllers\Sistema\Operacional\StatusObras;
 use App\Http\Controllers\Site\HomeSiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,9 @@ Route::prefix('/sistema')->group(function(){
     Route::resource('usuarios', UsuariosController::class);
 
     // Rotas Operacional
-    Route::get('/operacional', [DashboardOperacionalController::class, 'index']);
+    Route::get('/operacional', [DashboardOperacionalController::class, 'index'])->name('dashboard.index');
+    Route::post('/operacional/status', [StatusObras::class, 'store'])->name('status.store');
+    Route::delete('/operacional/status/{id}', [StatusObras::class, 'destroy'])->name('status.destroy');
     
     // Rotas Almoxarifado
 

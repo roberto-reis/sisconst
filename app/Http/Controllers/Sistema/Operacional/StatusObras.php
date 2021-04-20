@@ -10,8 +10,13 @@ use Illuminate\Support\Facades\Validator;
 class StatusObras extends Controller
 {
     
+    public function index() {
+        $statusObras = StatusObra::get();
+        return response()->json($statusObras);
+    }
 
     public function store(Request $request) {
+        $mensagem = [];
 
         $data = $request->only([
             'nome'
@@ -22,26 +27,51 @@ class StatusObras extends Controller
         ]);
 
         if($validator->fails()) {
-            return redirect()->route('dashboard.index')
-            ->withErrors($validator)
-            ->withInput();
+            foreach($validator->errors()->get('nome') as $error) {
+                $mensagem['error'] = $error;
+            }
+        } else {
+
+            $status = new StatusObra();
+            $status->nome = strtoupper($data['nome']);
+            $status->save();
+
+            $mensagem['sucesso'] = "Cadastrado com Sucesso!";
         }
 
-        $status = new StatusObra();
-        $status->nome = $data['nome'];
-        $status->save();
-
-
-        return redirect()->route('dashboard.index')->with('mensagem_sucesso', 'Cadastrado com Sucesso!');
+        return response()->json($mensagem);
 
     }
 
-    public function destroy($id) {
+    public function update(Request $request, $id) {
+        $mensagem = [];
+        
+        $data = $request->only([
+            'nome'
+        ]);
+        $validator = Validator::make($data, [
+            'nome' => ['required', 'string']
+        ]);
 
-        $status = StatusObra::find($id);
+        if($validator->fails()) {
+            foreach($validator->errors()->get('nome') as $error) {
+                $mensagem['error'] = $error;
+            }
+        } else {
 
+            $status = StatusObra::find($id)->update($request->all());
+            $mensagem['sucesso'] = "Atualizado com Sucesso!" . $id;
+        }
+
+        return response()->json($mensagem);
+
+    }
+
+    public function destroy(Request $request) {
+
+        $status = StatusObra::findOrFail( $request->get('id') );
         $status->delete();
 
-        return redirect()->route('dashboard.index');
+        return response()->json( ["sucesso" => "Deletado com sucesso!"] );
     }
 }

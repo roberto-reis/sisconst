@@ -12,40 +12,15 @@
 
 @section('content')
 
-    {{-- Mensagem Error --}}
-    @if ($errors->any())
-            <div class="alert alert-danger alert-dismissible fade show alerta_custom" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
-                <h5>
-                    <i class="icon fas fa-ban"></i>
-                    Ocorreu um erro!
-                </h5>     
-                <ul>                    
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-    @endif
-        {{-- mensagem_sucesso --}}
-        @if (session('mensagem_sucesso'))
-        <div class="alert alert-success alert-dismissible alerta_custom">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
-            
-                {{ session('mensagem_sucesso') }}
-            
-        </div>
-    @endif
-
     <!-- Seção nav btn's -->
     <div class="row my-4">
         <nav class="col-12 nav_btns">
-            <a href="{{ route('usuarios.index') }}" class="btn btn-info">Projetos</a>
+            <a href="#" class="btn btn-info">Projetos</a>
             <a href="{{ route('usuarios.index') }}" class="btn btn-info">Obras</a>
             <a href="{{ route('usuarios.index') }}" class="btn btn-info">Empreiteiros</a>
             <a href="{{ route('usuarios.index') }}" class="btn btn-info">Estação</a>
             <a href="{{ route('usuarios.index') }}" class="btn btn-info">Clientes</a>
-            <a href="{{ route('usuarios.index') }}" class="btn btn-info" data-toggle="modal" data-target="#statusObra">Status</a>
+            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#statusObra" id="btn_status">Status</a>
             <a href="{{ route('usuarios.index') }}" class="btn btn-info">Tipo Serviços</a>
         </nav>
     </div>
@@ -173,21 +148,26 @@
                 </button>
             </div>
             <div class="modal-body">
+
+
+                {{-- Mensagem Error --}}
+                <div class="menssageBox">
+                </div>
+
                 {{-- Form cadstrar status --}}
-                <form class="form_custom" action="{{ route('status.store') }}" method="post">
+                <form class="form_custom formStatus_edit" id="formStatus">
                     @csrf 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control @error('statusObra') is-invalid @enderror" id="nome" value="{{ old('nome') }}" name="nome" placeholder="Digite o status aqui..." aria-label="Status" aria-describedby="button-cadastrar">
-
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o status aqui..." aria-label="Status" aria-describedby="button-cadastrar">
                         <div class="input-group-append">
-                          <button class="btn btn-info" type="submit" id="button-cadastrar">Cadastrar</button>
+                          <button class="btn btn-info" type="submit" id="btn_create_update">Cadastrar</button>
                         </div>
                       </div>
                 </form>
 
                 {{-- Table status cadastrado --}}
                 <div>
-                    <table class="table table-sm">
+                    <table class="table table-sm table_status">
                         <thead>
                             <tr>
                                 <th>Status</th>
@@ -195,25 +175,7 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            @foreach ($statusObras as $item)                                
                             
-                                <tr>
-                                    <td>{{ $item->nome }}</td>
-                                    <td>
-                                        <div class="btn_table">
-                                            <a href="" class="btn"><i class="fas fa-edit"></i></a>                       
-                                            
-                                            <form class="d-inline" action="{{ route('status.destroy', $item->id) }}" method="POST" onclick="return confirm('Tem certeza que deseja excluir?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn"><i class="fas fa-trash"></i></button>
-                                            </form>
-                                        </div> 
-                                    </td>
-                                </tr>
-                            @endforeach
-
                         </tbody>
                     </table>
                     {{-- Paginação --}}
@@ -229,5 +191,147 @@
 
 @section('css')
     <link rel="stylesheet" href="/assets/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            // CSRF-TOKEN
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            // Function Listar Status
+            $('#btn_status').on('click', function() {
+                getStatus();
+            });
+            // Lista os status
+            function getStatus() {
+                $.ajax({
+                    url:"{{ route('status.index') }}",
+                    type:"GET",
+                    dataType: 'json',
+                }).done(function(result) {
+                    let rowTable;
+                    for(var i=0; i < result.length; i++) {
+                        rowTable += `
+                            <tr>
+                                <td>${result[i].nome}</td>
+                                <td>
+                                    <div class="btn_table">
+                                        <a href="#" class="btn btn_edit_status" data-id="${result[i].id}"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="btn btn_delete_status" data-id="${result[i].id}"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        `;
+                    }
+                    $('.table_status tbody').html(rowTable);
+                });
+            }
+
+            // Cadastrar Status
+            $('.formStatus_add').submit(function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url:"{{ route('status.store') }}",
+                    type:"POST",
+                    data:$(this).serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response.sucesso) {
+                            $('.menssageBox').html(`
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                    ${response.sucesso}
+                                </div>
+                            `);
+                        }
+                        if(response.error) {
+                            $('.menssageBox').html(`
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                    ${response.error}
+                                </div>
+                            `);
+                        }
+                        // console.log(response);
+                        $('#nome').val('').focus();
+                        getStatus();
+
+                    }
+                })
+            });
+
+            // Editar status
+            $('body').on('click', '.btn_edit_status', function() {
+                $('#btn_create_update').html("Atualizar");
+                $('#formStatus').addClass('formStatus_edit').removeClass('formStatus_add');
+                let id = $(this).attr("data-id");
+                console.log(id);           
+                let tr = $(this).closest('tr');
+                let data = tr.children('td').map(function(){
+                    return $(this).text();
+                }).get();
+                $('#nome').val(data[0]);
+            });
+
+            $('.formStatus_edit').submit(function(event) {
+                event.preventDefault();
+                let nome = $('#nome').val();
+                console.log(nome);
+                $.ajax({
+                    url:"{{ route('status.updade', 91) }}",
+                    type:"PUT",
+                    data:{ nome: nome},
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response.sucesso) {
+                            $('.menssageBox').html(`
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                    ${response.sucesso}
+                                </div>
+                            `);
+                        }
+                        if(response.error) {
+                            $('.menssageBox').html(`
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                    ${response.error}
+                                </div>
+                            `);
+                        }
+                        // console.log(response);
+                        $('#nome').val('').focus();
+                        getStatus();
+
+                    }
+                })
+            });
+
+            // Deletar status
+            $('body').on('click', '.btn_delete_status', function() {    
+                let id = $(this).attr("data-id");
+                if(confirm("Tem certeza que deseja excluir?")) {
+                    $.ajax({
+                        url:"{{ route('status.destroy') }}",
+                        type:"DELETE",
+                        dataType: 'json',
+                        data:{id: id},
+                        success: function(response) {
+                            console.log(response);
+                            getStatus();
+                        }                        
+                    })
+                } else {
+                    return false;
+                }
+            });
+
+       });
+    </script>
 @stop
 

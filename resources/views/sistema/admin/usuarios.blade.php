@@ -71,7 +71,7 @@
                                     <form class="d-inline" action="{{ route('usuarios.destroy', $user->id) }}" method="POST" onclick="return confirm('Tem certeza que deseja excluir?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn"><i class="fas fa-trash"></i></button>
+                                        <button type="subimit" class="btn"><i class="fas fa-trash"></i></button>
                                     </form>
                                 @endif
                             </div>                        

@@ -31,45 +31,66 @@ class StatusObras extends Controller
                 $mensagem['error'] = $error;
             }
         } else {
-
-            $status = new StatusObra();
-            $status->nome = strtoupper($data['nome']);
-            $status->save();
-
+            // Cadastra o status
+            StatusObra::create([
+                'nome' => strtoupper($data['nome'])
+            ]);   
             $mensagem['sucesso'] = "Cadastrado com Sucesso!";
         }
+
 
         return response()->json($mensagem);
 
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request) {
         $mensagem = [];
-        
+
+        // Pega os campos do request
         $data = $request->only([
             'nome'
         ]);
+        // Valida os dados
         $validator = Validator::make($data, [
             'nome' => ['required', 'string']
         ]);
 
-        if($validator->fails()) {
+        $status = StatusObra::find($request->get('status_id'));
+
+        if($status->nome != $data['nome']){
+
+            //Verificar o nome digitado já existe no bd
+            $hasNome = StatusObra::where('nome', $data['nome'])->get();
+            
+            if(count($hasNome) === 0) {
+                $status->nome = strtoupper($data['nome']);
+            } else {
+                // Se o nome digitado já existe no bd add validation.unique 
+                $validator->errors()->add('nome', __('validation.unique', [
+                    'attribute' => 'nome'
+                ]));
+            }
+        }
+    
+        if(count($validator->errors()) > 0) {
             foreach($validator->errors()->get('nome') as $error) {
                 $mensagem['error'] = $error;
             }
-        } else {
 
-            $status = StatusObra::find($id)->update($request->all());
-            $mensagem['sucesso'] = "Atualizado com Sucesso!" . $id;
+        } else {
+            // Atualiza os dados
+            $status->save();
+            $mensagem['sucesso'] = "Atualizado com Sucesso!";
         }
+
 
         return response()->json($mensagem);
 
     }
 
-    public function destroy(Request $request) {
+    public function destroy($id) {
 
-        $status = StatusObra::findOrFail( $request->get('id') );
+        $status = StatusObra::findOrFail( $id );
         $status->delete();
 
         return response()->json( ["sucesso" => "Deletado com sucesso!"] );

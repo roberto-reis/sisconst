@@ -20,8 +20,8 @@
             <a href="{{ route('usuarios.index') }}" class="btn btn-info">Empreiteiros</a>
             <a href="{{ route('usuarios.index') }}" class="btn btn-info">Estação</a>
             <a href="{{ route('usuarios.index') }}" class="btn btn-info">Clientes</a>
-            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalStatusObraAdd" id="btn_status">Status</a>
-            <a href="{{ route('usuarios.index') }}" class="btn btn-info">Tipo Serviços</a>
+            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modal_StatusObraAdd" id="btn_status">Status</a>
+            <a href="#" data-toggle="modal" data-target="#modal_TipoServicoAdd" id="btn_TipoServico" class="btn btn-info">Tipo Serviços</a>
         </nav>
     </div>
 
@@ -138,7 +138,7 @@
     </div>
 
     {{-- Modal Cadastrar status --}}
-    <div class="modal fade modal_custom" id="modalStatusObraAdd" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade modal_custom" id="modal_StatusObraAdd" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -148,13 +148,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
-
                     {{-- Mensagem sucesso e error --}}
                     <div class="menssageBox">
                     </div>
                     {{-- Form cadstrar status --}}
-                    <form class="form_custom" id="formStatusAdd">
+                    <form class="form_custom" id="form_StatusAdd">
                         @csrf 
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o status aqui..." aria-label="Status" aria-describedby="btn_add_update">
@@ -173,7 +171,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- Lista de status aqui... --}}                                
+                                {{-- Lista de status aqui... --}}                              
                             </tbody>
                         </table>
                         {{-- Paginação --}}
@@ -185,7 +183,7 @@
     </div>
 
     {{-- Modal update status --}}
-    <div class="modal fade modal_custom" id="modalStatusObraUpdate" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade modal_custom" id="modal_StatusObraUpdate" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -195,11 +193,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
                     {{-- Mensagem error --}}
                     <div class="menssageBox_update">
                     </div>
-
                     {{-- Form cadstrar status --}}
                     <form class="form_custom" id="formStatusUpdate">
                         @csrf
@@ -211,8 +207,52 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    {{-- Modal Cadastrar Tipo serviços --}}
+    <div class="modal fade modal_custom" id="modal_TipoServicoAdd" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Tipo de Serviços</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    {{-- Mensagem sucesso e error --}}
+                    <div class="menssageBox_TipoServico">
+                    </div>
+                    {{-- Form cadstrar status --}}
+                    <form class="form_custom" id="form_TipoServicoAdd">
+                        @csrf 
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o Tipo de Serviço aqui..." aria-label="Status" aria-describedby="btn_add">
+                            <div class="input-group-append">
+                            <button class="btn btn-info" type="submit" id="btn_add">Cadastrar</button>
+                            </div>
+                        </div>
+                    </form>
                     {{-- Table status cadastrado --}}
+                    <div>
+                        <table class="table table-sm table_TipoServico">
+                            <thead>
+                                <tr>
+                                    <th>Tipo de Serviço</th>
+                                    <th style="width: 80px">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{-- Lista de Tipo de Serviço aqui... --}}                              
+                            </tbody>
+                        </table>
+                        {{-- Paginação --}}
+                    </div>
 
                 </div>
             </div>
@@ -239,7 +279,7 @@
             
             $('#btn_status').on('click', function() {
                 getStatus(); // Listar Status
-                $('#modalStatusObraAdd').on('shown.bs.modal', function () {
+                $('#modal_StatusObraAdd').on('shown.bs.modal', function () {
                     $('#nome').trigger('focus');
                 });
             });
@@ -270,7 +310,7 @@
             }
 
             // Cadastrar Status
-            $('#formStatusAdd').submit(function(event) {
+            $('#form_StatusAdd').submit(function(event) {
                 event.preventDefault();
                 $.ajax({
                     url:"{{ route('status.store') }}",
@@ -286,7 +326,7 @@
                                 </div>
                             `);
                             getStatus();
-                            $('#formStatusAdd').trigger("reset");//Reset form
+                            $('#form_StatusAdd').trigger("reset");//Reset form
                             $('#nome').focus();
                         }
                         if(response.error) {

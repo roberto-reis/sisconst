@@ -27,10 +27,12 @@ Route::prefix('/sistema')->group(function(){
 
     // Rotas Operacional
     Route::get('/operacional', [DashboardOperacionalController::class, 'index'])->name('dashboard.index'); // Dashboard operacional
+    // Rotas Operacional status
     Route::get('/operacional/status', [StatusObras::class, 'index'])->name('status.index'); //Lista os dados
     Route::post('/operacional/status', [StatusObras::class, 'store'])->name('status.store'); //Salva os status
     Route::put('/operacional/status', [StatusObras::class, 'update'])->name('status.update'); //Update status
     Route::delete('/operacional/status/{id}', [StatusObras::class, 'destroy'])->name('status.destroy'); //Deleta o status
+    // Rotas Operacional Tipo de Serviços
     
     // Rotas Almoxarifado
 

@@ -20,8 +20,8 @@
             <a href="{{ route('usuarios.index') }}" class="btn btn-info">Empreiteiros</a>
             <a href="{{ route('usuarios.index') }}" class="btn btn-info">Estação</a>
             <a href="{{ route('usuarios.index') }}" class="btn btn-info">Clientes</a>
-            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modal_StatusObraAdd" id="btn_status">Status</a>
-            <a href="#" data-toggle="modal" data-target="#modal_TipoServicoAdd" id="btn_TipoServico" class="btn btn-info">Tipo Serviços</a>
+            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modal_statusObraAdd" id="btn_status">Status</a>
+            <a href="#" data-toggle="modal" data-target="#modal_tipoServicoAdd" id="btn_TipoServico" class="btn btn-info">Tipo Serviços</a>
         </nav>
     </div>
 
@@ -138,7 +138,7 @@
     </div>
 
     {{-- Modal Cadastrar status --}}
-    <div class="modal fade modal_custom" id="modal_StatusObraAdd" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade modal_custom" id="modal_statusObraAdd" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -153,7 +153,6 @@
                     </div>
                     {{-- Form cadstrar status --}}
                     <form class="form_custom" id="form_StatusAdd">
-                        @csrf 
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o status aqui..." aria-label="Status" aria-describedby="btn_add_update">
                             <div class="input-group-append">
@@ -171,7 +170,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- Lista de status aqui... --}}                              
+                                {{-- Lista de status aqui... --}}
                             </tbody>
                         </table>
                         {{-- Paginação --}}
@@ -181,27 +180,25 @@
             </div>
         </div>
     </div>
-
-    {{-- Modal update status --}}
-    <div class="modal fade modal_custom" id="modal_StatusObraUpdate" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    {{-- Modal update Status Obras --}}
+    <div class="modal fade modal_custom" id="modal_statusObrasUpdate" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Altualizar Status</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Editar Status</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     {{-- Mensagem error --}}
-                    <div class="menssageBox_update">
+                    <div class="menssageBox">
                     </div>
                     {{-- Form cadstrar status --}}
-                    <form class="form_custom" id="formStatusUpdate">
-                        @csrf
-                        <input type="hidden" name="status_id" id="status_id">
+                    <form class="form_custom" id="form_statusObrasUpdate">
+                        <input type="hidden" name="id" id="input_id">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="nome_update" name="nome" aria-label="Status" aria-describedby="btn_add_update">
+                            <input type="text" class="form-control" id="nome" name="nome">
                             <div class="input-group-append">
                                 <button class="btn btn-info" type="submit" id="btn_update">Alterar</button>
                             </div>
@@ -213,7 +210,7 @@
     </div>
 
     {{-- Modal Cadastrar Tipo serviços --}}
-    <div class="modal fade modal_custom" id="modal_TipoServicoAdd" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade modal_custom" id="modal_tipoServicoAdd" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -223,24 +220,21 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
-
                     {{-- Mensagem sucesso e error --}}
-                    <div class="menssageBox_TipoServico">
+                    <div class="menssageBox">
                     </div>
                     {{-- Form cadstrar status --}}
-                    <form class="form_custom" id="form_TipoServicoAdd">
-                        @csrf 
+                    <form class="form_custom" id="form_tipoServicoAdd">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o Tipo de Serviço aqui..." aria-label="Status" aria-describedby="btn_add">
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o Tipo de Serviço aqui...">
                             <div class="input-group-append">
                             <button class="btn btn-info" type="submit" id="btn_add">Cadastrar</button>
                             </div>
                         </div>
                     </form>
-                    {{-- Table status cadastrado --}}
+                    {{-- Table Tipo de Serviço cadastrado --}}
                     <div>
-                        <table class="table table-sm table_TipoServico">
+                        <table class="table table-sm table_tipoServico">
                             <thead>
                                 <tr>
                                     <th>Tipo de Serviço</th>
@@ -254,6 +248,34 @@
                         {{-- Paginação --}}
                     </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Modal update Tipo de Serviços --}}
+    <div class="modal fade modal_custom" id="modal_tipoServicoUpdate" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Editar Tipo de Serviços</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{-- Mensagem error --}}
+                    <div class="menssageBox">
+                    </div>
+                    {{-- Form cadstrar status --}}
+                    <form class="form_custom" id="form_tipoServicoUpdate">
+                        <input type="hidden" name="id" id="input_id">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="nome" name="nome">
+                            <div class="input-group-append">
+                                <button class="btn btn-info" type="submit" id="btn_update">Alterar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -276,13 +298,17 @@
                 }
             });
 
-            
-            $('#btn_status').on('click', function() {
-                getStatus(); // Listar Status
-                $('#modal_StatusObraAdd').on('shown.bs.modal', function () {
-                    $('#nome').trigger('focus');
-                });
+            getStatus(); // Listar Status
+            getTipoServicos(); // Listar Tipos de Serviços
+
+            // Focar no input quando o modal abrir
+            $('#modal_statusObraAdd').on('shown.bs.modal', function () {
+                $('#form_StatusAdd #nome').trigger('focus');
             });
+            $('#modal_tipoServicoAdd').on('shown.bs.modal', function () {
+                $('#form_tipoServicoAdd #nome').trigger('focus');
+            });
+
             // Lista os status
             function getStatus() {
                 $.ajax({
@@ -309,6 +335,32 @@
                 });
             }
 
+            // Lista os Tipo de Serviços
+            function getTipoServicos() {
+                $.ajax({
+                    url:"{{ route('tipoServico.index') }}",
+                    type:"GET",
+                    dataType: 'json',
+                    success: function(response) {
+                        let rowTable;
+                        for(var i=0; i < response.length; i++) {
+                            rowTable += `
+                                <tr>
+                                    <td>${response[i].nome}</td>
+                                    <td>
+                                        <div class="btn_table">
+                                            <a href="#" class="btn btn_edit_tipoServico" data-id="${response[i].id}"><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="btn btn_delete_tipoServico" data-id="${response[i].id}"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `;
+                        }
+                        $('.table_tipoServico tbody').html(rowTable);
+                    }
+                });
+            }
+
             // Cadastrar Status
             $('#form_StatusAdd').submit(function(event) {
                 event.preventDefault();
@@ -319,7 +371,7 @@
                     dataType: 'json',
                     success: function(response) {
                         if(response.sucesso) {
-                            $('.menssageBox').html(`
+                            $('#modal_statusObraAdd .menssageBox').html(`
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
                                     ${response.sucesso}
@@ -330,7 +382,7 @@
                             $('#nome').focus();
                         }
                         if(response.error) {
-                            $('.menssageBox').html(`
+                            $('#modal_statusObraAdd .menssageBox').html(`
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
                                     ${response.error}
@@ -348,44 +400,43 @@
                 let data = tr.children('td').map(function(){
                     return $(this).text();
                 }).get();
-                $('#nome_update').val(data[0]);
-                $('#status_id').val($(this).attr("data-id"));
-                $('#modalStatusObraUpdate').modal('show');
-                $('#modalStatusObraUpdate').on('shown.bs.modal', function () {
-                    $('#nome_update').trigger('focus');
+                $('#form_statusObrasUpdate #nome').val(data[0]);
+                $('#form_statusObrasUpdate #input_id').val($(this).attr("data-id"));
+                $('#modal_statusObrasUpdate').modal('toggle');
+                $('#modal_statusObrasUpdate').on('shown.bs.modal', function () {
+                    $('#form_statusObrasUpdate #nome').trigger('focus');
                 });
-
             });
             // Update Status
-            $('#formStatusUpdate').submit(function(event) {
-                    event.preventDefault();
-                    $.ajax({
-                        url:"{{ route('status.update') }}",
-                        type:"PUT",
-                        data: $(this).serialize(),
-                        dataType: 'json',
-                        success: function(response) {
-                            if(response.sucesso) {
-                                $('.menssageBox').html(`
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
-                                        ${response.sucesso}
-                                    </div>
-                                `);
-                                $('#modalStatusObraUpdate').modal('hide');
-                                getStatus();
-                            }
-                            if(response.error) {
-                                $('.menssageBox_update').html(`
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
-                                        ${response.error}
-                                    </div>
-                                `);
-                            }            
+            $('#form_statusObrasUpdate').submit(function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: "{{ route('status.update') }}",
+                    type:"PUT",
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response.sucesso) {
+                            $('#modal_statusObraAdd .menssageBox').html(`
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                    ${response.sucesso}
+                                </div>
+                            `);
+                            $('#modal_statusObrasUpdate').modal('hide');
+                            getStatus();
                         }
-                    });
+                        if(response.error) {
+                            $('#modal_statusObrasUpdate .menssageBox').html(`
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                    ${response.error}
+                                </div>
+                            `);
+                        }            
+                    }
                 });
+            });
 
             // Deletar status
             $('body').on('click', '.btn_delete_status', function() { 
@@ -396,14 +447,129 @@
                         type:"DELETE",
                         dataType: 'json',
                         success: function(response) {
-                            // console.log(response);
+                            console.log(response);
+                            $('#modal_statusObraAdd .menssageBox').html(`
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                    ${response.error}
+                                </div>
+                            `);
                             getStatus();
-                        }                      
+                        },
+                        error: function (response) {
+                            console.log('Error:', response.responseJSON);
+                        }                   
                     });
                 } else {
                     return false;
                 }
             });
+
+            // Cadastrar Tipo de Serviço
+            $('#form_tipoServicoAdd').submit(function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url:"{{ route('tipoServico.store') }}",
+                    type:"POST",
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response.sucesso) {
+                            $('#modal_tipoServicoAdd .menssageBox').html(`
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                    ${response.sucesso}
+                                </div>
+                            `);
+                            getTipoServicos();
+                            $('#form_tipoServicoAdd').trigger("reset");//Reset form
+                            $('#form_tipoServicoAdd #nome').focus();
+                        }
+                        if(response.error) {
+                            $('#modal_tipoServicoAdd .menssageBox').html(`
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                    ${response.error}
+                                </div>
+                            `);
+                        }
+                    }
+                })
+            });
+
+            // Editar Tipo de Serviço
+            $('body').on('click', '.btn_edit_tipoServico', function() {
+                // Carrega os dados para o form update       
+                let tr = $(this).closest('tr');
+                let data = tr.children('td').map(function(){
+                    return $(this).text();
+                }).get();
+                $('#form_tipoServicoUpdate #nome').val(data[0]);
+                $('#form_tipoServicoUpdate #input_id').val($(this).attr("data-id"));
+                $('#modal_tipoServicoUpdate').modal('toggle');
+                $('#modal_tipoServicoUpdate').on('shown.bs.modal', function () {
+                    $('#form_tipoServicoUpdate #nome').trigger('focus');
+                });
+            });
+            // Update Tipo de Serviço
+            $('#form_tipoServicoUpdate').submit(function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: "{{ route('tipoServico.update') }}",
+                    type:"PUT",
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response.sucesso) {
+                            $('#modal_tipoServicoUpdate').modal('hide');
+                            $('#modal_tipoServicoAdd .menssageBox').html(`
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                    ${response.sucesso}
+                                </div>
+                            `);
+                            getTipoServicos();
+                        }
+                        if(response.error) {
+                            $('#modal_tipoServicoUpdate .menssageBox').html(`
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                    ${response.error}
+                                </div>
+                            `);
+                        }            
+                    }
+                });
+            });
+
+            // Deletar Tipo de Serviço
+            $('body').on('click', '.btn_delete_tipoServico', function() { 
+                let id = $(this).attr("data-id");   
+                if(confirm("Tem certeza que deseja excluir?")) {
+                    $.ajax({
+                        url:"operacional/tipoServico/" + id,
+                        type:"DELETE",
+                        dataType: 'json',
+                        success: function(response) {
+                            //console.log(response);
+                            $('#modal_tipoServicoAdd .menssageBox').html(`
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                    ${response.error}
+                                </div>
+                            `);
+                            getTipoServicos();
+                        },
+                        error: function (response) {
+                            console.log('Error:', response.responseJSON);
+                        }                   
+                    });
+                } else {
+                    return false;
+                }
+            });
+
+
        });
     </script>
 @stop

@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StatusObra extends Model
+class TipoServico extends Model
 {
     use HasFactory;
 
-    protected $table = "status_obras";
-
     public $timestamps = false;
 
+    protected $table = "tipo_servicos";
+
     protected $fillable = ['nome'];
-    
 }

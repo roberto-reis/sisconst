@@ -11,6 +11,8 @@ class Projeto extends Model
 
     public $timestamps = false;
 
+    protected $table = "projetos";
+
     protected $fillable = [
         'projeto',
         'id_estacao',

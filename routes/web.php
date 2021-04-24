@@ -4,6 +4,7 @@ use App\Http\Controllers\Sistema\Admin\DashboardAdminController;
 use App\Http\Controllers\Sistema\Admin\UsuariosController;
 use App\Http\Controllers\Sistema\Operacional\DashboardOperacionalController;
 use App\Http\Controllers\Sistema\Operacional\StatusObras;
+use App\Http\Controllers\Sistema\Operacional\TipoServicos;
 use App\Http\Controllers\Site\HomeSiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +34,13 @@ Route::prefix('/sistema')->group(function(){
     Route::put('/operacional/status', [StatusObras::class, 'update'])->name('status.update'); //Update status
     Route::delete('/operacional/status/{id}', [StatusObras::class, 'destroy'])->name('status.destroy'); //Deleta o status
     // Rotas Operacional Tipo de Serviços
-    
+    Route::get('/operacional/tipoServico', [TipoServicos::class, 'index'])->name('tipoServico.index');
+    Route::post('/operacional/tipoServico', [TipoServicos::class, 'store'])->name('tipoServico.store'); //Salva os Tipo de Serviços
+    Route::put('/operacional/tipoServico', [TipoServicos::class, 'update'])->name('tipoServico.update'); //Update Tipo de Serviços
+    Route::delete('/operacional/tipoServico/{id}', [TipoServicos::class, 'destroy'])->name('tipoServico.destroy'); //Deleta Tipo de Serviços
+
+
+
     // Rotas Almoxarifado
 
 });

@@ -7,7 +7,7 @@ use App\Models\StatusObra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class StatusObras extends Controller
+class StatusObrasController extends Controller
 {
     
     public function index() {
@@ -27,9 +27,8 @@ class StatusObras extends Controller
         ]);
 
         if($validator->fails()) {
-            foreach($validator->errors()->get('nome') as $error) {
-                $mensagem['error'] = $error;
-            }
+            $mensagem['error'] = $validator->errors()->get('nome');
+
         } else {
             // Cadastra o status
             StatusObra::create([
@@ -45,6 +44,9 @@ class StatusObras extends Controller
 
     public function update(Request $request) {
         $mensagem = [];
+        
+        //Busca o status no bd
+        $status = StatusObra::find($request->get('id'));
 
         // Pega os campos do request
         $data = $request->only([
@@ -54,8 +56,6 @@ class StatusObras extends Controller
         $validator = Validator::make($data, [
             'nome' => ['required', 'string']
         ]);
-
-        $status = StatusObra::find($request->get('id'));
 
         if($status->nome != $data['nome']){
 
@@ -73,9 +73,7 @@ class StatusObras extends Controller
         }
     
         if(count($validator->errors()) > 0) {
-            foreach($validator->errors()->get('nome') as $error) {
-                $mensagem['error'] = $error;
-            }
+            $mensagem['error'] = $validator->errors()->get('nome');
 
         } else {
             // Atualiza os dados

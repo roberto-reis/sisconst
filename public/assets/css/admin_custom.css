@@ -53,7 +53,7 @@
 }
 
 /* form_custom */
-.form_custom .form-group label{
+.form_custom label{
     color: #4e4e4e;
 }
 .form_custom input,
@@ -94,6 +94,10 @@
     position: absolute;
     top: 60px;
     right: 5px;
+}
+/* menssageBox */
+.menssageBox li{
+    list-style: none;
 }
 
 /* nav_btns */

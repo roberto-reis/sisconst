@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\TipoServico;
 use Illuminate\Support\Facades\Validator;
 
-class TipoServicos extends Controller
+class TipoServicosController extends Controller
 {
     public function index() {
 
@@ -28,9 +28,8 @@ class TipoServicos extends Controller
         ]);
 
         if($validator->fails()) {
-            foreach($validator->errors()->get('nome') as $error) {
-                $mensagem['error'] = $error;
-            }
+            $mensagem['error'] = $validator->errors()->get('nome');
+
         } else {
             TipoServico::create([
                 'nome' => $data['nome']
@@ -43,6 +42,9 @@ class TipoServicos extends Controller
 
     public function update(Request $request) {
         $mensagem = [];
+        
+        //Busca o TipoServico no bd
+        $tipoServico = TipoServico::find($request->get('id'));
 
         // Pega os campos do request
         $data = $request->only([
@@ -52,9 +54,6 @@ class TipoServicos extends Controller
         $validator = Validator::make($data, [
             'nome' => ['required', 'string']
         ]);
-
-        //Verificar o nome digitado já existe no bd
-        $tipoServico = TipoServico::find($request->get('id'));
 
         if($data['nome'] != $tipoServico->nome) {
 
@@ -70,9 +69,8 @@ class TipoServicos extends Controller
         }
 
         if(count($validator->errors()) > 0) {
-            foreach($validator->errors()->get('nome') as $error) {
-                $mensagem['error'] = $error;
-            }
+            $mensagem['error'] = $validator->errors()->get('nome');
+
         } else {
             // Atualiza os dados
             $tipoServico->save();
@@ -100,7 +98,4 @@ class TipoServicos extends Controller
 
         return response()->json( $mensagem );
     }
-
-
-
 }

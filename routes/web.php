@@ -3,6 +3,7 @@
 use App\Http\Controllers\Sistema\Admin\DashboardAdminController;
 use App\Http\Controllers\Sistema\Admin\UsuariosController;
 use App\Http\Controllers\Sistema\Operacional\DashboardOperacionalController;
+use App\Http\Controllers\Sistema\Operacional\EmpreiteirosController;
 use App\Http\Controllers\Sistema\Operacional\StatusObrasController;
 use App\Http\Controllers\Sistema\Operacional\EstacoesController;
 use App\Http\Controllers\Sistema\Operacional\TipoServicosController;
@@ -45,7 +46,11 @@ Route::prefix('/sistema')->group(function(){
     Route::post('/operacional/estacoes', [EstacoesController::class, 'store'])->name('estacoes.store'); //Salva as estações
     Route::put('/operacional/estacoes', [EstacoesController::class, 'update'])->name('estacoes.update'); //Update estação
     Route::delete('/operacional/estacoes/{id}', [EstacoesController::class, 'destroy'])->name('estacoes.destroy'); //Deleta estação
-
+    // Rotas Operacional Empreiteiros
+    Route::get('/operacional/empreiteiros', [EmpreiteirosController::class, 'index'])->name('empreiteiros.index'); //Lista os dados
+    Route::post('/operacional/empreiteiros', [EmpreiteirosController ::class, 'store'])->name('empreiteiros.store'); //Salva as Empreiteiro
+    Route::put('/operacional/empreiteiros', [EmpreiteirosController::class, 'update'])->name('empreiteiros.update'); //Update Empreiteiro
+    Route::delete('/operacional/empreiteiros/{id}', [EmpreiteirosController::class, 'destroy'])->name('empreiteiros.destroy'); //Deleta Empreiteiro
 
 
     // Rotas Almoxarifado

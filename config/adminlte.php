@@ -253,29 +253,45 @@ return [
             'icon' => 'fas fa-pencil-ruler'
         ],
         [
-            'text' => 'Estação',
-            'url'  => 'sistema/estacao',
-            'icon' => 'fas fa-copy'
-        ],
-        [
-            'text' => 'Empreiteiros',
-            'url'  => 'sistema/empreiteiros',
-            'icon' => 'fas fa-users'
-        ],
-        [
             'text' => 'Clientes',
             'url'  => 'sistema/clentes',
             'icon' => 'fas fa-user-tie'
         ],
         [
+            'text' => 'Empreiteiros',
+            'url'  => 'sistema/empreiteiros',
+            'icon' => 'fas fa-users',
+            'data' => [
+                'toggle' => 'modal',
+                'target' => '#modal_empreiteiroAdd'
+            ]
+        ],
+        [
+            'text' => 'Estação',
+            'url'  => 'sistema/estacao',
+            'icon' => 'fas fa-copy',
+            'data' => [
+                'toggle' => 'modal',
+                'target' => '#modal_estacaoAdd'
+            ]
+        ],
+        [
             'text' => 'Status',
             'url'  => 'sistema/status',
             'icon' => 'fas fa-info-circle',
+            'data' => [
+                'toggle' => 'modal',
+                'target' => '#modal_statusObraAdd'
+            ]
         ],
         [
             'text' => 'Tipo de Serviços',
             'url'  => 'sistema/tipo_servico',
-            'icon' => 'fas fa-tenge'
+            'icon' => 'fas fa-tenge',
+            'data' => [
+                'toggle' => 'modal',
+                'target' => '#modal_tipoServicoAdd'
+            ]
         ]        
     ],
 

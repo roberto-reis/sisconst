@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Sistema\Operacional\ClientesController;
 use App\Http\Controllers\Sistema\Admin\DashboardAdminController;
 use App\Http\Controllers\Sistema\Admin\UsuariosController;
 use App\Http\Controllers\Sistema\Operacional\DashboardOperacionalController;
@@ -29,7 +30,7 @@ Route::prefix('/sistema')->group(function(){
     Route::resource('usuarios', UsuariosController::class);
 
     // Rotas Operacional
-    Route::get('/operacional', [DashboardOperacionalController::class, 'index'])->name('dashboard.index'); // Dashboard operacional
+    Route::get('/operacional', [DashboardOperacionalController::class, 'index'])->name('operacional.index'); // Dashboard operacional
 
     // Rotas Operacional status
     Route::get('/operacional/status', [StatusObrasController::class, 'index'])->name('status.index'); //Lista os dados
@@ -51,7 +52,10 @@ Route::prefix('/sistema')->group(function(){
     Route::post('/operacional/empreiteiros', [EmpreiteirosController ::class, 'store'])->name('empreiteiros.store'); //Salva as Empreiteiro
     Route::put('/operacional/empreiteiros', [EmpreiteirosController::class, 'update'])->name('empreiteiros.update'); //Update Empreiteiro
     Route::delete('/operacional/empreiteiros/{id}', [EmpreiteirosController::class, 'destroy'])->name('empreiteiros.destroy'); //Deleta Empreiteiro
-
+    // Rotas Operacional Cliente
+    Route::get('/operacional/clientes', [ClientesController::class, 'index'])->name('clientes.index'); //Lista os dados
+    Route::get('/operacional/clientes/create', [ClientesController ::class, 'create'])->name('cliente.create');
+    //Route::post('/operacional/clientes', [ClientesController ::class, 'store'])->name('clientes.store'); //Salva as clientes
 
     // Rotas Almoxarifado
 

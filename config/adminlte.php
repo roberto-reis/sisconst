@@ -244,22 +244,22 @@ return [
         ],
         [
             'text' => 'Projetos',
-            'url'  => 'sistema/projetos',
+            'url'  => 'sistema/operacional/projetos',
             'icon' => 'fas fa-project-diagram'
         ],
         [
             'text' => 'Obras',
-            'url'  => 'sistema/obras',
+            'url'  => 'sistema/operacional/obras',
             'icon' => 'fas fa-pencil-ruler'
         ],
         [
             'text' => 'Clientes',
-            'url'  => 'sistema/clentes',
+            'url'  => 'sistema/operacional/clientes',
             'icon' => 'fas fa-user-tie'
         ],
         [
             'text' => 'Empreiteiros',
-            'url'  => 'sistema/empreiteiros',
+            'url'  => '#',
             'icon' => 'fas fa-users',
             'data' => [
                 'toggle' => 'modal',
@@ -268,7 +268,7 @@ return [
         ],
         [
             'text' => 'Estação',
-            'url'  => 'sistema/estacao',
+            'url'  => '#',
             'icon' => 'fas fa-copy',
             'data' => [
                 'toggle' => 'modal',
@@ -277,7 +277,7 @@ return [
         ],
         [
             'text' => 'Status',
-            'url'  => 'sistema/status',
+            'url'  => '#',
             'icon' => 'fas fa-info-circle',
             'data' => [
                 'toggle' => 'modal',
@@ -286,7 +286,7 @@ return [
         ],
         [
             'text' => 'Tipo de Serviços',
-            'url'  => 'sistema/tipo_servico',
+            'url'  => '#',
             'icon' => 'fas fa-tenge',
             'data' => [
                 'toggle' => 'modal',

@@ -13,7 +13,7 @@
     padding-top: 12px;
     padding: 12px;
 }
-.content-header h2 {
+.content-header .breadcrumb_custom {
     padding: 0;
     margin: 0;
     font-size: 20px;
@@ -63,7 +63,7 @@
 
 /* table_custom */
 .table_custom thead {
-    background-color: #c4c4c4;
+    background-color: #E9ECEF;
     color: #4e4e4e;
 }
 .table_custom tbody{
@@ -104,4 +104,8 @@
 .nav_btns a {
     margin-right: 10px;
     margin-bottom: 10px;
+}
+
+.pagination {
+    justify-content: flex-end;
 }

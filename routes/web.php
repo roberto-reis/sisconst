@@ -55,7 +55,10 @@ Route::prefix('/sistema')->group(function(){
     // Rotas Operacional Cliente
     Route::get('/operacional/clientes', [ClientesController::class, 'index'])->name('clientes.index'); //Lista os dados
     Route::get('/operacional/clientes/create', [ClientesController ::class, 'create'])->name('cliente.create');
-    //Route::post('/operacional/clientes', [ClientesController ::class, 'store'])->name('clientes.store'); //Salva as clientes
+    Route::post('/operacional/clientes', [ClientesController ::class, 'store'])->name('cliente.store'); //Salva as clientes
+    Route::get('/operacional/clientes/{id}/edit', [ClientesController::class, 'edit'])->name('cliente.edit'); //Editar cliente
+    Route::put('/operacional/clientes/{id}', [ClientesController::class, 'update'])->name('cliente.update'); //Update cliente
+    Route::delete('/operacional/clientes/{id}/delete', [ClientesController::class, 'destroy'])->name('cliente.destroy'); //Update cliente
 
     // Rotas Almoxarifado
 

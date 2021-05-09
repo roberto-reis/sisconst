@@ -5,7 +5,7 @@
 
 @section('content_header')
         <div class="row">
-            <div class="col"><h2><a href="{{ route('admin.dashboard') }}">Dashboard</a> > <a href="{{ route('usuarios.index') }}">Usuarios</a> > Editar Usuario</h2></div>
+            <nav class="col breadcrumb_custom"><a href="{{ route('admin.dashboard') }}">Dashboard</a> > <a href="{{ route('usuarios.index') }}">Usuarios</a> > Editar Usuario</nav>
         </div>
 @stop
 

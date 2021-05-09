@@ -19,8 +19,10 @@ class Cliente extends Model
         'cnpj',
         'endereco',
         'bairro',
-        'municipio',
+        'cidade',
         'uf',
+        'inscricao_municipal',
+        'inscricao_estadual',
         'classe_servico',
         'valor_urs'
     ];

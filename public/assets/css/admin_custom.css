@@ -57,7 +57,8 @@
     color: #4e4e4e;
 }
 .form_custom input,
-.form_custom select {
+.form_custom select,
+.form_custom textarea {
     border: 2px solid var(--blue-primary);
 }
 
@@ -106,6 +107,7 @@
     margin-bottom: 10px;
 }
 
+/* Paginação */
 .pagination {
     justify-content: flex-end;
 }

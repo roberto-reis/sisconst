@@ -244,7 +244,7 @@ return [
         ],
         [
             'text' => 'Projetos',
-            'url'  => 'sistema/operacional/projetos',
+            'url'  => 'sistema/operacional/projeto',
             'icon' => 'fas fa-project-diagram'
         ],
         [
@@ -256,6 +256,15 @@ return [
             'text' => 'Clientes',
             'url'  => 'sistema/operacional/clientes',
             'icon' => 'fas fa-user-tie'
+        ],
+        [
+            'text' => 'Supevisor',
+            'url'  => '#',
+            'icon' => 'fas fa-users',
+            'data' => [
+                'toggle' => 'modal',
+                'target' => '#modal_supervisorAdd'
+            ]
         ],
         [
             'text' => 'Empreiteiros',

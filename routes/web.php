@@ -7,6 +7,8 @@ use App\Http\Controllers\Sistema\Operacional\DashboardOperacionalController;
 use App\Http\Controllers\Sistema\Operacional\EmpreiteirosController;
 use App\Http\Controllers\Sistema\Operacional\StatusObrasController;
 use App\Http\Controllers\Sistema\Operacional\EstacoesController;
+use App\Http\Controllers\Sistema\Operacional\ProjetoController;
+use App\Http\Controllers\Sistema\Operacional\SupervisorController;
 use App\Http\Controllers\Sistema\Operacional\TipoServicosController;
 use App\Http\Controllers\Site\HomeSiteController;
 use Illuminate\Support\Facades\Route;
@@ -37,28 +39,42 @@ Route::prefix('/sistema')->group(function(){
     Route::post('/operacional/status', [StatusObrasController::class, 'store'])->name('status.store'); //Salva os status
     Route::put('/operacional/status', [StatusObrasController::class, 'update'])->name('status.update'); //Update status
     Route::delete('/operacional/status/{id}', [StatusObrasController::class, 'destroy'])->name('status.destroy'); //Deleta o status
+
     // Rotas Operacional Tipo de Serviços
     Route::get('/operacional/tipoServico', [TipoServicosController::class, 'index'])->name('tipoServico.index'); //Lista os dados
     Route::post('/operacional/tipoServico', [TipoServicosController::class, 'store'])->name('tipoServico.store'); //Salva os Tipo de Serviços
     Route::put('/operacional/tipoServico', [TipoServicosController::class, 'update'])->name('tipoServico.update'); //Update Tipo de Serviços
     Route::delete('/operacional/tipoServico/{id}', [TipoServicosController::class, 'destroy'])->name('tipoServico.destroy'); //Deleta Tipo de Serviços
+
     // Rotas Operacional Estações
     Route::get('/operacional/estacoes', [EstacoesController::class, 'index'])->name('estacoes.index'); //Lista os dados
     Route::post('/operacional/estacoes', [EstacoesController::class, 'store'])->name('estacoes.store'); //Salva as estações
     Route::put('/operacional/estacoes', [EstacoesController::class, 'update'])->name('estacoes.update'); //Update estação
     Route::delete('/operacional/estacoes/{id}', [EstacoesController::class, 'destroy'])->name('estacoes.destroy'); //Deleta estação
+
     // Rotas Operacional Empreiteiros
     Route::get('/operacional/empreiteiros', [EmpreiteirosController::class, 'index'])->name('empreiteiros.index'); //Lista os dados
     Route::post('/operacional/empreiteiros', [EmpreiteirosController ::class, 'store'])->name('empreiteiros.store'); //Salva as Empreiteiro
     Route::put('/operacional/empreiteiros', [EmpreiteirosController::class, 'update'])->name('empreiteiros.update'); //Update Empreiteiro
     Route::delete('/operacional/empreiteiros/{id}', [EmpreiteirosController::class, 'destroy'])->name('empreiteiros.destroy'); //Deleta Empreiteiro
+    // Rotas Operacional Empreiteiros
+    Route::get('/operacional/supervisores', [SupervisorController::class, 'index'])->name('supervisores.index'); //Lista os Supervisores
+    Route::post('/operacional/supervisor', [SupervisorController ::class, 'store'])->name('supervisor.store'); //Salva as supervisor
+    Route::put('/operacional/supervisor', [SupervisorController::class, 'update'])->name('supervisor.update'); //Update supervisor
+    Route::delete('/operacional/supervisor/{id}', [SupervisorController::class, 'destroy'])->name('supervisor.destroy'); //Deleta supervisor
+
     // Rotas Operacional Cliente
     Route::get('/operacional/clientes', [ClientesController::class, 'index'])->name('clientes.index'); //Lista os dados
-    Route::get('/operacional/clientes/create', [ClientesController ::class, 'create'])->name('cliente.create');
+    Route::get('/operacional/clientes/create', [ClientesController ::class, 'create'])->name('cliente.create'); // View Cadatrar cliente
     Route::post('/operacional/clientes', [ClientesController ::class, 'store'])->name('cliente.store'); //Salva as clientes
     Route::get('/operacional/clientes/{id}/edit', [ClientesController::class, 'edit'])->name('cliente.edit'); //Editar cliente
     Route::put('/operacional/clientes/{id}', [ClientesController::class, 'update'])->name('cliente.update'); //Update cliente
     Route::delete('/operacional/clientes/{id}/delete', [ClientesController::class, 'destroy'])->name('cliente.destroy'); //Update cliente
+
+    // Rotas Operacional Projeto
+    Route::get('/operacional/projeto', [ProjetoController::class, 'index'])->name('projeto.index'); //Lista os dados
+    Route::get('/operacional/projeto/create', [ProjetoController ::class, 'create'])->name('projeto.create'); // View Cadatrar projeto
+    Route::post('/operacional/projeto', [ProjetoController ::class, 'store'])->name('projeto.store'); //Salva as projeto
 
     // Rotas Almoxarifado
 

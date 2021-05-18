@@ -75,6 +75,9 @@ Route::prefix('/sistema')->group(function(){
     Route::get('/operacional/projeto', [ProjetoController::class, 'index'])->name('projeto.index'); //Lista os dados
     Route::get('/operacional/projeto/create', [ProjetoController ::class, 'create'])->name('projeto.create'); // View Cadatrar projeto
     Route::post('/operacional/projeto', [ProjetoController ::class, 'store'])->name('projeto.store'); //Salva as projeto
+    Route::get('/operacional/projeto/{id}/edit', [ProjetoController::class, 'edit'])->name('projeto.edit'); //Editar projeto
+    Route::put('/operacional/projeto/{id}', [ProjetoController::class, 'update'])->name('projeto.update'); //Update projeto
+    Route::delete('/operacional/projeto/{id}/delete', [ProjetoController::class, 'destroy'])->name('projeto.destroy'); //Update projeto
 
     // Rotas Almoxarifado
 

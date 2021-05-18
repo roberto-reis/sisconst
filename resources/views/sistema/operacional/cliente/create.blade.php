@@ -43,7 +43,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="cnpj">CNPJ:</label>
-                            <input type="number" name="cnpj" class="form-control @error('cnpj') is-invalid @enderror" id="cnpj" value="{{ old('cnpj') }}" placeholder="Somente numero">
+                            <input type="text" name="cnpj" class="form-control @error('cnpj') is-invalid @enderror" id="cnpj" value="{{ old('cnpj') }}" placeholder="Qual o CNPJ?">
                         </div>
                     </div>
         

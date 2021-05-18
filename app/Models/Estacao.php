@@ -19,5 +19,10 @@ class Estacao extends Model
         'municipio'
     ];
 
+
+    public function projeto() {
+        return $this->hasMany(Projeto::class, 'id_estacao', 'id');
+    }
+
     
 }

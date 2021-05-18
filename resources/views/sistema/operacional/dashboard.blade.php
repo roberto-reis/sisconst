@@ -150,7 +150,7 @@
                     </form>
                     {{-- Table status cadastrado --}}
                     <div>
-                        <table class="table table-sm table_supervisor">
+                        <table class="table table-sm table_supervisor table_custom">
                             <thead>
                                 <tr>
                                     <th>Supervisor</th>
@@ -222,7 +222,7 @@
                     </form>
                     {{-- Table status cadastrado --}}
                     <div>
-                        <table class="table table-sm table_empreiterio">
+                        <table class="table table-sm table_empreiterio table_custom">
                             <thead>
                                 <tr>
                                     <th>Empreiteiro</th>
@@ -306,7 +306,7 @@
                     </form>
                     {{-- Table Estação cadastrado --}}
                     <div class="table-responsive mt-2">                        
-                        <table class="table table-sm table_estacao">
+                        <table class="table table-sm table_estacao table_custom">
                             <thead>
                                 <tr>
                                     <th style="min-width: 80px">Estação</th>
@@ -391,7 +391,7 @@
                     </form>
                     {{-- Table status cadastrado --}}
                     <div>
-                        <table class="table table-sm table_status">
+                        <table class="table table-sm table_status table_custom">
                             <thead>
                                 <tr>
                                     <th>Status</th>
@@ -463,7 +463,7 @@
                     </form>
                     {{-- Table Tipo de Serviço cadastrado --}}
                     <div>
-                        <table class="table table-sm table_tipoServico">
+                        <table class="table table-sm table_tipoServico table_custom">
                             <thead>
                                 <tr>
                                     <th>Tipo de Serviço</th>
@@ -518,7 +518,6 @@
 @stop
 
 @section('js')
-    <script src="/assets/js/custom.js"></script>
     <script>
         $(document).ready(function() {
             // CSRF-TOKEN

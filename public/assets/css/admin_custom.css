@@ -111,3 +111,8 @@
 .pagination {
     justify-content: flex-end;
 }
+
+#valor_projetado::after {
+    content: "R$";
+    background-color: #FF7A00;
+}

@@ -66,21 +66,21 @@
                         </thead>
                         <tbody>
         
-                            @foreach ($projetos as $item)
+                            @foreach ($projetos as $projeto)
 
                             <tr>
-                                <td>{{ $item->projeto }}</td>
-                                <td>{{ $item->numero_oe_oc }}</td>
-                                <td>{{ $item->endereco }}</td>
-                                <td>{{ $item->bairro }}</td>
-                                <td>{{ $item->licenca }}</td>
-                                <td>{{ $item->inicio_licenca }}</td>
-                                <td>{{ $item->termino_licenca }}</td>
+                                <td>{{ $projeto->num_projeto }}</td>
+                                <td>{{ $projeto->numero_oe_oc }}</td>
+                                <td>{{ $projeto->endereco }}</td>
+                                <td>{{ $projeto->bairro }}</td>
+                                <td>{{ $projeto->licenca }}</td>
+                                <td>{{ $projeto->inicio_licenca }}</td>
+                                <td>{{ $projeto->termino_licenca }}</td>
                                 <td>
                                     <div class="btn_table">
-                                        <a href="" class="btn"><i class="fas fa-edit"></i></a>                       
+                                        <a href="{{ route('projeto.edit', $projeto->id) }}" class="btn"><i class="fas fa-edit"></i></a>                       
                                         
-                                        <form class="d-inline" action="" method="POST" onclick="return confirm('Tem certeza que deseja excluir?')">
+                                        <form class="d-inline" action="{{ route('projeto.destroy', $projeto->id) }}" method="POST" onclick="return confirm('Tem certeza que deseja excluir?')">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn"><i class="fas fa-trash"></i></button>

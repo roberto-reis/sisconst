@@ -74,7 +74,6 @@
                         <th>Licença</th>
                         <th>Status</th>
                         <th>Foto Anexo XII</th>
-                        <th style="width: 78px">Ação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -86,37 +85,6 @@
                         <td>01837-2021</td>
                         <td>Em andamento</td>
                         <td>03/07/2021</td>
-                        <td>
-                            <div class="btn_table">
-                                <a href="" class="btn"><i class="fas fa-edit"></i></a>                       
-                                
-                                <form class="d-inline" action="" method="POST" onclick="return confirm('Tem certeza que deseja excluir?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn"><i class="fas fa-trash"></i></button>
-                                </form>
-                            </div> 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A2-10002-2017-DE-BPAC-RJ</td>
-                        <td>2017-031981</td>
-                        <td>Estrada Adhemar Bebiano, 3610</td>
-                        <td>Inhaúma</td>
-                        <td>01837-2021</td>
-                        <td>Em andamento</td>
-                        <td>03/07/2021</td>
-                        <td>
-                            <div class="btn_table">
-                                <a href="" class="btn"><i class="fas fa-edit"></i></a>                       
-                                
-                                <form class="d-inline" action="" method="POST" onclick="return confirm('Tem certeza que deseja excluir?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn"><i class="fas fa-trash"></i></button>
-                                </form>
-                            </div> 
-                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -875,12 +843,14 @@
                         dataType: 'json',
                         success: function(response) {
                             //console.log(response);
-                            $('#modal_empreiteiroAdd .menssageBox').html(`
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
-                                    ${response.error}
-                                </div>
-                            `);
+                            if(response.error) {
+                                $('#modal_empreiteiroAdd .menssageBox').html(`
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                        ${response.error}
+                                    </div>
+                                `);
+                            }
                             getEmpreiteiros();
                         },
                         error: function (response) {
@@ -1088,12 +1058,14 @@
                         dataType: 'json',
                         success: function(response) {
                             //console.log(response);
-                            $('#modal_statusObraAdd .menssageBox').html(`
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
-                                    ${response.error}
-                                </div>
-                            `);
+                            if(response.error){
+                                $('#modal_statusObraAdd .menssageBox').html(`
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                        ${response.error}
+                                    </div>
+                                `);
+                            }
                             getStatus();
                         },
                         error: function (response) {

@@ -3,20 +3,24 @@
 namespace App\Http\Controllers\Sistema\Operacional;
 
 use App\Http\Controllers\Controller;
+use App\Models\Obra;
 use App\Models\Projeto;
 use App\Models\StatusObra;
 use Illuminate\Http\Request;
 
 class DashboardOperacionalController extends Controller
 {
-    public function index() {
-        $projetos = Projeto::paginate(12);
+    public function __construct() {
+        $this->middleware('auth');
+    }
 
-        $statusObras = StatusObra::get();
+    public function index() {
+        $obras = Obra::get();
+        $ObrasNaoiniciado = Obra::count();
         
         return view('sistema.operacional.dashboard', [
-            'projetos' => $projetos,
-            'statusObras' => $statusObras
+            'obras' => $obras,
+            'ObrasNaoiniciado' => $ObrasNaoiniciado
         ]);
     }
 }

@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Validator;
 
 class ProjetoController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     // Formata numero para guadar no BD
     public function format_num($valor) {
         $valor = str_replace(".", "", $valor);
@@ -117,13 +122,13 @@ class ProjetoController extends Controller
         
         $projeto->save();
 
-        return redirect()->route('projeto.index');
+        return redirect()->route('projetos.index');
         
     }
 
     public function edit($id) {
         // Busca o Projeto com os relacionamentos
-        $projeto = Projeto::with(['estacao', 'cliente', 'tipoServico', 'supervisor'])->find($id);
+        $projeto = Projeto::find($id);
 
         $estacoes = Estacao::get();
         $clientes = Cliente::get();
@@ -141,11 +146,11 @@ class ProjetoController extends Controller
             ]);
         }
         
-        return redirect()->route('projeto.index');
+        return redirect()->route('projetos.index');
     }
 
     public function update(Request $request, $id) {
-
+        // Busca o Projeto no BD
         $projeto = Projeto::find($id);
 
         if($projeto) {
@@ -235,11 +240,11 @@ class ProjetoController extends Controller
                 $projeto->save();
 
             }
-            return redirect()->route('projeto.index')->with('mensagem_sucesso', 'Projeto alterado com sucesso!');
+            return redirect()->route('projetos.index')->with('mensagem_sucesso', 'Projeto alterado com sucesso!');
 
         }
 
-        return redirect()->route('projeto.index');
+        return redirect()->route('projetos.index');
 
     }
 
@@ -248,14 +253,14 @@ class ProjetoController extends Controller
         
         if(count($hasRelationship) > 0) {
             // Verifica se não existe relacionamento o a tabela Projeto
-            return redirect()->route('projeto.index')->with('mensagem_error', 'Este Projeto não pode ser deletado, existe '.count($hasRelationship).' resistro(s) usando-o. ');
+            return redirect()->route('projetos.index')->with('mensagem_error', 'Este Projeto não pode ser deletado, existe '.count($hasRelationship).' resistro(s) usando-o. ');
 
         } else {
 
             $projeto = Projeto::findOrFail( $id );
             $projeto->delete();
             
-            return redirect()->route('projeto.index');
+            return redirect()->route('projetos.index');
 
         }       
 

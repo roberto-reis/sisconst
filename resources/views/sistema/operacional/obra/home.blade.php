@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Projeto')
+@section('title', 'Obras')
 
 
 @section('content_header')
         <div class="row">
-            <nav class="col breadcrumb_custom"><a href="{{ route('operacional.index') }}">Operacional</a> > Projetos</nav>
+            <nav class="col breadcrumb_custom"><a href="{{ route('operacional.index') }}">Operacional</a> > Obras</nav>
         </div>
 @stop
 
@@ -30,7 +30,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10 mt-4 mb-3">
             <!-- Button trigger modal adicionar -->
-            <a href="{{ route('projeto.create') }}" class="btn btn-info">Novo Projeto</a>
+            <a href="{{ route('obra.create') }}" class="btn btn-info">Nova Obra</a>
         </div>
         <div class="card col-md-10 col-sm-12">
             <div class="card-body">
@@ -42,7 +42,7 @@
                                     Projeto
                                 </th>
                                 <th>
-                                    O.E.
+                                    O.E. / OC
                                 </th>
                                 <th style="min-width: 180px">
                                     Endereço
@@ -54,10 +54,10 @@
                                     Licença
                                 </th>
                                 <th>
-                                    Inicio Licença
+                                    Status
                                 </th>
                                 <th>
-                                    Término Licença
+                                    Data Anexo XIII
                                 </th>
                                 <th style="width: 78px">
                                     Ação
@@ -66,33 +66,33 @@
                         </thead>
                         <tbody>
         
-                            @foreach ($projetos as $projeto)
+                            @foreach ($obras as $obra)
 
-                            <tr>
-                                <td>{{ $projeto->num_projeto }}</td>
-                                <td>{{ $projeto->numero_oe_oc }}</td>
-                                <td>{{ $projeto->endereco }}</td>
-                                <td>{{ $projeto->bairro }}</td>
-                                <td>{{ $projeto->licenca }}</td>
-                                <td>{{ date("d/m/Y", strtotime($projeto->inicio_licenca))}}</td>
-                                <td>{{ date("d/m/Y", strtotime($projeto->termino_licenca)) }}</td>
-                                <td>
-                                    <div class="btn_table">
-                                        <a href="{{ route('projeto.edit', $projeto->id) }}" class="btn"><i class="fas fa-edit"></i></a>                       
-                                        
-                                        <form class="d-inline" action="{{ route('projeto.destroy', $projeto->id) }}" method="POST" onclick="return confirm('Tem certeza que deseja excluir?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn"><i class="fas fa-trash"></i></button>
-                                        </form>
-                                    </div> 
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $obra->projeto->num_projeto }}</td>
+                                    <td>{{ $obra->projeto->numero_oe_oc }}</td>
+                                    <td>{{ $obra->projeto->endereco }}</td>
+                                    <td>{{ $obra->projeto->bairro }}</td>
+                                    <td>{{ $obra->projeto->licenca }}</td>
+                                    <td>{{ $obra->statusObra->nome }}</td>
+                                    <td>{{ !empty($obra->data_fotos_anexo_xiii) ? date("d/m/Y", strtotime($obra->data_fotos_anexo_xiii)) : "" }}</td>
+                                    <td>
+                                        <div class="btn_table">
+                                            <a href="{{ route('obra.edit', $obra->id) }}" class="btn"><i class="fas fa-edit"></i></a>                       
+                                            
+                                            <form class="d-inline" action="{{ route('obra.destroy', $obra->id) }}" method="POST" onclick="return confirm('Tem certeza que deseja excluir?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </div> 
+                                    </td>
+                                </tr>
                             @endforeach
         
                         </tbody>
                     </table>
-                        {{ $projetos->links('pagination::bootstrap-4') }}
+                    {{ $obras->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>

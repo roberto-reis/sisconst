@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Validator;
 
 class ClientesController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function index() {
 
         $clientes = Cliente::paginate(10);
@@ -59,20 +63,19 @@ class ClientesController extends Controller
 
         }
 
-        $classe_servico = isset($data['valor_urs']) ? str_replace(',', '.', $data['valor_urs']) : $data['valor_urs'];
-        Cliente::create([
-            'contrato' => $data['contrato'],
-            'rasao_social' => $data['rasao_social'],
-            'cnpj' => $data['cnpj'],
-            'endereco' => $data['endereco'],
-            'bairro' => $data['endereco'],
-            'cidade' => $data['cidade'],
-            'uf' => strtoupper($data['uf']),
-            'inscricao_municipal' => $data['inscricao_municipal'],
-            'inscricao_estadual' => $data['inscricao_estadual'],
-            'classe_servico' => $data['classe_servico'],
-            'valor_urs' => $classe_servico
-        ]);
+        $cliente = new Cliente();
+        $cliente->contrato = $data['contrato'];
+        $cliente->rasao_social = $data['rasao_social'];
+        $cliente->cnpj = $data['cnpj'];
+        $cliente->endereco = $data['endereco'];
+        $cliente->bairro = $data['bairro'];
+        $cliente->cidade = $data['cidade'];
+        $cliente->uf = strtoupper($data['uf']);
+        $cliente->inscricao_municipal = $data['inscricao_municipal'];
+        $cliente->inscricao_estadual = $data['inscricao_estadual'];
+        $cliente->classe_servico = $data['classe_servico'];
+        $cliente->valor_urs = $this->format_num($data['valor_urs']);
+        $cliente->save();
 
         return redirect()->route('clientes.index')->with('mensagem_sucesso', 'Cadastrado com sucesso!');
     }
@@ -126,20 +129,18 @@ class ClientesController extends Controller
                 ->withInput();    
             }
 
-            $classe_servico = isset($data['valor_urs']) ? str_replace(',', '.', $data['valor_urs']) : $data['valor_urs'];
-            $cliente->update([
-                'contrato' => $data['contrato'],
-                'rasao_social' => $data['rasao_social'],
-                'cnpj' => $data['cnpj'],
-                'endereco' => $data['endereco'],
-                'bairro' => $data['endereco'],
-                'cidade' => $data['cidade'],
-                'uf' => strtoupper($data['uf']),
-                'inscricao_municipal' => $data['inscricao_municipal'],
-                'inscricao_estadual' => $data['inscricao_estadual'],
-                'classe_servico' => $data['classe_servico'],
-                'valor_urs' => $classe_servico
-            ]);
+            $cliente->contrato = $data['contrato'];
+            $cliente->rasao_social = $data['rasao_social'];
+            $cliente->cnpj = $data['cnpj'];
+            $cliente->endereco = $data['endereco'];
+            $cliente->bairro = $data['bairro'];
+            $cliente->cidade = $data['cidade'];
+            $cliente->uf = strtoupper($data['uf']);
+            $cliente->inscricao_municipal = $data['inscricao_municipal'];
+            $cliente->inscricao_estadual = $data['inscricao_estadual'];
+            $cliente->classe_servico = $data['classe_servico'];
+            $cliente->valor_urs = $this->format_num($data['valor_urs']);
+            $cliente->save();
 
             return redirect()->route('clientes.index')->with('mensagem_sucesso', 'Cliente alterado com sucesso!');
 
@@ -169,6 +170,12 @@ class ClientesController extends Controller
     }
 
 
+    // Formata numero para guadar no BD
+    public function format_num($valor) {
+        $valor = str_replace(".", "", $valor);
+        $valor = str_replace(",", ".", $valor);
+        return $valor;
+    }
 
 
 }

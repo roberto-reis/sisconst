@@ -4,11 +4,16 @@ namespace App\Http\Controllers\Sistema\Operacional;
 
 use App\Http\Controllers\Controller;
 use App\Models\Empreiteiro;
+use App\Models\Obra;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class EmpreiteirosController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function index() {
         $empreiteiro = Empreiteiro::get();
 
@@ -89,25 +94,19 @@ class EmpreiteirosController extends Controller
 
     public function destroy($id) {
         $mensagem = [];
-        // $hasRelationship = Obra::where('id_empreiteiro', $id)->get();
+        $hasRelationship = Obra::where('id_empreiteiro', $id)->get();
         
-        // if(count($hasRelationship) > 0) {
+        if(count($hasRelationship) > 0) {
 
-        //     $mensagem['error'] = "Este Tipo de Serviço não pode ser deletado, existe ".count($hasRelationship)." resistro(s) usando. ";
+            $mensagem['error'] = "Este Tipo de Serviço não pode ser deletado, existe ".count($hasRelationship)." resistro(s) usando. ";
 
-        // } else {
+        } else {
 
-        //     $status = Empreiteiro::findOrFail( $id );
-        //     $status->delete();
-        //     $mensagem['sucesso'] = "Deletado com sucesso!!!";
-
-        // }
-
-            $empreiteiro = Empreiteiro::findOrFail( $id );
-            $empreiteiro->delete();
+            $status = Empreiteiro::findOrFail( $id );
+            $status->delete();
             $mensagem['sucesso'] = "Deletado com sucesso!!!";
 
-        
+        }        
 
         return response()->json( $mensagem );
     }

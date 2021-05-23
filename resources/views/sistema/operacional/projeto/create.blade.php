@@ -5,7 +5,7 @@
 
 @section('content_header')
         <div class="row">
-            <nav class="col breadcrumb_custom"><a href="{{ route('operacional.index') }}">Operacional</a> > <a href="{{ route('projeto.index') }}">Projeto</a> > Novo Projeto</nav>
+            <nav class="col breadcrumb_custom"><a href="{{ route('operacional.index') }}">Operacional</a> > <a href="{{ route('projetos.index') }}">Projetos</a> > Novo Projeto</nav>
         </div>
 @stop
 
@@ -28,10 +28,10 @@
 
     <div class="row justify-content-center mt-4">
         
-        <div class="card col-xl-10 col-md-12">
-            <div class="card-bady p-2">
-                <form class=" form_custom" action="{{ route('projeto.store') }}" method="POST">
-                    @csrf
+        <div class="card col-xl-10 col-md-12 p-0">
+            <form class=" form_custom" action="{{ route('projeto.store') }}" method="POST">
+                @csrf
+                <div class="card-bady px-3 pt-2">
                     <div class="form-row">
                         <div class="form-group col-md-4 col-sm-6">
                             <label for="num_projeto">Projeto*:</label>
@@ -87,10 +87,10 @@
                         </div>
                         <div class="form-group col-md-4 col-sm-6">
                             <label for="pc_rv">PC / RV:</label>
-                            <input type="text" name="pc_rv" class="form-control @error('pc_rv') is-invalid @enderror" id="bairro" value="{{ old('pc_rv') }}" placeholder="Digite o PC ou SC">
+                            <input type="text" name="pc_rv" class="form-control @error('pc_rv') is-invalid @enderror" id="pc_rv" value="{{ old('pc_rv') }}" placeholder="Digite o PC ou SC">
                         </div>
                         <div class="form-group col-md-4 col-sm-12">
-                            <label for="tipo_servico">Tipo de Serviço:*</label>
+                            <label for="tipo_servico">Tipo de Serviço*:</label>
                             <select name="tipo_servico" id="tipo_servico" class="form-control @error('tipo_servico') is-invalid @enderror" id="tipo_servico" value="{{ old('tipo_servico') }}">
                                 <option value="">Selecione o tipo de serviço</option>
                                 @foreach ($tipoServicos as $tipoServico)
@@ -101,22 +101,22 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-8 col-sm-12">
+                        <div class="form-group col-lg-8 col-md-5 col-sm-12">
                             <label for="descricao_servico">Descrição Serviço:</label>
                             <textarea name="descricao_servico" class="form-control @error('descricao_servico') is-invalid @enderror" rows="1" placeholder="Digite a descrição do serviço">{{ old('descricao_servico') }}</textarea>
                         </div>
-                        <div class="form-group col-md-2 col-sm-6">
+                        <div class="form-group col-lg-2 col-md-3 col-sm-6">
                             <label for="inicio_previsto">Inicio Previsto:</label>
                             <input type="date" name="inicio_previsto" class="form-control @error('inicio_previsto') is-invalid @enderror" value="{{ old('inicio_previsto') }}">
                         </div>
-                        <div class="form-group col-md-2 col-sm-6">
+                        <div class="form-group col-lg-2 col-md-4 col-sm-6">
                             <label for="termino_previsto">Término Previsto:</label>
                             <input type="date" name="termino_previsto" class="form-control @error('termino_previsto') is-invalid @enderror" id="termino_previsto" value="{{ old('termino_previsto') }}">
                         </div>
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-5 col-sm-6">
+                        <div class="form-group col-lg-5 col-md-4 col-sm-6">
                             <label for="supervisor">Supervisor:</label>
                             <select name="supervisor" id="supervisor" class="form-control">
                                 <option value="">Selecione um supervisor</option>
@@ -125,15 +125,15 @@
                                 @endforeach                                
                             </select>
                         </div>
-                        <div class="form-group col-md-3 col-sm-6">
+                        <div class="form-group col-lg-3 col-md-2 col-sm-6">
                             <label for="licenca">Licença:</label>
                             <input type="text" name="licenca" class="form-control @error('licenca') is-invalid @enderror" value="{{ old('licenca') }}" placeholder="Digite licença">
                         </div>
-                        <div class="form-group col-md-2 col-sm-6">
+                        <div class="form-group col-lg-2 col-md-3 col-sm-6">
                             <label for="inicio_licenca">Inicio Licença:</label>
                             <input type="date" name="inicio_licenca" class="form-control @error('inicio_licenca') is-invalid @enderror" value="{{ old('inicio_licenca') }}">
                         </div>
-                        <div class="form-group col-md-2 col-sm-6">
+                        <div class="form-group col-lg-2 col-md-3 col-sm-6">
                             <label for="termino_licenca">Término Licença:</label>
                             <input type="date" name="termino_licenca" class="form-control @error('termino_licenca') is-invalid @enderror" value="{{ old('termino_licenca') }}">
                         </div>
@@ -157,10 +157,12 @@
                             <input type="text" name="comprimento_galeria" class="form-control @error('comprimento_galeria') is-invalid @enderror" value="{{ old('comprimento_galeria') }}" placeholder="Qual o Comprimento Galeria?">
                         </div>
                     </div>
-        
+                </div>    
+                <div class="card-footer">
+                    <a href="{{ route('projetos.index') }}" class="btn btn-danger btn-lg">Cancelar</a>
                     <button type="submit" class="btn btn-info btn-lg">Cadastrar</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
 
     </div>
@@ -175,8 +177,8 @@
     <script>
         $(document).ready(function() {
 
-
-            $('#contrato_cliente').on('click', function() {
+            // Carrega do dados quando selecionar o option do select
+            $('#contrato_cliente').on('change', function() {
                 $('#classe_servico').val($('#contrato_cliente option:selected').attr("data-classe_servico"));
                 $('#valor_urs').val($('#contrato_cliente option:selected').attr("data-valor_urs"));
             })

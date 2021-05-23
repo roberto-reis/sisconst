@@ -244,7 +244,7 @@ return [
         ],
         [
             'text' => 'Projetos',
-            'url'  => 'sistema/operacional/projeto',
+            'url'  => 'sistema/operacional/projetos',
             'icon' => 'fas fa-project-diagram'
         ],
         [

@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Sistema\Operacional;
 
 use App\Http\Controllers\Controller;
+use App\Models\Obra;
 use App\Models\StatusObra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class StatusObrasController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
     
     public function index() {
         $statusObras = StatusObra::get();
@@ -88,24 +92,16 @@ class StatusObrasController extends Controller
 
     public function destroy($id) {
         $mensagem = [];
-        // $hasRelationship = Obra::where('id_status_obra', $id)->get();
+        $hasRelationship = Obra::where('id_status_obra', $id)->get();
         
-        // if(count($hasRelationship) > 0) {
-
-        //     $mensagem['error'] = "Este Tipo de Serviço não pode ser deletado, existe ".count($hasRelationship)." resistro(s) usando. ";
-
-        // } else {
-
-        //     $status = StatusObra::findOrFail( $id );
-        //     $status->delete();
-        //     $mensagem['sucesso'] = "Deletado com sucesso!!!";
-
-        // }
-
+        if(count($hasRelationship) > 0) {
+            $mensagem['error'] = "Este Tipo de Serviço não pode ser deletado, existe ".count($hasRelationship)." resistro(s) usando. ";
+        } else {
             $status = StatusObra::findOrFail( $id );
             $status->delete();
             $mensagem['sucesso'] = "Deletado com sucesso!!!";
 
+        }
         
 
         return response()->json( $mensagem );

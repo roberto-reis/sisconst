@@ -7,6 +7,7 @@ use App\Http\Controllers\Sistema\Operacional\DashboardOperacionalController;
 use App\Http\Controllers\Sistema\Operacional\EmpreiteirosController;
 use App\Http\Controllers\Sistema\Operacional\StatusObrasController;
 use App\Http\Controllers\Sistema\Operacional\EstacoesController;
+use App\Http\Controllers\Sistema\Operacional\ObraController;
 use App\Http\Controllers\Sistema\Operacional\ProjetoController;
 use App\Http\Controllers\Sistema\Operacional\SupervisorController;
 use App\Http\Controllers\Sistema\Operacional\TipoServicosController;
@@ -72,12 +73,20 @@ Route::prefix('/sistema')->group(function(){
     Route::delete('/operacional/clientes/{id}/delete', [ClientesController::class, 'destroy'])->name('cliente.destroy'); //Update cliente
 
     // Rotas Operacional Projeto
-    Route::get('/operacional/projeto', [ProjetoController::class, 'index'])->name('projeto.index'); //Lista os dados
+    Route::get('/operacional/projetos', [ProjetoController::class, 'index'])->name('projetos.index'); //Lista os dados
     Route::get('/operacional/projeto/create', [ProjetoController ::class, 'create'])->name('projeto.create'); // View Cadatrar projeto
     Route::post('/operacional/projeto', [ProjetoController ::class, 'store'])->name('projeto.store'); //Salva as projeto
     Route::get('/operacional/projeto/{id}/edit', [ProjetoController::class, 'edit'])->name('projeto.edit'); //Editar projeto
     Route::put('/operacional/projeto/{id}', [ProjetoController::class, 'update'])->name('projeto.update'); //Update projeto
     Route::delete('/operacional/projeto/{id}/delete', [ProjetoController::class, 'destroy'])->name('projeto.destroy'); //Update projeto
+
+    // Rotas Operacional Obras
+    Route::get('/operacional/obras', [ObraController::class, 'index'])->name('obras.index'); //Lista os dados
+    Route::get('/operacional/obra/create', [ObraController ::class, 'create'])->name('obra.create'); // View Cadatrar obra
+    Route::post('/operacional/obra', [ObraController ::class, 'store'])->name('obra.store'); //Salva as obra
+    Route::get('/operacional/obra/{id}/edit', [ObraController::class, 'edit'])->name('obra.edit'); //Editar obra
+    Route::put('/operacional/obra/{id}', [ObraController::class, 'update'])->name('obra.update'); //Update obra
+    Route::delete('/operacional/obra/{id}/delete', [ObraController::class, 'destroy'])->name('obra.destroy'); //Update obra
 
     // Rotas Almoxarifado
 

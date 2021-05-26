@@ -4,9 +4,9 @@
 
 
 @section('content_header')
-        <div class="row">
-            <nav class="col breadcrumb_custom">Dashboard</nav>
-        </div>
+    <div class="row">
+        <nav class="col breadcrumb_custom">Dashboard</nav>
+    </div>
 @stop
 
 
@@ -18,7 +18,7 @@
         <div class="col-md-3 col-sm-6">
             <div class="card card_custom">
                 <div class="card-body text-center">
-                    <span>05</span>
+                    <span>{{ $obraFaltaAnexoIII }}</span>
                     <h3>Obra Falta Anexo III</h3>
                 </div>
             </div>
@@ -26,15 +26,7 @@
         <div class="col-md-3 col-sm-6">
             <div class="card card_custom">
                 <div class="card-body text-center">
-                    <span>10</span>
-                    <h3>Obras Não iniciado</h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="card card_custom">
-                <div class="card-body text-center">
-                    <span>08</span>
+                    <span>{{ $obrasEmAndamentoCount }}</span>
                     <h3>Obras em andamento</h3>
                 </div>
             </div>
@@ -42,15 +34,15 @@
         <div class="col-md-3 col-sm-6">
             <div class="card card_custom">
                 <div class="card-body text-center">
-                    <span>03</span>
-                    <h3>Obras Encerrado</h3>
+                    <span>{{ $obrasFinalizadaCount }}</span>
+                    <h3>Obras Finalizadas</h3>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="card card_custom">
                 <div class="card-body text-center">
-                    <span>50</span>
+                    <span>{{ $obrasFaturadaCount }}</span>
                     <h3>Obras Faturada</h3>
                 </div>
             </div>
@@ -67,9 +59,9 @@
             <table class="table table-bordered table_custom">
                 <thead>
                     <tr>
-                        <th>Projeto</th>
+                        <th style="min-width: 220px">Projeto</th>
                         <th>O.E</th>
-                        <th>Endereço</th>
+                        <th style="min-width: 250px">Endereço</th>
                         <th>Bairro</th>
                         <th>Licença</th>
                         <th>Status</th>
@@ -77,18 +69,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>A2-10002-2017-DE-BPAC-RJ</td>
-                        <td>2017-031981</td>
-                        <td>Estrada Adhemar Bebiano, 3610</td>
-                        <td>Inhaúma</td>
-                        <td>01837-2021</td>
-                        <td>Em andamento</td>
-                        <td>03/07/2021</td>
-                    </tr>
+                    @foreach ($obras as $obra)
+                        <tr>
+                            <td>{{ $obra->projeto->num_projeto }}</td>
+                            <td>{{ $obra->projeto->numero_oe_oc }}</td>
+                            <td>{{ $obra->projeto->endereco }}</td>
+                            <td>{{ $obra->projeto->bairro }}</td>
+                            <td>{{ $obra->projeto->licenca }}</td>
+                            <td>{{ $obra->statusObra->nome }}</td>
+                            <td>{{ !empty($obra->data_fotos_anexo_xiii) ? date("d/m/Y", strtotime($obra->data_fotos_anexo_xiii)) : "" }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
-            {{-- Paginação --}}
         </div>
     </div>
 

@@ -4,9 +4,9 @@
 
 
 @section('content_header')
-        <div class="row">
-            <nav class="col breadcrumb_custom"><a href="{{ route('operacional.index') }}">Operacional</a> > Projetos</nav>
-        </div>
+    <div class="row">
+        <nav class="col-6 breadcrumb_custom"><a href="{{ route('operacional.index') }}">Operacional</a> > Projetos</nav>
+    </div>
 @stop
 
 @section('content')
@@ -28,11 +28,13 @@
     @endif
 
     <div class="row justify-content-center">
-        <div class="col-md-10 mt-4 mb-3">
-            <!-- Button trigger modal adicionar -->
+        <div class="col-md-10 mt-4">
             <a href="{{ route('projeto.create') }}" class="btn btn-info">Novo Projeto</a>
         </div>
-        <div class="card col-md-10 col-sm-12">
+    </div>
+
+    <div class="row justify-content-center">        
+        <div class="card col-md-10 col-sm-12 mt-3">
             <div class="card-body">
                 <div class="table-responsive-md">
                     <table class="table table-hover table_custom">
@@ -74,8 +76,8 @@
                                 <td>{{ $projeto->endereco }}</td>
                                 <td>{{ $projeto->bairro }}</td>
                                 <td>{{ $projeto->licenca }}</td>
-                                <td>{{ date("d/m/Y", strtotime($projeto->inicio_licenca))}}</td>
-                                <td>{{ date("d/m/Y", strtotime($projeto->termino_licenca)) }}</td>
+                                <td>{{ !empty($projeto->inicio_licenca) ? date("d/m/Y", strtotime($projeto->inicio_licenca)) : "" }}</td>
+                                <td>{{ !empty($projeto->termino_licenca) ? date("d/m/Y", strtotime($projeto->termino_licenca)) : "" }}</td>
                                 <td>
                                     <div class="btn_table">
                                         <a href="{{ route('projeto.edit', $projeto->id) }}" class="btn"><i class="fas fa-edit"></i></a>                       

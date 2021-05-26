@@ -58,8 +58,12 @@
 }
 .form_custom input,
 .form_custom select,
-.form_custom textarea {
+.form_custom textarea,
+.input-group-text {
     border: 2px solid var(--blue-primary);
+}
+.input-group-text{
+    border-right: 0;
 }
 
 /* table_custom */

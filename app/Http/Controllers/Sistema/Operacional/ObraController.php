@@ -43,7 +43,9 @@ class ObraController extends Controller
         $data = $request->only([
             'projeto',
             'statusObra',
+            'fotos_emergencia',
             'data_fotos_emergencia',
+            'fotos_anexo_xiii',
             'data_fotos_anexo_xiii',
             'empreiteiro',
             'fiscal_cliente',
@@ -55,7 +57,9 @@ class ObraController extends Controller
         $validator = Validator::make($data, [
             'projeto' => ['required', 'integer'],
             'statusObra' => ['required', 'integer'],
+            'fotos_emergencia' => ['nullable', 'string'],
             'data_fotos_emergencia' => ['nullable', 'date'],
+            'fotos_anexo_xiii' => ['nullable', 'string'],
             'data_fotos_anexo_xiii' => ['nullable', 'date'],
             'empreiteiro' => ['nullable', 'integer'],
             'fiscal_cliente' => ['nullable', 'string', 'max:50'],
@@ -71,8 +75,10 @@ class ObraController extends Controller
         $obra = new Obra();
         $obra->inicio_real = $data['inicio_real'];
         $obra->termino_real = $data['termino_real'];
-        $obra->data_fotos_emergencia = $data['data_fotos_emergencia'];
-        $obra->data_fotos_anexo_xiii = $data['data_fotos_anexo_xiii'];
+        $obra->fotos_emergencia = $data['fotos_emergencia'] ?? 'N' ;
+        $obra->data_fotos_emergencia = $data['data_fotos_emergencia'] ?? null;
+        $obra->fotos_anexo_xiii = $data['fotos_anexo_xiii'] ?? 'N';
+        $obra->data_fotos_anexo_xiii = $data['data_fotos_anexo_xiii'] ?? null;
         $obra->fiscal_cliente = $data['fiscal_cliente'];
         $obra->observacao = $data['observacao'];
         $obra->id_projeto = $data['projeto'];
@@ -86,7 +92,7 @@ class ObraController extends Controller
     }
 
     public function edit($id) {
-        $obra = Obra::find($id);
+        $obra = Obra::with('empreiteiro')->find($id);
         $projetos = Projeto::get();
         $statusObras = StatusObra::get();
         $empreiteiros = Empreiteiro::get();
@@ -112,7 +118,9 @@ class ObraController extends Controller
             $data = $request->only([
                 'projeto',
                 'statusObra',
+                'fotos_emergencia',
                 'data_fotos_emergencia',
+                'fotos_anexo_xiii',
                 'data_fotos_anexo_xiii',
                 'empreiteiro',
                 'fiscal_cliente',
@@ -120,11 +128,15 @@ class ObraController extends Controller
                 'termino_real',
                 'observacao'
             ]);
+
+            //dd($data);
     
             $validator = Validator::make($data, [
                 'projeto' => ['required', 'integer'],
                 'statusObra' => ['required', 'integer'],
+                'fotos_emergencia' => ['nullable', 'string'],
                 'data_fotos_emergencia' => ['nullable', 'date'],
+                'fotos_anexo_xiii' => ['nullable', 'string'],
                 'data_fotos_anexo_xiii' => ['nullable', 'date'],
                 'empreiteiro' => ['nullable', 'integer'],
                 'fiscal_cliente' => ['nullable', 'string', 'max:50'],
@@ -133,14 +145,18 @@ class ObraController extends Controller
                 'observacao' => ['nullable', 'string', 'max:300']
             ]);
 
+
+
             if($validator->fails()) {
                 return redirect()->route('obra.edit', $id)->withErrors($validator)->withInput();
             } else {
 
                 $obra->inicio_real = $data['inicio_real'];
                 $obra->termino_real = $data['termino_real'];
-                $obra->data_fotos_emergencia = $data['data_fotos_emergencia'];
-                $obra->data_fotos_anexo_xiii = $data['data_fotos_anexo_xiii'];
+                $obra->fotos_emergencia = $data['fotos_emergencia'] ?? 'N' ;
+                $obra->data_fotos_emergencia = $data['data_fotos_emergencia'] ?? null;
+                $obra->fotos_anexo_xiii = $data['fotos_anexo_xiii'] ?? 'N';
+                $obra->data_fotos_anexo_xiii = $data['data_fotos_anexo_xiii'] ?? null;
                 $obra->fiscal_cliente = $data['fiscal_cliente'];
                 $obra->observacao = $data['observacao'];
                 $obra->id_projeto = $data['projeto'];

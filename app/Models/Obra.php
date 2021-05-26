@@ -16,8 +16,10 @@ class Obra extends Model
     protected $fillable = [
         'inicio_real',
         'termino_real',
-        'data_fotos_anexo_xiii',
+        'fotos_emergencia',
         'data_fotos_emergencia',
+        'fotos_anexo_xiii',
+        'data_fotos_anexo_xiii',
         'fiscal_cliente',
         'observacao',
         'id_projeto',

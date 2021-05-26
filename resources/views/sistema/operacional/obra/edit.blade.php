@@ -84,56 +84,75 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-xl-2 col-md-4 col-sm-6">
+                        <div class="form-group col-md-2 col-sm-6">
                             <label for="valor_projetado">Valor Previsto:</label>
                             <input type="text" name="valor_projetado" class="form-control" id="valor_projetado" disabled>
                         </div>
-                        <div class="form-group col-xl-2 col-md-4 col-sm-6">
+                        <div class="form-group col-md-3 col-sm-6">
                             <label for="comprimento_galeria">Comprimento Galeria:</label>
                             <input type="text" name="comprimento_galeria" class="form-control" id="comprimento_galeria" disabled>
                         </div>
-                        <div class="form-group col-xl-2 col-md-4 col-sm-6">
+                        <div class="form-group col-md-3 col-sm-6">
                             <label for="licenca">Licença:</label>
                             <input type="text" name="licenca" class="form-control" id="licenca" disabled>
                         </div>
-                        <div class="form-group col-xl-2 col-md-4 col-sm-6">
+                        <div class="form-group col-md-2 col-sm-6">
                             <label for="inicio_licenca">Inicio Licença:</label>
                             <input type="date" name="inicio_licenca" class="form-control" id="inicio_licenca" disabled>
                         </div>
-                        <div class="form-group col-xl-2 col-md-4 col-sm-6">
+                        <div class="form-group col-md-2 col-sm-6">
                             <label for="termino_licenca">Término Licença:</label>
                             <input type="date" name="termino_licenca" class="form-control" id="termino_licenca" disabled>
-                        </div>
-                        <div class="form-group col-xl-2 col-md-4 col-sm-6">
-                            <label for="data_fotos_emergencia">Dt. Fotos Emergência:</label>
-                            <input type="date" name="data_fotos_emergencia" class="form-control" id="data_fotos_emergencia" value="{{ $obra->data_fotos_emergencia }}">
-                        </div>                        
+                        </div>                     
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-2 col-sm-6">
-                            <label for="data_fotos_anexo_xiii">Dt. Fotos Anexo XIII:</label>
-                            <input type="date" name="data_fotos_anexo_xiii" class="form-control" id="data_fotos_anexo_xiii" value="{{ $obra->data_fotos_anexo_xiii }}">
-                        </div>
-                        <div class="form-group col-md-4 col-sm-6">
-                            <label for="empreiteiro">Empreiteiro:</label>
-                            <select name="empreiteiro" id="empreiteiro" class="form-control">
-                                @foreach ($empreiteiros as $empreiteiro)
-                                    <option value="{{ $empreiteiro->id }}" {{ $empreiteiro->id === $obra->empreiteiro->id ? "selected" : null }} >{{ $empreiteiro->nome }}</option>
-                                @endforeach                                
-                            </select>
+                        <div class="form-group col-md-3 col-sm-6">
+                            <label for="data_fotos_emergencia">Dt. Fotos Emergência:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                        <input type="checkbox"  name="fotos_emergencia" id="fotos_emergencia" value="S" {{ $obra->fotos_emergencia == 'S' ? 'checked' : '' }}>
+                                  </div>
+                                </div>
+                                <input type="date" name="data_fotos_emergencia" class="form-control" id="data_fotos_emergencia" value="{{ $obra->data_fotos_emergencia }}">
+                            </div>
                         </div>
                         <div class="form-group col-md-3 col-sm-6">
+                            <label for="data_fotos_anexo_xiii">Dt. Fotos Anexo XIII:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <input type="checkbox" name="fotos_anexo_xiii" id="fotos_anexo_xiii" value="S" {{ $obra->fotos_anexo_xiii == 'S' ? 'checked' : '' }}>
+                                  </div>
+                                </div>
+                                <input type="date" name="data_fotos_anexo_xiii" class="form-control" id="data_fotos_anexo_xiii" value="{{ $obra->data_fotos_anexo_xiii }}">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 col-sm-6">
+                            <label for="empreiteiro">Empreiteiro:</label>
+                            <select name="empreiteiro" id="empreiteiro" class="form-control">
+                                <option value="">Selecione a empreiteiro</option>
+                                    @foreach ($empreiteiros as $empreiteiro)
+                                        @if($obra->id_empreiteiro)
+                                            <option value="{{ $empreiteiro->id }}" {{ $empreiteiro->id === $obra->empreiteiro->id ? "selected" : '' }} >{{ $empreiteiro->nome }}</option>
+                                        @else
+                                            <option value="{{ $empreiteiro->id }}">{{ $empreiteiro->nome }}</option>
+                                        @endif
+                                    @endforeach                             
+                            </select>
+                        </div>                      
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4 col-sm-6">
+                            <label for="supervisor">Supervisor:</label>
+                            <input type="text" name="supervisor" id="supervisor" class="form-control" disabled>
+                        </div>
+                        <div class="form-group col-md-4 col-sm-6">
                             <label for="fiscal_cliente">Fiscal (Cliente):</label>
                             <input type="text" name="fiscal_cliente" class="form-control" value="{{ $obra->fiscal_cliente }}">
                         </div>
-                        <div class="form-group col-md-3 col-sm-6">
-                            <label for="supervisor">Supervisor:</label>
-                            <input type="text" name="supervisor" id="supervisor" class="form-control" disabled>
-                        </div>                        
-                    </div>
-
-                    <div class="form-row">
                         <div class="form-group col-md-2 col-sm-6">
                             <label for="inicio_real">Inicio Real:</label>
                             <input type="date" name="inicio_real" class="form-control" id="inicio_real" value="{{ $obra->inicio_real }}">
@@ -142,7 +161,9 @@
                             <label for="termino_real">Término Real:</label>
                             <input type="date" name="termino_real" class="form-control" id="termino_real" value="{{ $obra->termino_real }}">
                         </div>
-                        <div class="form-group col-md-8 col-sm-12">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12 col-sm-12">
                             <label for="observacao">Observações:</label>
                             <textarea name="observacao" class="form-control" rows="1" placeholder="Digite a descrição do serviço">{{ $obra->observacao }}</textarea>
                         </div>
@@ -166,6 +187,34 @@
 @section('js')
     <script>
         $(document).ready(function() {
+
+            // Quando o checkbox estiver checked libera o campo data
+            if($('#fotos_emergencia').is(":checked")) {
+                $('#data_fotos_emergencia').prop('disabled', false);
+            } else {
+                $('#data_fotos_emergencia').prop('disabled', true);
+            }
+            $('#fotos_emergencia').on('click', function() {
+                if($('#fotos_emergencia').is(":checked")) {
+                    $('#data_fotos_emergencia').prop('disabled', false);
+                } else {
+                    $('#data_fotos_emergencia').prop('disabled', true);
+                }
+            });
+
+            // Quando o checkbox estiver checked libera o campo data
+            if($('#fotos_anexo_xiii').is(":checked")) {
+                $('#data_fotos_anexo_xiii').prop('disabled', false);
+            } else {
+                $('#data_fotos_anexo_xiii').prop('disabled', true);
+            }
+            $('#fotos_anexo_xiii').on('click', function() {
+                if($('#fotos_anexo_xiii').is(":checked")) {
+                    $('#data_fotos_anexo_xiii').prop('disabled', false);
+                } else {
+                    $('#data_fotos_anexo_xiii').prop('disabled', true);
+                }
+            });
 
             // Carrega os dados ao iniciar
             $('#estacao').val($('#projeto option:selected').attr("data-estacao"));

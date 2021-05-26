@@ -27,6 +27,7 @@
         </div>
     @endif
 
+    
     <div class="row justify-content-center">
         <div class="col-md-10 mt-4 mb-3">
             <!-- Button trigger modal adicionar -->

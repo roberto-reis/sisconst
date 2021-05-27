@@ -18,10 +18,19 @@ class ObraController extends Controller
     }
 
     public function index() {
-        $obras = Obra::paginate(10);
+        $search = request('search');
+        $filtro = request('filtro');
+
+        if($search) {
+            $obras = Obra::with('projeto')->where($filtro, 'like', '%'.$search.'%')->orderBy('id', 'desc')->paginate(10);
+        } else {
+            $obras = Obra::with('projeto')->orderBy('id', 'desc')->paginate(10);
+            dd($obras);
+        }
 
         return view('sistema.operacional.obra.home', [
-            'obras' => $obras
+            'obras' => $obras,
+            'search' => $search
         ]);
     }
 

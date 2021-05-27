@@ -15,11 +15,19 @@ class ClientesController extends Controller
     }
 
     public function index() {
+        $search = request('search');
+        $filtro = request('filtro');
 
-        $clientes = Cliente::paginate(10);
+        if($search) {
+            $clientes = Cliente::where($filtro, 'like', '%'.$search.'%')->orderBy('id', 'desc')->paginate(10);
+        } else {
+            $clientes = Cliente::orderBy('id', 'desc')->paginate(10);
+        }
+        
 
         return view('sistema.operacional.cliente.home', [
-            'clientes' => $clientes
+            'clientes' => $clientes,
+            'search' => $search
         ]);
     }
 

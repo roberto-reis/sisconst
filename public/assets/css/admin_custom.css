@@ -10,8 +10,7 @@
 .content-header {
     color: #4e4e4e;
     background-color: #E9ECEF;
-    padding-top: 12px;
-    padding: 12px;
+    padding: 8px 12px;
 }
 .content-header .breadcrumb_custom {
     padding: 0;

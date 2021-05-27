@@ -27,11 +27,19 @@ class ProjetoController extends Controller
     }
 
     public function index() {
-        $projetos = Projeto::paginate(10);
+        $search = request('search');
+        $filtro = request('filtro');
+
+        if($search) {
+            $projetos = Projeto::where($filtro, 'like', '%'.$search.'%')->orderBy('id', 'desc')->paginate(10);
+        } else {
+            $projetos = Projeto::orderBy('id', 'desc')->paginate(10);
+        }
         
 
         return view('sistema.operacional.projeto.home', [
-            'projetos' => $projetos
+            'projetos' => $projetos,
+            'search' => $search
         ]);
     }
 

@@ -9,7 +9,7 @@
         {{-- Form de pesquisar --}}
         <form class="col-md-5 col-sm-7 p-0" action="{{ route('projetos.index') }}" method="GET">
             <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="O que deseja pesquisar?">
+                <input type="text" name="search" class="form-control" value="{{ $search }}" placeholder="O que deseja pesquisar?">
                 <div class="input-group-append">
                     <select name="filtro" class="custom-select rounded-0">
                         <option value="num_projeto" selected>Filtro...</option>
@@ -18,7 +18,7 @@
                         <option value="endereco">Endereço</option>
                         <option value="bairro">Bairro</option>
                         <option value="licenca">licença</option>
-                      </select>
+                    </select>
                   <button type="submit" class="btn btn-outline-info"><i class="fas fa-search"></i></button>
                 </div>
               </div>

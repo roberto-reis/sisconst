@@ -12,12 +12,12 @@
                     <input type="text" name="search" class="form-control" placeholder="O que deseja pesquisar?">
                     <div class="input-group-append">
                         <select name="filtro" class="custom-select rounded-0">
-                            <option value="id_projeto" selected>Filtro...</option>
-                            <option value="id_projeto">Projeto</option>
+                            <option value="num_projeto" selected>Filtro...</option>
+                            <option value="num_projeto">Projeto</option>
                             <option value="numero_oe_oc">O.E/OC</option>
                             <option value="endereco">Endereço</option>
                             <option value="bairro">Bairro</option>
-                            <option value="id_status_obra">Status</option>
+                            <option value="status">Status</option>
                         </select>
                     <button type="submit" class="btn btn-outline-info"><i class="fas fa-search"></i></button>
                     </div>

@@ -29,7 +29,6 @@ Route::get('/', [HomeSiteController::class, 'index']);
 
 Route::prefix('/sistema')->group(function(){
     // Rotas Admin
-    Route::get('/', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
     Route::resource('usuarios', UsuariosController::class);
 
     // Rotas Operacional

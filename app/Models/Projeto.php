@@ -53,4 +53,8 @@ class Projeto extends Model
         return $this->hasOne(Supervisor::class, 'id', 'id_supervisor');
     }
 
+    public function obras() {
+        return $this->hasMany(Obra::class, 'id_projeto', 'id');
+    }
+
 }

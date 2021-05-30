@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ObraController extends Controller
 {
+
     public function __construct() {
         $this->middleware('auth');
     }
@@ -22,10 +23,21 @@ class ObraController extends Controller
         $filtro = request('filtro');
 
         if($search) {
-            $obras = Obra::with('projeto')->where($filtro, 'like', '%'.$search.'%')->orderBy('id', 'desc')->paginate(10);
+            
+            if($filtro === "status") {
+                // Consulta pelo relacionamento statusObra
+                $obras = Obra::whereHas('statusObra', function($query) use ($search) {                    
+                    $query->where('nome', 'like', '%'.$search.'%');
+                })->orderBy('id', 'desc')->paginate(20);
+            } else {
+                // Consulta pelo relacionamento projeto
+                $obras = Obra::whereHas('projeto', function($query) use($search, $filtro) {
+                    $query->where($filtro, 'like', '%'.$search.'%');
+                })->orderBy('id', 'desc')->paginate(20);
+            }
+
         } else {
-            $obras = Obra::with('projeto')->orderBy('id', 'desc')->paginate(10);
-            dd($obras);
+            $obras = Obra::with('projeto', 'statusObra')->orderBy('id', 'desc')->paginate(12);
         }
 
         return view('sistema.operacional.obra.home', [

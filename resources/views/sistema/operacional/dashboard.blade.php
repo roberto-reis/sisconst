@@ -43,7 +43,7 @@
             <div class="card card_custom">
                 <div class="card-body text-center">
                     <span>{{ $obrasFaturadaCount }}</span>
-                    <h3>Obras Faturada</h3>
+                    <h3>Obras Faturadas</h3>
                 </div>
             </div>
         </div>

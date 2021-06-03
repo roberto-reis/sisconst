@@ -41,7 +41,7 @@
     @endif
 
     <div class="row justify-content-center">
-        <div class="col-md-10 mt-4 mb-3">
+        <div class="col-md-10 mt-4">
             <a href="{{ route('projeto.create') }}" class="btn btn-info">Novo Projeto</a>
         </div>
     </div>
@@ -54,8 +54,7 @@
                 <h3 class="mb-0">Projetos cadastrados</h3>
             @endif
         </div>
-        <div class="col-xl-10 col-md-12 col-sm-12">
-            <div class="card">
+            <div class="card col-xl-10 col-md-12 col-sm-12 p-0">
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover table_custom">
@@ -119,8 +118,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
     </div>
 
 @stop

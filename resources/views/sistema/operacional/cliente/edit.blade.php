@@ -36,11 +36,11 @@
     @endif
 
     <div class="row justify-content-center mt-4">
-        <div class="card col-xl-10 col-md-12">
-            <div class="card-bady p-2">
-                <form class="form_custom" action="{{ route('cliente.update', $cliente->id) }}" method="POST">
-                    @csrf
-                    @method('PUT') 
+        <div class="card col-xl-10 col-md-12 p-0">
+            <form class="form_custom" action="{{ route('cliente.update', $cliente->id) }}" method="POST">
+                @csrf
+                @method('PUT')                
+                <div class="card-body">
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="contrato">Nº Contrato*:</label>
@@ -99,10 +99,12 @@
                             <input type="text" name="valor_urs" class="form-control @error('valor_urs') is-invalid @enderror" id="contrato" value="{{ str_replace('.', ',', $cliente->valor_urs) }}">
                         </div>
                     </div>
-        
-                    <button type="submit" class="btn btn-info mt-2">Atualizar</button>
-                </form>
-            </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ route('clientes.index') }}" class="btn btn-danger">Cancelar</a>
+                    <button type="submit" class="btn btn-info">Atualizar</button>
+                </div>
+            </form>
         </div>
         
     </div>

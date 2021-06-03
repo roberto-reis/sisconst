@@ -35,53 +35,59 @@
     @endif
 
     <div class="row justify-content-center">
-        <div class="col-md-10 mt-4 mb-3">
-            <!-- Button trigger modal adicionar -->
+        <div class="col-md-10 mt-4">
             <button type="button" data-toggle="modal" data-target="#modalAdicionar" class="btn btn-info">Novo Usuário</button>
         </div>
-        <div class="table-responsive-md col-md-10 col-sm-12">
-            <table class="table table-hover table_custom">
-                <thead>
-                    <tr>
-                        <th>
-                            Nome
-                        </th>
-                        <th>
-                            Email
-                        </th>
-                        <th>
-                            Nivel
-                        </th>
-                        <th>
-                            Ação
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach ($users as $user)
-                    <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->nivel }}</td>
-                        <td>
-                            <div class="btn_table">
-                                <a href="{{ route('usuarios.edit', $user->id) }}" class="btn"><i class="fas fa-edit"></i></a>                        
-                                @if ($user->id !== $loggedId)
-                                    <form class="d-inline" action="{{ route('usuarios.destroy', $user->id) }}" method="POST" onclick="return confirm('Tem certeza que deseja excluir?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="subimit" class="btn"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                @endif
-                            </div>                        
-                        </td>
-                    </tr>
-                    @endforeach
-
-                </tbody>
-            </table>
-                {{ $users->links('pagination::bootstrap-4') }}
+        <div class="title_custom col-10 mt-3">
+            <h3 class="mb-0">Usuários cadastradas</h3>
+        </div>
+        <div class="card col-md-10 col-sm-12 p-0">
+            <div class="card-body">
+                <div class="table-responsive-md">
+                    <table class="table table-hover table_custom">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Nome
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Nivel
+                                </th>
+                                <th>
+                                    Ação
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+        
+                            @foreach ($users as $user)
+                            <tr>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->nivel }}</td>
+                                <td>
+                                    <div class="btn_table">
+                                        <a href="{{ route('usuarios.edit', $user->id) }}" class="btn"><i class="fas fa-edit"></i></a>                        
+                                        @if ($user->id !== $loggedId)
+                                            <form class="d-inline" action="{{ route('usuarios.destroy', $user->id) }}" method="POST" onclick="return confirm('Tem certeza que deseja excluir?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="subimit" class="btn"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        @endif
+                                    </div>                        
+                                </td>
+                            </tr>
+                            @endforeach
+        
+                        </tbody>
+                    </table>
+                        {{ $users->links('pagination::bootstrap-4') }}
+                </div>
+            </div>
         </div>
     </div>
 

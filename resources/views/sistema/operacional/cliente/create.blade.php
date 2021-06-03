@@ -28,10 +28,10 @@
 
     <div class="row justify-content-center mt-4">
         
-        <div class="card col-xl-10 col-md-12">
-            <div class="card-bady p-2">
-                <form class=" form_custom" action="{{ route('cliente.store') }}" method="POST">
-                    @csrf
+        <div class="card col-xl-10 col-md-12 p-0">
+            <form class=" form_custom" action="{{ route('cliente.store') }}" method="POST">
+                @csrf
+                <div class="card-body">
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="contrato">Nº Contrato*:</label>
@@ -90,10 +90,12 @@
                             <input type="text" name="valor_urs" class="form-control @error('valor_urs') is-invalid @enderror" id="valor_urs" value="{{ old('valor_urs') }}" placeholder="Exemplo: 29,90">
                         </div>
                     </div>
-        
+                </div>
+                <div class="card-footer">
+                    <a href="{{ route('clientes.index') }}" class="btn btn-danger">Cancelar</a>
                     <button type="submit" class="btn btn-info">Cadastrar</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
 
     </div>

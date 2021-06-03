@@ -31,7 +31,7 @@
         <div class="card col-xl-10 col-md-12 p-0">
             <form class="form_custom" action="{{ route('projeto.store') }}" method="POST">
                 @csrf
-                <div class="card-bady px-3 pt-2">
+                <div class="card-body">
                     <div class="form-row">
                         <div class="form-group col-md-4 col-sm-6">
                             <label for="num_projeto">Projeto*:</label>
@@ -47,11 +47,11 @@
                             </select>
                         </div>
                         <div class="form-group col-md-2 col-sm-6">
-                            <label for="data_oe">Data O.E. / OC:</label>
+                            <label for="data_oe">Data OE / OC:</label>
                             <input type="date" name="data_oe" class="form-control @error('data_oe') is-invalid @enderror" id="data_oe" value="{{ old('data_oe') }}">
                         </div>
                         <div class="form-group col-md-4 col-sm-6">
-                            <label for="numero_oe_oc">O.E. / OC:</label>
+                            <label for="numero_oe_oc">OE / OC:</label>
                             <input type="text" name="numero_oe_oc" class="form-control @error('numero_oe_oc') is-invalid @enderror" id="numero_oe_oc" value="{{ old('numero_oe_oc') }}" placeholder="Digite o nº O.E. ou OC">
                         </div>
                     </div>
@@ -164,7 +164,6 @@
                 </div>
             </form>
         </div>
-
     </div>
 
 @stop

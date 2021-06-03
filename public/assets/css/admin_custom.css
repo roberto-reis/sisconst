@@ -7,6 +7,10 @@
     background-color: var(--blue-primary);
 }
 
+.brand-text{
+    display: inline-block;
+}
+
 .content-header {
     color: #4e4e4e;
     background-color: #E9ECEF;

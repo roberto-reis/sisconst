@@ -31,7 +31,7 @@
         <div class="card col-xl-10 col-md-12 p-0">
             <form class=" form_custom" action="{{ route('obra.store') }}" method="POST">
                 @csrf
-                <div class="card-bady px-3 pt-2">
+                <div class="card-body">
                     <div class="form-row">
                         <div class="form-group col-md-4 col-sm-6">
                             <label for="num_projeto">Projeto*:</label>

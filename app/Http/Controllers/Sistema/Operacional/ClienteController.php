@@ -8,7 +8,7 @@ use App\Models\Projeto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ClientesController extends Controller
+class ClienteController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
@@ -176,7 +176,6 @@ class ClientesController extends Controller
 
             
     }
-
 
     // Formata numero para guadar no BD
     public function format_num($valor) {

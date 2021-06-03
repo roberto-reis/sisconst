@@ -3,20 +3,21 @@
 namespace App\Http\Controllers\Sistema\Operacional;
 
 use App\Http\Controllers\Controller;
+use App\Models\Empreiteiro;
 use App\Models\Obra;
-use App\Models\StatusObra;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
-class StatusObrasController extends Controller
+class EmpreiteiroController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
     }
-    
+
     public function index() {
-        $statusObras = StatusObra::get();
-        return response()->json($statusObras);
+        $empreiteiro = Empreiteiro::get();
+
+        return response()->json($empreiteiro);
     }
 
     public function store(Request $request) {
@@ -27,7 +28,7 @@ class StatusObrasController extends Controller
         ]);
 
         $validator = Validator::make($data, [
-            'nome' => ['required', 'string', 'unique:status_obras']
+            'nome' => ['required', 'string', 'unique:empreiteiros']
         ]);
 
         if($validator->fails()) {
@@ -35,8 +36,8 @@ class StatusObrasController extends Controller
 
         } else {
             // Cadastra o status
-            StatusObra::create([
-                'nome' => strtoupper($data['nome'])
+            Empreiteiro::create([
+                'nome' => $data['nome']
             ]);   
             $mensagem['sucesso'] = "Cadastrado com Sucesso!";
         }
@@ -50,24 +51,25 @@ class StatusObrasController extends Controller
         $mensagem = [];
         
         //Busca o status no bd
-        $status = StatusObra::find($request->get('id'));
+        $empreiteiro = Empreiteiro::find($request->get('id'));
 
         // Pega os campos do request
         $data = $request->only([
             'nome'
         ]);
+
         // Valida os dados
         $validator = Validator::make($data, [
             'nome' => ['required', 'string']
         ]);
 
-        if($status->nome != $data['nome']){
-
+        if($empreiteiro->nome != $data['nome']){
             //Verificar o nome digitado já existe no bd
-            $hasNome = StatusObra::where('nome', $data['nome'])->get();
+            $hasNome = Empreiteiro::where('nome', $data['nome'])->get();
 
             if(count($hasNome) === 0) {
-                $status->nome = strtoupper($data['nome']);
+                // Altera o nome
+                $empreiteiro->nome = $data['nome'];
             } else {
                 // Se o nome digitado já existe no bd add validation.unique 
                 $validator->errors()->add('nome', __('validation.unique', [
@@ -81,7 +83,7 @@ class StatusObrasController extends Controller
 
         } else {
             // Atualiza os dados
-            $status->save();
+            $empreiteiro->save();
             $mensagem['sucesso'] = "Atualizado com Sucesso!";
         }
 
@@ -92,18 +94,21 @@ class StatusObrasController extends Controller
 
     public function destroy($id) {
         $mensagem = [];
-        $hasRelationship = Obra::where('id_status_obra', $id)->get();
+        $hasRelationship = Obra::where('id_empreiteiro', $id)->get();
         
         if(count($hasRelationship) > 0) {
+
             $mensagem['error'] = "Este Tipo de Serviço não pode ser deletado, existe ".count($hasRelationship)." resistro(s) usando. ";
+
         } else {
-            $status = StatusObra::findOrFail( $id );
+
+            $status = Empreiteiro::findOrFail( $id );
             $status->delete();
             $mensagem['sucesso'] = "Deletado com sucesso!!!";
 
-        }
-        
+        }        
 
         return response()->json( $mensagem );
     }
+
 }

@@ -41,7 +41,7 @@
     @endif
     
     <div class="row justify-content-center">
-        <div class="col-md-10 mt-4 mb-3">
+        <div class="col-md-10 mt-4">
             <a href="{{ route('obra.create') }}" class="btn btn-info">Nova Obra</a>
         </div>
         <div class="title_custom col-10 mt-3">

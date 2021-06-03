@@ -32,7 +32,7 @@
             <form class=" form_custom" action="{{ route('projeto.update', $projeto->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="card-bady px-3 pt-2">
+                <div class="card-body">
                     <div class="form-row">
                         <div class="form-group col-md-4 col-sm-6">
                             <label for="num_projeto">Projeto*:</label>

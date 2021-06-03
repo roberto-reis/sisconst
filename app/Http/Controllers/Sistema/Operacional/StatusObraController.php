@@ -3,52 +3,54 @@
 namespace App\Http\Controllers\Sistema\Operacional;
 
 use App\Http\Controllers\Controller;
-use App\Models\Projeto;
+use App\Models\Obra;
+use App\Models\StatusObra;
 use Illuminate\Http\Request;
-use App\Models\TipoServico;
 use Illuminate\Support\Facades\Validator;
 
-class TipoServicosController extends Controller
+class StatusObraController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
     }
-
+    
     public function index() {
-
-        $tipoServico = TipoServico::get();
-
-        return response()->json($tipoServico);
+        $statusObras = StatusObra::get();
+        return response()->json($statusObras);
     }
 
     public function store(Request $request) {
         $mensagem = [];
+
         $data = $request->only([
             'nome'
         ]);
 
         $validator = Validator::make($data, [
-            'nome' => ['required', 'string', 'unique:tipo_servicos']
+            'nome' => ['required', 'string', 'unique:status_obras']
         ]);
 
         if($validator->fails()) {
             $mensagem['error'] = $validator->errors()->get('nome');
 
         } else {
-            TipoServico::create([
-                'nome' => $data['nome']
-            ]);
-            $mensagem['sucesso'] = "Cadastrado com sucesso!";
+            // Cadastra o status
+            StatusObra::create([
+                'nome' => strtoupper($data['nome'])
+            ]);   
+            $mensagem['sucesso'] = "Cadastrado com Sucesso!";
         }
 
+
         return response()->json($mensagem);
+
     }
 
     public function update(Request $request) {
         $mensagem = [];
         
-        //Busca o TipoServico no bd
-        $tipoServico = TipoServico::find($request->get('id'));
+        //Busca o status no bd
+        $status = StatusObra::find($request->get('id'));
 
         // Pega os campos do request
         $data = $request->only([
@@ -59,11 +61,13 @@ class TipoServicosController extends Controller
             'nome' => ['required', 'string']
         ]);
 
-        if($data['nome'] != $tipoServico->nome) {
+        if($status->nome != $data['nome']){
 
-            $hasName = TipoServico::where('nome', $data['nome'])->get();
-            if(count($hasName) === 0) {
-                $tipoServico->nome = $data['nome'];
+            //Verificar o nome digitado já existe no bd
+            $hasNome = StatusObra::where('nome', $data['nome'])->get();
+
+            if(count($hasNome) === 0) {
+                $status->nome = strtoupper($data['nome']);
             } else {
                 // Se o nome digitado já existe no bd add validation.unique 
                 $validator->errors()->add('nome', __('validation.unique', [
@@ -71,34 +75,34 @@ class TipoServicosController extends Controller
                 ]));
             }
         }
-
+    
         if(count($validator->errors()) > 0) {
             $mensagem['error'] = $validator->errors()->get('nome');
 
         } else {
             // Atualiza os dados
-            $tipoServico->save();
+            $status->save();
             $mensagem['sucesso'] = "Atualizado com Sucesso!";
         }
 
+
         return response()->json($mensagem);
+
     }
 
     public function destroy($id) {
         $mensagem = [];
-        $hasRelationship = Projeto::where('id_tipo_servico', $id)->get();
+        $hasRelationship = Obra::where('id_status_obra', $id)->get();
         
         if(count($hasRelationship) > 0) {
-
             $mensagem['error'] = "Este Tipo de Serviço não pode ser deletado, existe ".count($hasRelationship)." resistro(s) usando. ";
-
         } else {
-
-            $tipoServico = TipoServico::findOrFail( $id );
-            $tipoServico->delete();
+            $status = StatusObra::findOrFail( $id );
+            $status->delete();
             $mensagem['sucesso'] = "Deletado com sucesso!!!";
 
         }
+        
 
         return response()->json( $mensagem );
     }

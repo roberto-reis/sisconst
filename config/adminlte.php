@@ -45,9 +45,9 @@ return [
     |
     */
 
-    'logo' => '<b>Sis</b>Const',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo' => '<b class="d-none">SisConst</b>',
+    'logo_img' => 'assets/images/logo_aliados.png',
+    'logo_img_class' => 'brand-image',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'SisConst',
@@ -191,7 +191,7 @@ return [
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
-    'password_reset_url' => 'password/reset',
+    'password_reset_url' => false, //'password/reset'
     'password_email_url' => 'password/email',
     'profile_url' => false,
 

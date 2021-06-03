@@ -3,73 +3,67 @@
 namespace App\Http\Controllers\Sistema\Operacional;
 
 use App\Http\Controllers\Controller;
-use App\Models\Empreiteiro;
-use App\Models\Obra;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Projeto;
 use Illuminate\Http\Request;
+use App\Models\TipoServico;
+use Illuminate\Support\Facades\Validator;
 
-class EmpreiteirosController extends Controller
+class TipoServicoController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
     }
 
     public function index() {
-        $empreiteiro = Empreiteiro::get();
 
-        return response()->json($empreiteiro);
+        $tipoServico = TipoServico::get();
+
+        return response()->json($tipoServico);
     }
 
     public function store(Request $request) {
         $mensagem = [];
-
         $data = $request->only([
             'nome'
         ]);
 
         $validator = Validator::make($data, [
-            'nome' => ['required', 'string', 'unique:empreiteiros']
+            'nome' => ['required', 'string', 'unique:tipo_servicos']
         ]);
 
         if($validator->fails()) {
             $mensagem['error'] = $validator->errors()->get('nome');
 
         } else {
-            // Cadastra o status
-            Empreiteiro::create([
+            TipoServico::create([
                 'nome' => $data['nome']
-            ]);   
-            $mensagem['sucesso'] = "Cadastrado com Sucesso!";
+            ]);
+            $mensagem['sucesso'] = "Cadastrado com sucesso!";
         }
 
-
         return response()->json($mensagem);
-
     }
 
     public function update(Request $request) {
         $mensagem = [];
         
-        //Busca o status no bd
-        $empreiteiro = Empreiteiro::find($request->get('id'));
+        //Busca o TipoServico no bd
+        $tipoServico = TipoServico::find($request->get('id'));
 
         // Pega os campos do request
         $data = $request->only([
             'nome'
         ]);
-
         // Valida os dados
         $validator = Validator::make($data, [
             'nome' => ['required', 'string']
         ]);
 
-        if($empreiteiro->nome != $data['nome']){
-            //Verificar o nome digitado já existe no bd
-            $hasNome = Empreiteiro::where('nome', $data['nome'])->get();
+        if($data['nome'] != $tipoServico->nome) {
 
-            if(count($hasNome) === 0) {
-                // Altera o nome
-                $empreiteiro->nome = $data['nome'];
+            $hasName = TipoServico::where('nome', $data['nome'])->get();
+            if(count($hasName) === 0) {
+                $tipoServico->nome = $data['nome'];
             } else {
                 // Se o nome digitado já existe no bd add validation.unique 
                 $validator->errors()->add('nome', __('validation.unique', [
@@ -77,24 +71,22 @@ class EmpreiteirosController extends Controller
                 ]));
             }
         }
-    
+
         if(count($validator->errors()) > 0) {
             $mensagem['error'] = $validator->errors()->get('nome');
 
         } else {
             // Atualiza os dados
-            $empreiteiro->save();
+            $tipoServico->save();
             $mensagem['sucesso'] = "Atualizado com Sucesso!";
         }
 
-
         return response()->json($mensagem);
-
     }
 
     public function destroy($id) {
         $mensagem = [];
-        $hasRelationship = Obra::where('id_empreiteiro', $id)->get();
+        $hasRelationship = Projeto::where('id_tipo_servico', $id)->get();
         
         if(count($hasRelationship) > 0) {
 
@@ -102,13 +94,12 @@ class EmpreiteirosController extends Controller
 
         } else {
 
-            $status = Empreiteiro::findOrFail( $id );
-            $status->delete();
+            $tipoServico = TipoServico::findOrFail( $id );
+            $tipoServico->delete();
             $mensagem['sucesso'] = "Deletado com sucesso!!!";
 
-        }        
+        }
 
         return response()->json( $mensagem );
     }
-
 }

@@ -8,7 +8,7 @@ use App\Models\Projeto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class EstacoesController extends Controller
+class EstacaoController extends Controller
 {
 
     public function __construct() {

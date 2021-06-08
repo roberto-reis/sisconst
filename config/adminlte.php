@@ -187,7 +187,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'sistema',
+    'dashboard_url' => 'sistema/operacional',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -233,6 +233,7 @@ return [
             'text' => 'Usuários',
             'url'  => 'sistema/usuarios',
             'icon' => 'fas fa-fw fa-user',
+            'can'  => 'permission-admin'
         ],
         [
             'header' => 'OPERACIONAL',
@@ -245,22 +246,26 @@ return [
         [
             'text' => 'Projetos',
             'url'  => 'sistema/operacional/projetos',
-            'icon' => 'fas fa-project-diagram'
+            'icon' => 'fas fa-project-diagram',
+            'can'  => 'permission-operacional'
         ],
         [
             'text' => 'Obras',
             'url'  => 'sistema/operacional/obras',
-            'icon' => 'fas fa-pencil-ruler'
+            'icon' => 'fas fa-pencil-ruler',
+            'can'  => 'permission-operacional'
         ],
         [
             'text' => 'Clientes',
             'url'  => 'sistema/operacional/clientes',
-            'icon' => 'fas fa-user-tie'
+            'icon' => 'fas fa-user-tie',
+            'can'  => 'permission-operacional'
         ],
         [
             'text' => 'Supevisor',
             'url'  => '#',
             'icon' => 'fas fa-users',
+            'can'  => 'permission-operacional',
             'data' => [
                 'toggle' => 'modal',
                 'target' => '#modal_supervisorAdd'
@@ -270,6 +275,7 @@ return [
             'text' => 'Empreiteiros',
             'url'  => '#',
             'icon' => 'fas fa-users',
+            'can'  => 'permission-operacional',
             'data' => [
                 'toggle' => 'modal',
                 'target' => '#modal_empreiteiroAdd'
@@ -279,6 +285,7 @@ return [
             'text' => 'Estação',
             'url'  => '#',
             'icon' => 'fas fa-copy',
+            'can'  => 'permission-operacional',
             'data' => [
                 'toggle' => 'modal',
                 'target' => '#modal_estacaoAdd'
@@ -288,6 +295,7 @@ return [
             'text' => 'Status',
             'url'  => '#',
             'icon' => 'fas fa-info-circle',
+            'can'  => 'permission-operacional',
             'data' => [
                 'toggle' => 'modal',
                 'target' => '#modal_statusObraAdd'
@@ -297,6 +305,7 @@ return [
             'text' => 'Tipo de Serviços',
             'url'  => '#',
             'icon' => 'fas fa-tenge',
+            'can'  => 'permission-operacional',
             'data' => [
                 'toggle' => 'modal',
                 'target' => '#modal_tipoServicoAdd'

@@ -435,7 +435,6 @@
                                 {{-- Lista de Tipo de Serviço aqui... --}}                              
                             </tbody>
                         </table>
-                        {{-- Paginação --}}
                     </div>
 
                 </div>

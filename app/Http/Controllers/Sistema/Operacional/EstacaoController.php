@@ -13,6 +13,7 @@ class EstacaoController extends Controller
 
     public function __construct() {
         $this->middleware('auth');
+        $this->middleware('can:permission-operacional');
     }
 
     public function index() {

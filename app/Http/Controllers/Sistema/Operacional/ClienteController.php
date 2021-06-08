@@ -12,6 +12,7 @@ class ClienteController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
+        $this->middleware('can:permission-operacional');
     }
 
     public function index() {
@@ -19,9 +20,9 @@ class ClienteController extends Controller
         $filtro = request('filtro');
 
         if($search) {
-            $clientes = Cliente::where($filtro, 'like', '%'.$search.'%')->orderBy('id', 'desc')->paginate(10);
+            $clientes = Cliente::where($filtro, 'like', '%'.$search.'%')->orderBy('id', 'desc')->get();
         } else {
-            $clientes = Cliente::orderBy('id', 'desc')->paginate(10);
+            $clientes = Cliente::orderBy('id', 'desc')->get();
         }
         
 

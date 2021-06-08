@@ -11,6 +11,7 @@ use App\Http\Controllers\Sistema\Operacional\ProjetoController;
 use App\Http\Controllers\Sistema\Operacional\SupervisorController;
 use App\Http\Controllers\Sistema\Operacional\TipoServicoController;
 use App\Http\Controllers\Site\HomeSiteController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeSiteController::class, 'index']);
 
 Route::prefix('/sistema')->group(function(){
+
+    // Rota Convidado
+    Route::get('/convidado', function () {
+        return view('sistema.convidado', ['user' => Auth::user()]);
+    })->middleware('auth');
+    
     // Rotas Admin
     Route::resource('usuarios', UsuariosController::class);
 

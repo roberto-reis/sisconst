@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Sistema\Operacional;
 
 use App\Http\Controllers\Controller;
 use App\Models\Obra;
-use App\Models\Projeto;
 use App\Models\StatusObra;
 use Illuminate\Http\Request;
 
@@ -12,6 +11,7 @@ class DashboardOperacionalController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
+        $this->middleware('can:permission-operacional');
     }
 
     public function index() {

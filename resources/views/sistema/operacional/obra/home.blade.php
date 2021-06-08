@@ -4,19 +4,20 @@
 
 
 @section('content_header')
-        <div class="row">
-            <nav class="col-md-7 col-sm-5 breadcrumb_custom"><a href="{{ route('operacional.index') }}">Operacional</a> > Obras</nav>
+        <div class="row align-items-center">
+            <nav class="col-md-5 col-sm-5 breadcrumb_custom pb-2 p-sm-0"><div><a href="{{ route('operacional.index') }}">Operacional</a> > Obras</div></nav>
             {{-- Form de pesquisar --}}
-            <form class="col-md-5 col-sm-7 p-0" action="{{ route('obras.index') }}" method="GET">
+            <form class="col-md-7 col-sm-7 p-0" action="{{ route('obras.index') }}" method="GET">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control" placeholder="O que deseja pesquisar?">
                     <div class="input-group-append">
                         <select name="filtro" class="custom-select rounded-0">
                             <option value="num_projeto" selected>Filtro...</option>
-                            <option value="num_projeto">Projeto</option>
-                            <option value="numero_oe_oc">O.E/OC</option>
-                            <option value="endereco">Endereço</option>
                             <option value="bairro">Bairro</option>
+                            <option value="empreiteiro">Empreiteiro</option>
+                            <option value="endereco">Endereço</option>
+                            <option value="numero_oe_oc">OE/OC</option>
+                            <option value="num_projeto">Projeto</option>
                             <option value="status">Status</option>
                         </select>
                     <button type="submit" class="btn btn-outline-info"><i class="fas fa-search"></i></button>
@@ -41,20 +42,20 @@
     @endif
     
     <div class="row justify-content-center">
-        <div class="col-md-10 mt-4">
+        <div class="col-xl-10 col-md-12 mt-4">
             <a href="{{ route('obra.create') }}" class="btn btn-info">Nova Obra</a>
         </div>
-        <div class="title_custom col-10 mt-3">
+        <div class="title_custom col-xl-10 col-12 mt-3">
             @if ($search)
                 <h3 class="mb-0">Resultado da pesquisa: {{ $search }}</h3>
             @else
                 <h3 class="mb-0">Obras cadastradas</h3>
             @endif
         </div>
-        <div class="col-md-10 col-sm-12">
+        <div class="col-xl-10 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="table-responsive-md">
+                    <div class="table-responsive">
                         <table class="table table-hover table_custom">
                             <thead>
                                 <tr>

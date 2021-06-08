@@ -16,6 +16,7 @@ class ObraController extends Controller
 
     public function __construct() {
         $this->middleware('auth');
+        $this->middleware('can:permission-operacional');
     }
 
     public function index() {
@@ -29,6 +30,12 @@ class ObraController extends Controller
                 $obras = Obra::whereHas('statusObra', function($query) use ($search) {                    
                     $query->where('nome', 'like', '%'.$search.'%');
                 })->orderBy('id', 'desc')->paginate(20);
+
+            } elseif($filtro === "empreiteiro") {
+                // Consulta pelo relacionamento empreiteiro
+                $obras = Obra::whereHas('empreiteiro', function($query) use ($search) {                    
+                    $query->where('nome', 'like', '%'.$search.'%');
+                })->orderBy('id', 'desc')->paginate(20);
             } else {
                 // Consulta pelo relacionamento projeto
                 $obras = Obra::whereHas('projeto', function($query) use($search, $filtro) {
@@ -37,7 +44,7 @@ class ObraController extends Controller
             }
 
         } else {
-            $obras = Obra::with('projeto', 'statusObra')->orderBy('id', 'desc')->paginate(12);
+            $obras = Obra::with('projeto', 'statusObra', 'empreiteiro')->orderBy('id', 'desc')->paginate(12);
         }
 
         return view('sistema.operacional.obra.home', [

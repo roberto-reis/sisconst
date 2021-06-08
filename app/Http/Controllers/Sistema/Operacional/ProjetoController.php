@@ -17,6 +17,7 @@ class ProjetoController extends Controller
 
     public function __construct() {
         $this->middleware('auth');
+        $this->middleware('can:permission-operacional');
     }
 
     // Formata numero para guadar no BD

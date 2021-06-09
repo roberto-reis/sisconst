@@ -29,22 +29,22 @@ class ObraController extends Controller
                 // Consulta pelo relacionamento statusObra
                 $obras = Obra::whereHas('statusObra', function($query) use ($search) {                    
                     $query->where('nome', 'like', '%'.$search.'%');
-                })->orderBy('id', 'desc')->paginate(20);
+                })->orderBy('id', 'desc')->get();
 
             } elseif($filtro === "empreiteiro") {
                 // Consulta pelo relacionamento empreiteiro
                 $obras = Obra::whereHas('empreiteiro', function($query) use ($search) {                    
                     $query->where('nome', 'like', '%'.$search.'%');
-                })->orderBy('id', 'desc')->paginate(20);
+                })->orderBy('id', 'desc')->get();
             } else {
                 // Consulta pelo relacionamento projeto
                 $obras = Obra::whereHas('projeto', function($query) use($search, $filtro) {
                     $query->where($filtro, 'like', '%'.$search.'%');
-                })->orderBy('id', 'desc')->paginate(20);
+                })->orderBy('id', 'desc')->get();
             }
 
         } else {
-            $obras = Obra::with('projeto', 'statusObra', 'empreiteiro')->orderBy('id', 'desc')->paginate(12);
+            $obras = Obra::with('projeto', 'statusObra', 'empreiteiro')->orderBy('id', 'desc')->get();
         }
 
         return view('sistema.operacional.obra.home', [

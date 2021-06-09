@@ -37,14 +37,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('permission-operacional', function($user) {
             if($user->nivel === "operacional" || $user->nivel === "admin") {
                 return true;
-
             }
         });
-        
-        Gate::define('permission-convidado', function($user) {
-            return $user->nivel === "convidado";
-        });
-
 
     }
 }

@@ -56,7 +56,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-hover table_custom">
+                        <table class="table table-hover table_custom table-obras">
                             <thead>
                                 <tr>
                                     <th>
@@ -111,13 +111,25 @@
                                 @endforeach            
                             </tbody>
                         </table>
-                        {{ $obras->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+@stop
+
+@section('plugins.Datatables', true)
+@section('js')
+    <script>
+        $(document).ready(function () {
+            $('.table-obras').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
+        });
+    </script>
 @stop
 
 

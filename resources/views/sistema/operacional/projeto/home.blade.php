@@ -58,7 +58,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-hover table_custom">
+                        <table class="table table-hover table_custom table-projetos">
                             <thead>
                                 <tr>
                                     <th style="min-width: 150px">
@@ -115,13 +115,25 @@
             
                             </tbody>
                         </table>
-                        {{ $projetos->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+@stop
+
+@section('plugins.Datatables', true)
+@section('js')
+    <script>
+        $(document).ready(function () {
+            $('.table-projetos').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
+        });
+    </script>
 @stop
 
 

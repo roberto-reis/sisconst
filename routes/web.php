@@ -40,6 +40,24 @@ Route::prefix('/sistema')->group(function(){
     // Rotas Operacional
     Route::get('/operacional', [DashboardOperacionalController::class, 'index'])->name('operacional.index'); // Dashboard operacional
 
+    // Rotas Operacional Supervisores
+    Route::get('/operacional/supervisores', [SupervisorController::class, 'index'])->name('supervisores.index'); //Lista os Supervisores
+    Route::post('/operacional/supervisor', [SupervisorController ::class, 'store'])->name('supervisor.store'); //Salva as supervisor
+    Route::put('/operacional/supervisor', [SupervisorController::class, 'update'])->name('supervisor.update'); //Update supervisor
+    Route::delete('/operacional/supervisor/{id}', [SupervisorController::class, 'destroy'])->name('supervisor.destroy'); //Deleta supervisor
+
+    // Rotas Operacional Empreiteiros
+    Route::get('/operacional/empreiteiros', [EmpreiteiroController::class, 'index'])->name('empreiteiros.index'); //Lista os dados
+    Route::post('/operacional/empreiteiro', [EmpreiteiroController ::class, 'store'])->name('empreiteiros.store'); //Salva as Empreiteiro
+    Route::put('/operacional/empreiteiro', [EmpreiteiroController::class, 'update'])->name('empreiteiros.update'); //Update Empreiteiro
+    Route::delete('/operacional/empreiteiro/{id}', [EmpreiteiroController::class, 'destroy'])->name('empreiteiros.destroy'); //Deleta Empreiteiro
+
+    // Rotas Operacional Estações
+    Route::get('/operacional/estacoes', [EstacaoController::class, 'index'])->name('estacoes.index'); //Lista os dados
+    Route::post('/operacional/estacao', [EstacaoController::class, 'store'])->name('estacoes.store'); //Salva as estações
+    Route::put('/operacional/estacao', [EstacaoController::class, 'update'])->name('estacoes.update'); //Update estação
+    Route::delete('/operacional/estacao/{id}', [EstacaoController::class, 'destroy'])->name('estacoes.destroy'); //Deleta estação
+
     // Rotas Operacional status
     Route::get('/operacional/status', [StatusObraController::class, 'index'])->name('status.index'); //Lista os dados
     Route::post('/operacional/status', [StatusObraController::class, 'store'])->name('status.store'); //Salva os status
@@ -47,27 +65,10 @@ Route::prefix('/sistema')->group(function(){
     Route::delete('/operacional/status/{id}', [StatusObraController::class, 'destroy'])->name('status.destroy'); //Deleta o status
 
     // Rotas Operacional Tipo de Serviços
-    Route::get('/operacional/tipoServico', [TipoServicoController::class, 'index'])->name('tipoServico.index'); //Lista os dados
+    Route::get('/operacional/tipoServicos', [TipoServicoController::class, 'index'])->name('tipoServico.index'); //Lista os dados
     Route::post('/operacional/tipoServico', [TipoServicoController::class, 'store'])->name('tipoServico.store'); //Salva os Tipo de Serviços
     Route::put('/operacional/tipoServico', [TipoServicoController::class, 'update'])->name('tipoServico.update'); //Update Tipo de Serviços
     Route::delete('/operacional/tipoServico/{id}', [TipoServicoController::class, 'destroy'])->name('tipoServico.destroy'); //Deleta Tipo de Serviços
-
-    // Rotas Operacional Estações
-    Route::get('/operacional/estacoes', [EstacaoController::class, 'index'])->name('estacoes.index'); //Lista os dados
-    Route::post('/operacional/estacoes', [EstacaoController::class, 'store'])->name('estacoes.store'); //Salva as estações
-    Route::put('/operacional/estacoes', [EstacaoController::class, 'update'])->name('estacoes.update'); //Update estação
-    Route::delete('/operacional/estacoes/{id}', [EstacaoController::class, 'destroy'])->name('estacoes.destroy'); //Deleta estação
-
-    // Rotas Operacional Empreiteiros
-    Route::get('/operacional/empreiteiros', [EmpreiteiroController::class, 'index'])->name('empreiteiros.index'); //Lista os dados
-    Route::post('/operacional/empreiteiros', [EmpreiteiroController ::class, 'store'])->name('empreiteiros.store'); //Salva as Empreiteiro
-    Route::put('/operacional/empreiteiros', [EmpreiteiroController::class, 'update'])->name('empreiteiros.update'); //Update Empreiteiro
-    Route::delete('/operacional/empreiteiros/{id}', [EmpreiteiroController::class, 'destroy'])->name('empreiteiros.destroy'); //Deleta Empreiteiro
-    // Rotas Operacional Empreiteiros
-    Route::get('/operacional/supervisores', [SupervisorController::class, 'index'])->name('supervisores.index'); //Lista os Supervisores
-    Route::post('/operacional/supervisor', [SupervisorController ::class, 'store'])->name('supervisor.store'); //Salva as supervisor
-    Route::put('/operacional/supervisor', [SupervisorController::class, 'update'])->name('supervisor.update'); //Update supervisor
-    Route::delete('/operacional/supervisor/{id}', [SupervisorController::class, 'destroy'])->name('supervisor.destroy'); //Deleta supervisor
 
     // Rotas Operacional Cliente
     Route::get('/operacional/clientes', [ClienteController::class, 'index'])->name('clientes.index'); //Lista os dados

@@ -32,9 +32,9 @@ class ProjetoController extends Controller
         $filtro = request('filtro');
 
         if($search) {
-            $projetos = Projeto::where($filtro, 'like', '%'.$search.'%')->orderBy('id', 'desc')->paginate(12);
+            $projetos = Projeto::where($filtro, 'like', '%'.$search.'%')->orderBy('id', 'desc')->get();
         } else {
-            $projetos = Projeto::orderBy('id', 'desc')->paginate(12);
+            $projetos = Projeto::orderBy('id', 'desc')->get();
         }
         
 

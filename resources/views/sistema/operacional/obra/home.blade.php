@@ -13,9 +13,9 @@
                     <div class="input-group-append">
                         <select name="filtro" class="custom-select rounded-0">
                             <option value="num_projeto" selected>Filtro...</option>
-                            <option value="bairro">Bairro</option>
-                            <option value="empreiteiro">Empreiteiro</option>
+                            <option value="bairro">Bairro</option>                            
                             <option value="endereco">Endereço</option>
+                            <option value="empreiteiro">Empreiteiro</option>
                             <option value="numero_oe_oc">OE/OC</option>
                             <option value="num_projeto">Projeto</option>
                             <option value="status">Status</option>

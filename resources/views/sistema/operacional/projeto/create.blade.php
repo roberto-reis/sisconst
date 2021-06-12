@@ -35,7 +35,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4 col-sm-6">
                             <label for="num_projeto">Projeto*:</label>
-                            <input type="text" name="num_projeto" class="form-control @error('num_projeto') is-invalid @enderror" id="projeto" value="{{ old('num_projeto') }}" placeholder="Digite o numero do projeto">
+                            <input type="text" name="num_projeto" class="form-control @error('num_projeto') is-invalid @enderror" id="num_projeto" value="{{ old('num_projeto') }}" placeholder="Digite o numero do projeto">
                         </div>
                         <div class="form-group col-md-2 col-sm-6">
                             <label for="estacao">Estação*:</label>
@@ -103,15 +103,15 @@
                     <div class="form-row">
                         <div class="form-group col-lg-8 col-md-5 col-sm-12">
                             <label for="descricao_servico">Descrição Serviço:</label>
-                            <textarea name="descricao_servico" class="form-control @error('descricao_servico') is-invalid @enderror" rows="1" placeholder="Digite a descrição do serviço">{{ old('descricao_servico') }}</textarea>
+                            <textarea name="descricao_servico" id="descricao_servico" class="form-control @error('descricao_servico') is-invalid @enderror" rows="1" placeholder="Digite a descrição do serviço">{{ old('descricao_servico') }}</textarea>
                         </div>
                         <div class="form-group col-lg-2 col-md-3 col-sm-6">
                             <label for="inicio_previsto">Inicio Previsto:</label>
-                            <input type="date" name="inicio_previsto" class="form-control @error('inicio_previsto') is-invalid @enderror" value="{{ old('inicio_previsto') }}">
+                            <input type="date" name="inicio_previsto" id="inicio_previsto" class="form-control @error('inicio_previsto') is-invalid @enderror" value="{{ old('inicio_previsto') }}">
                         </div>
                         <div class="form-group col-lg-2 col-md-4 col-sm-6">
                             <label for="termino_previsto">Término Previsto:</label>
-                            <input type="date" name="termino_previsto" class="form-control @error('termino_previsto') is-invalid @enderror" id="termino_previsto" value="{{ old('termino_previsto') }}">
+                            <input type="date" name="termino_previsto" id="termino_previsto" class="form-control @error('termino_previsto') is-invalid @enderror" id="termino_previsto" value="{{ old('termino_previsto') }}">
                         </div>
                     </div>
 
@@ -127,15 +127,15 @@
                         </div>
                         <div class="form-group col-lg-3 col-md-2 col-sm-6">
                             <label for="licenca">Licença:</label>
-                            <input type="text" name="licenca" class="form-control @error('licenca') is-invalid @enderror" value="{{ old('licenca') }}" placeholder="Digite licença">
+                            <input type="text" name="licenca" id="licenca" class="form-control @error('licenca') is-invalid @enderror" value="{{ old('licenca') }}" placeholder="Digite licença">
                         </div>
                         <div class="form-group col-lg-2 col-md-3 col-sm-6">
                             <label for="inicio_licenca">Inicio Licença:</label>
-                            <input type="date" name="inicio_licenca" class="form-control @error('inicio_licenca') is-invalid @enderror" value="{{ old('inicio_licenca') }}">
+                            <input type="date" name="inicio_licenca" id="inicio_licenca" class="form-control @error('inicio_licenca') is-invalid @enderror" value="{{ old('inicio_licenca') }}">
                         </div>
                         <div class="form-group col-lg-2 col-md-3 col-sm-6">
                             <label for="termino_licenca">Término Licença:</label>
-                            <input type="date" name="termino_licenca" class="form-control @error('termino_licenca') is-invalid @enderror" value="{{ old('termino_licenca') }}">
+                            <input type="date" name="termino_licenca" id="termino_licenca" class="form-control @error('termino_licenca') is-invalid @enderror" value="{{ old('termino_licenca') }}">
                         </div>
                     </div>
 
@@ -150,11 +150,16 @@
                         </div>
                         <div class="form-group col-md-3 col-sm-6">
                             <label for="valor_projetado">Valor Previsto:</label>
-                            <input type="text" name="valor_projetado" class="form-control @error('valor_projetado') is-invalid @enderror" value="{{ old('valor_projetado') }}" placeholder="Qual o valor previsto?">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text form-control">R$</span>
+                                </div>
+                                <input type="text" name="valor_projetado" id="valor_projetado" class="form-control @error('valor_projetado') is-invalid @enderror" value="{{ old('valor_projetado') }}" placeholder="Qual o valor previsto?">
+                            </div>
                         </div>
                         <div class="form-group col-md-3 col-sm-6">
                             <label for="comprimento_galeria">Comprimento Galeria:</label>
-                            <input type="text" name="comprimento_galeria" class="form-control @error('comprimento_galeria') is-invalid @enderror" value="{{ old('comprimento_galeria') }}" placeholder="Qual o Comprimento Galeria?">
+                            <input type="text" name="comprimento_galeria" id="comprimento_galeria" class="form-control @error('comprimento_galeria') is-invalid @enderror" value="{{ old('comprimento_galeria') }}" placeholder="Qual o Comprimento Galeria?">
                         </div>
                     </div>
                 </div>    
@@ -170,11 +175,23 @@
 
 @section('css')
     <link rel="stylesheet" href="/assets/css/admin_custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"> <!-- Select2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css"> <!-- Select2 -->
 @stop
 
 @section('js')
+    <!-- select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
     <script>
         $(document).ready(function() {
+
+            // Function buncar no select
+            $('select').select2({
+                theme: 'bootstrap4',
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            });
 
             // Carrega do dados quando selecionar o option do select
             $('#contrato_cliente').on('change', function() {

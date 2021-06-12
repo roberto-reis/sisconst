@@ -36,13 +36,13 @@
                     <div class="form-row">
                         <div class="form-group col-md-4 col-sm-6">
                             <label for="num_projeto">Projeto*:</label>
-                            <input type="text" name="num_projeto" class="form-control @error('num_projeto') is-invalid @enderror" id="projeto" value="{{ $projeto->num_projeto }}">
+                            <input type="text" name="num_projeto" id="num_projeto" class="form-control @error('num_projeto') is-invalid @enderror" id="projeto" value="{{ $projeto->num_projeto }}">
                         </div>
                         <div class="form-group col-md-2 col-sm-6">
                             <label for="estacao">Estação*:</label>
                             <select name="estacao" id="estacao" class="form-control @error('estacao') is-invalid @enderror" id="estacao">
                                 @foreach ($estacoes as $estacao)
-                                    <option value="{{ $estacao->id }}" {{ $estacao->id === $projeto->estacao->id ? "selected" : null }} >{{ $estacao->sigla }}</option>
+                                    <option value="{{ $estacao->id }}" {{ $estacao->id === $projeto->estacao->id ? "selected" : null }} >{{ $estacao->sigla ." - ". $estacao->descricao }}</option>
                                 @endforeach                                
                             </select>
                         </div>
@@ -78,7 +78,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4 col-sm-6">
                             <label for="contrato_cliente">Contrato - Cliente*:</label>
-                            <select name="contrato_cliente" id="contrato_cliente" class="form-control @error('contrato_cliente') is-invalid @enderror" id="contrato_cliente">
+                            <select name="contrato_cliente" id="contrato_cliente" class="form-control @error('contrato_cliente') is-invalid @enderror">
                                 @foreach ($clientes as $cliente)
                                     <option {{ $cliente->id === $projeto->cliente->id ? "selected" : null }} data-valor_urs="{{ $cliente->valor_urs }}" data-classe_servico="{{ $cliente->classe_servico }}" value="{{ $cliente->id }}">{{ $cliente->contrato }} - {{ $cliente->rasao_social }}</option>
                                 @endforeach
@@ -86,7 +86,7 @@
                         </div>
                         <div class="form-group col-md-4 col-sm-6">
                             <label for="pc_rv">PC / RV:</label>
-                            <input type="text" name="pc_rv" class="form-control @error('pc_rv') is-invalid @enderror" id="bairro" value="{{ $projeto->pc_rv }}">
+                            <input type="text" name="pc_rv" class="form-control @error('pc_rv') is-invalid @enderror" id="pc_rv" value="{{ $projeto->pc_rv }}">
                         </div>
                         <div class="form-group col-md-4 col-sm-12">
                             <label for="tipo_servico">Tipo de Serviço:*</label>
@@ -101,15 +101,15 @@
                     <div class="form-row">
                         <div class="form-group col-lg-8 col-md-5 col-sm-12">
                             <label for="descricao_servico">Descrição Serviço:</label>
-                            <textarea name="descricao_servico" class="form-control @error('descricao_servico') is-invalid @enderror" rows="1">{{ $projeto->descricao_servico }}</textarea>
+                            <textarea name="descricao_servico" id="descricao_servico" class="form-control @error('descricao_servico') is-invalid @enderror" rows="1">{{ $projeto->descricao_servico }}</textarea>
                         </div>
                         <div class="form-group col-lg-2 col-md-3 col-sm-6">
                             <label for="inicio_previsto">Inicio Previsto:</label>
-                            <input type="date" name="inicio_previsto" class="form-control @error('inicio_previsto') is-invalid @enderror" value="{{ $projeto->inicio_previsto }}">
+                            <input type="date" name="inicio_previsto" id="inicio_previsto" class="form-control @error('inicio_previsto') is-invalid @enderror" value="{{ $projeto->inicio_previsto }}">
                         </div>
                         <div class="form-group col-lg-2 col-md-4 col-sm-6">
                             <label for="termino_previsto">Término Previsto:</label>
-                            <input type="date" name="termino_previsto" class="form-control @error('termino_previsto') is-invalid @enderror" id="termino_previsto" value="{{ $projeto->termino_previsto }}">
+                            <input type="date" name="termino_previsto" id="termino_previsto" class="form-control @error('termino_previsto') is-invalid @enderror" value="{{ $projeto->termino_previsto }}">
                         </div>
                     </div>
 
@@ -124,15 +124,15 @@
                         </div>
                         <div class="form-group col-lg-3 col-md-2 col-sm-6">
                             <label for="licenca">Licença:</label>
-                            <input type="text" name="licenca" class="form-control @error('licenca') is-invalid @enderror" value="{{ $projeto->licenca }}">
+                            <input type="text" name="licenca" id="licenca" class="form-control @error('licenca') is-invalid @enderror" value="{{ $projeto->licenca }}">
                         </div>
                         <div class="form-group col-lg-2 col-md-3 col-sm-6">
                             <label for="inicio_licenca">Inicio Licença:</label>
-                            <input type="date" name="inicio_licenca" class="form-control @error('inicio_licenca') is-invalid @enderror" value="{{ $projeto->inicio_licenca }}">
+                            <input type="date" name="inicio_licenca" id="inicio_licenca" class="form-control @error('inicio_licenca') is-invalid @enderror" value="{{ $projeto->inicio_licenca }}">
                         </div>
                         <div class="form-group col-lg-2 col-md-3 col-sm-6">
                             <label for="termino_licenca">Término Licença:</label>
-                            <input type="date" name="termino_licenca" class="form-control @error('termino_licenca') is-invalid @enderror" value="{{ $projeto->termino_licenca }}">
+                            <input type="date" name="termino_licenca" id="termino_licenca" class="form-control @error('termino_licenca') is-invalid @enderror" value="{{ $projeto->termino_licenca }}">
                         </div>
                     </div>
 
@@ -151,7 +151,7 @@
                         </div>
                         <div class="form-group col-md-3 col-sm-6">
                             <label for="comprimento_galeria">Comprimento Galeria:</label>
-                            <input type="text" name="comprimento_galeria" class="form-control @error('comprimento_galeria') is-invalid @enderror" value="{{ number_format($projeto->comprimento_galeria, 2, ",", ".") }}">
+                            <input type="text" name="comprimento_galeria" id="comprimento_galeria" class="form-control @error('comprimento_galeria') is-invalid @enderror" value="{{ number_format($projeto->comprimento_galeria, 2, ",", ".") }}">
                         </div>
                     </div>
                 </div>
@@ -168,11 +168,23 @@
 
 @section('css')
     <link rel="stylesheet" href="/assets/css/admin_custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"> <!-- Select2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css"> <!-- Select2 -->
 @stop
 
 @section('js')
+    <!-- select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
+
+            // Function buncar no select
+            $('select').select2({
+                theme: 'bootstrap4',
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            });
+
             // Carrega os dados ao iniciar
             $('#classe_servico').val($('#contrato_cliente option:selected').attr("data-classe_servico"));
             $('#valor_urs').val($('#contrato_cliente option:selected').attr("data-valor_urs"));

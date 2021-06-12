@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <div class="form-row">
                         <div class="form-group col-md-4 col-sm-6">
-                            <label for="num_projeto">Projeto*:</label>
+                            <label for="projeto">Projeto*:</label>
                             <select name="projeto" id="projeto" class="form-control @error('projeto') is-invalid @enderror">
                                 @foreach ($projetos as $projeto)
                                     <option data-estacao="{{$projeto->estacao->sigla}}" data-numerooe="{{$projeto->numero_oe_oc}}" data-endereco="{{$projeto->endereco}}"
@@ -182,12 +182,23 @@
 
 @section('css')
     <link rel="stylesheet" href="/assets/css/admin_custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"> <!-- Select2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css"> <!-- Select2 -->
 @stop
 
 @section('js')
+    <!-- select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
 
+            // Function buncar no select
+            $('select').select2({
+                theme: 'bootstrap4',
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            });
+            
             // Quando o checkbox estiver checked libera o campo data
             if($('#fotos_emergencia').is(":checked")) {
                 $('#data_fotos_emergencia').prop('disabled', false);

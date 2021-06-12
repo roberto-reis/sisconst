@@ -36,7 +36,7 @@
                         <div class="form-group col-md-4 col-sm-6">
                             <label for="num_projeto">Projeto*:</label>
                             <select name="projeto" id="projeto" class="form-control @error('projeto') is-invalid @enderror" value="{{ old('projeto') }}">
-                                <option value="">Selecione a projeto</option>
+                                <option value="" selected>Selecione a projeto</option>
                                 @foreach ($projetos as $projeto)
                                     <option data-estacao="{{$projeto->estacao->sigla}}" data-numerooe="{{$projeto->numero_oe_oc}}" data-endereco="{{$projeto->endereco}}"
                                         data-bairro="{{$projeto->bairro}}" data-contrato="{{$projeto->cliente->contrato ." - ". $projeto->cliente->rasao_social}}"
@@ -51,7 +51,7 @@
                         <div class="form-group col-md-3 col-sm-6">
                             <label for="statusObra">Status da Obra*:</label>
                             <select name="statusObra" id="statusObra" class="form-control @error('statusObra') is-invalid @enderror" value="{{ old('statusObra') }}">
-                                <option value="">Selecione um status</option>
+                                <option value="" selected>Selecione um status</option>
                                 @foreach ($statusObras as $statusObra)
                                     <option value="{{ $statusObra->id }}">{{ $statusObra->nome }}</option>
                                 @endforeach                                
@@ -194,8 +194,8 @@
 
 @section('css')
     <link rel="stylesheet" href="/assets/css/admin_custom.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css"> <!-- for live demo page -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"> <!-- Select2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css"> <!-- Select2 -->
 @stop
 
 @section('js')
@@ -205,6 +205,7 @@
     <script>
         $(document).ready(function() {
 
+            // Function buncar no select
             $('select').select2({
                 theme: 'bootstrap4',
                 width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',

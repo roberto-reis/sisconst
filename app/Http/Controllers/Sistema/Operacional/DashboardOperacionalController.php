@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Sistema\Operacional;
 
 use App\Http\Controllers\Controller;
 use App\Models\Obra;
-use App\Models\StatusObra;
 use Illuminate\Http\Request;
 
 class DashboardOperacionalController extends Controller
@@ -17,20 +16,18 @@ class DashboardOperacionalController extends Controller
     public function index() {
         $obras = Obra::get();
 
-        // Pega os id referente aos status
-        $emAndamento = StatusObra::where('nome', 'Em andamento')->first();
-        $emAndamentoId = $emAndamento != null ? $emAndamento->id : 0;
-        $finalizada = StatusObra::where('nome', 'finalizada')->first();
-        $finalizadaId = $finalizada != null ? $finalizada->id : 0;
-        $faturada = StatusObra::where('nome', 'faturada')->first();
-        $faturadaId = $faturada != null ? $faturada->id : 0;
-
         //Contar obras com determinado status
-        $obrasEmAndamentoCount = Obra::where('id_status_obra', $emAndamentoId)->count();        
-        $obrasFinalizadaCount = Obra::where('id_status_obra', $finalizadaId)->count();        
-        $obrasFaturadaCount = Obra::where('id_status_obra', $faturadaId)->count();
+        $obrasEmAndamentoCount = Obra::whereHas('statusObra', function($query) {                    
+            $query->where('nome', 'Em andamento');
+        })->count();   
+        $obrasFinalizadaCount = Obra::whereHas('statusObra', function($query) {                    
+            $query->where('nome', 'finalizada');
+        })->count();       
+        $obrasFaturadaCount = Obra::whereHas('statusObra', function($query) {                    
+            $query->where('nome', 'faturada');
+        })->count();
 
-        // 
+        // Contar as obras que não tem anexo XIII
         $obraFaltaAnexoIII = Obra::where('fotos_anexo_xiii', 'N')->count();
 
         return view('sistema.operacional.dashboard', [

@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="cnpj">CNPJ:</label>
-                            <input type="number" name="cnpj" class="form-control @error('cnpj') is-invalid @enderror" id="contrato" value="{{ $cliente->cnpj }}">
+                            <input type="text" name="cnpj" class="form-control @error('cnpj') is-invalid @enderror" id="contrato" value="{{ $cliente->cnpj }}">
                         </div>
                     </div>
         

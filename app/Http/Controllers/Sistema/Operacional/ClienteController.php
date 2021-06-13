@@ -75,7 +75,7 @@ class ClienteController extends Controller
         $cliente = new Cliente();
         $cliente->contrato = $data['contrato'];
         $cliente->rasao_social = $data['rasao_social'];
-        $cliente->cnpj = $data['cnpj'];
+        $cliente->cnpj = $this->format_cnpj($data['cnpj']);
         $cliente->endereco = $data['endereco'];
         $cliente->bairro = $data['bairro'];
         $cliente->cidade = $data['cidade'];
@@ -140,7 +140,7 @@ class ClienteController extends Controller
 
             $cliente->contrato = $data['contrato'];
             $cliente->rasao_social = $data['rasao_social'];
-            $cliente->cnpj = $data['cnpj'];
+            $cliente->cnpj = $this->format_cnpj($data['cnpj']);
             $cliente->endereco = $data['endereco'];
             $cliente->bairro = $data['bairro'];
             $cliente->cidade = $data['cidade'];
@@ -182,6 +182,14 @@ class ClienteController extends Controller
     public function format_num($valor) {
         $valor = str_replace(".", "", $valor);
         $valor = str_replace(",", ".", $valor);
+        return $valor;
+    }
+
+    // Formata cnpj para guadar no BD
+    public function format_cnpj($valor) {
+        $valor = str_replace(".", "", $valor);
+        $valor = str_replace("/", "", $valor);
+        $valor = str_replace("-", "", $valor);
         return $valor;
     }
 

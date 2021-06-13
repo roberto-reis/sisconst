@@ -23,6 +23,7 @@ class Obra extends Model
         'fiscal_cliente',
         'observacao',
         'id_projeto',
+        'id_supervisor',
         'id_empreiteiro',
         'id_status_obra',
         'id_usuario'
@@ -38,6 +39,10 @@ class Obra extends Model
 
     public function empreiteiro() {
         return $this->hasOne(Empreiteiro::class, 'id', 'id_empreiteiro');
+    }
+
+    public function supervisor() {
+        return $this->hasOne(Supervisor::class, 'id', 'id_supervisor');
     }
 
 }

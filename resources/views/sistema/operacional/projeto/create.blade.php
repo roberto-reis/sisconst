@@ -116,24 +116,15 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-lg-5 col-md-4 col-sm-6">
-                            <label for="supervisor">Supervisor:</label>
-                            <select name="supervisor" id="supervisor" class="form-control">
-                                <option value="">Selecione um supervisor</option>
-                                @foreach ($supervisores as $supervisor)
-                                    <option value="{{ $supervisor->id }}">{{ $supervisor->nome }}</option>
-                                @endforeach                                
-                            </select>
-                        </div>
-                        <div class="form-group col-lg-3 col-md-2 col-sm-6">
+                        <div class="form-group col-md-4 col-sm-6">
                             <label for="licenca">Licença:</label>
                             <input type="text" name="licenca" id="licenca" class="form-control @error('licenca') is-invalid @enderror" value="{{ old('licenca') }}" placeholder="Digite licença">
                         </div>
-                        <div class="form-group col-lg-2 col-md-3 col-sm-6">
+                        <div class="form-group col-md-4 col-sm-6">
                             <label for="inicio_licenca">Inicio Licença:</label>
                             <input type="date" name="inicio_licenca" id="inicio_licenca" class="form-control @error('inicio_licenca') is-invalid @enderror" value="{{ old('inicio_licenca') }}">
                         </div>
-                        <div class="form-group col-lg-2 col-md-3 col-sm-6">
+                        <div class="form-group col-md-4 col-sm-6">
                             <label for="termino_licenca">Término Licença:</label>
                             <input type="date" name="termino_licenca" id="termino_licenca" class="form-control @error('termino_licenca') is-invalid @enderror" value="{{ old('termino_licenca') }}">
                         </div>
@@ -150,7 +141,7 @@
                         </div>
                         <div class="form-group col-md-3 col-sm-6">
                             <label for="valor_projetado">Valor Previsto:</label>
-                            <div class="input-group mb-3">
+                            <div class="input-group">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text form-control">R$</span>
                                 </div>

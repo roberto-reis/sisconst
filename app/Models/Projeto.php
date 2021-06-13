@@ -27,7 +27,6 @@ class Projeto extends Model
         'descricao_servico',
         'inicio_previsto',
         'termino_previsto',
-        'supervisor',
         'licenca',
         'inicio_licenca',
         'termino_licenca',
@@ -47,10 +46,6 @@ class Projeto extends Model
 
     public function tipoServico() {
         return $this->hasOne(TipoServico::class, 'id', 'id_tipo_servico');
-    }
-
-    public function supervisor() {
-        return $this->hasOne(Supervisor::class, 'id', 'id_supervisor');
     }
 
     public function obras() {

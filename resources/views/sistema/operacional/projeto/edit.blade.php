@@ -114,23 +114,15 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-lg-5 col-md-4 col-sm-6">
-                            <label for="supervisor">Supervisor:</label>
-                            <select name="supervisor" id="supervisor" class="form-control">
-                                @foreach ($supervisores as $supervisor)
-                                    <option value="{{ $supervisor->id }}" {{ $projeto->supervisor->id === $supervisor->id ? "selected" : null }}>{{ $supervisor->nome }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-lg-3 col-md-2 col-sm-6">
+                        <div class="form-group col-md-4 col-sm-6">
                             <label for="licenca">Licença:</label>
                             <input type="text" name="licenca" id="licenca" class="form-control @error('licenca') is-invalid @enderror" value="{{ $projeto->licenca }}">
                         </div>
-                        <div class="form-group col-lg-2 col-md-3 col-sm-6">
+                        <div class="form-group col-md-4 col-sm-6">
                             <label for="inicio_licenca">Inicio Licença:</label>
                             <input type="date" name="inicio_licenca" id="inicio_licenca" class="form-control @error('inicio_licenca') is-invalid @enderror" value="{{ $projeto->inicio_licenca }}">
                         </div>
-                        <div class="form-group col-lg-2 col-md-3 col-sm-6">
+                        <div class="form-group col-md-4 col-sm-6">
                             <label for="termino_licenca">Término Licença:</label>
                             <input type="date" name="termino_licenca" id="termino_licenca" class="form-control @error('termino_licenca') is-invalid @enderror" value="{{ $projeto->termino_licenca }}">
                         </div>
@@ -147,7 +139,12 @@
                         </div>
                         <div class="form-group col-md-3 col-sm-6">
                             <label for="valor_projetado">Valor Previsto:</label>
-                            <input type="text" name="valor_projetado" id="valor_projetado" class="form-control @error('valor_projetado') is-invalid @enderror" value="{{ number_format($projeto->valor_projetado, 2, ",", ".") }}">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text form-control">R$</span>
+                                </div>
+                                <input type="text" name="valor_projetado" id="valor_projetado" class="form-control @error('valor_projetado') is-invalid @enderror" value="{{ number_format($projeto->valor_projetado, 2, ",", ".") }}">
+                            </div>
                         </div>
                         <div class="form-group col-md-3 col-sm-6">
                             <label for="comprimento_galeria">Comprimento Galeria:</label>

@@ -43,7 +43,7 @@
                                         data-pcrv="{{$projeto->pc_rv}}" data-tiposervico="{{$projeto->tipoServico->nome}}" data-descricaoservico="{{$projeto->descricao_servico}}"
                                         data-valorprojetado="{{$projeto->valor_projetado}}" data-comprimentogaleria="{{$projeto->comprimento_galeria}}"
                                         data-licenca="{{$projeto->licenca}}" data-iniciolicenca="{{$projeto->inicio_licenca}}" data-terminolicenca="{{$projeto->termino_licenca}}"
-                                        data-supervisor="{{$projeto->supervisor->nome}}" value="{{ $projeto->id }}">{{ $projeto->num_projeto }}</option>
+                                        value="{{ $projeto->id }}">{{ $projeto->num_projeto }}</option>
                                 @endforeach                                
                             </select>
                             @error('projeto') <small class="invalid-feedback">{{ $message }}</small> @enderror
@@ -99,11 +99,16 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-2 col-sm-6">
-                            <label for="valor_projetado">Valor Previsto:</label>
-                            <input type="text" name="valor_projetado" class="form-control" id="valor_projetado" disabled>
-                        </div>
                         <div class="form-group col-md-3 col-sm-6">
+                            <label for="valor_projetado">Valor Previsto:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text form-control">R$</span>
+                                </div>
+                                <input type="text" name="valor_projetado" class="form-control" id="valor_projetado" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2 col-sm-6">
                             <label for="comprimento_galeria">Comp. Galeria:</label>
                             <input type="text" name="comprimento_galeria" class="form-control" id="comprimento_galeria" disabled>
                         </div>
@@ -158,7 +163,12 @@
                     <div class="form-row">
                         <div class="form-group col-md-4 col-sm-6">
                             <label for="supervisor">Supervisor:</label>
-                            <input type="text" name="supervisor" id="supervisor" class="form-control" disabled>
+                            <select name="supervisor" id="supervisor" class="form-control">
+                                <option value="">Selecione um supervisor</option>
+                                @foreach ($supervisores as $supervisor)
+                                    <option value="{{ $supervisor->id }}">{{ $supervisor->nome }}</option>
+                                @endforeach                                
+                            </select>
                         </div>
                         <div class="form-group col-md-4 col-sm-6">
                             <label for="fiscal_cliente">Fiscal (Cliente):</label>
@@ -227,7 +237,6 @@
                 $('#licenca').val($('#projeto option:selected').attr("data-licenca"));
                 $('#inicio_licenca').val($('#projeto option:selected').attr("data-iniciolicenca"));
                 $('#termino_licenca').val($('#projeto option:selected').attr("data-terminolicenca"));
-                $('#supervisor').val($('#projeto option:selected').attr("data-supervisor"));
             });
 
 

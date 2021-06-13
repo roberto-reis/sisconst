@@ -28,7 +28,7 @@
                                         data-pcrv="{{$projeto->pc_rv}}" data-tiposervico="{{$projeto->tipoServico->nome}}" data-descricaoservico="{{$projeto->descricao_servico}}"
                                         data-valorprojetado="{{$projeto->valor_projetado}}" data-comprimentogaleria="{{$projeto->comprimento_galeria}}"
                                         data-licenca="{{$projeto->licenca}}" data-iniciolicenca="{{$projeto->inicio_licenca}}"
-                                        data-terminolicenca="{{$projeto->termino_licenca}}"data-supervisor="{{$projeto->supervisor->nome}}"
+                                        data-terminolicenca="{{$projeto->termino_licenca}}"
                                         value="{{ $projeto->id }}" {{ $projeto->id === $obra->projeto->id ? "selected" : null }} >{{ $projeto->num_projeto }}</option>
                                 @endforeach                                
                             </select>
@@ -84,11 +84,16 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-2 col-sm-6">
-                            <label for="valor_projetado">Valor Previsto:</label>
-                            <input type="text" name="valor_projetado" class="form-control" id="valor_projetado" disabled>
-                        </div>
                         <div class="form-group col-md-3 col-sm-6">
+                            <label for="valor_projetado">Valor Previsto:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text form-control">R$</span>
+                                </div>
+                                <input type="text" name="valor_projetado" class="form-control" id="valor_projetado" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2 col-sm-6">
                             <label for="comprimento_galeria">Comprimento Galeria:</label>
                             <input type="text" name="comprimento_galeria" class="form-control" id="comprimento_galeria" disabled>
                         </div>
@@ -147,7 +152,11 @@
                     <div class="form-row">
                         <div class="form-group col-md-4 col-sm-6">
                             <label for="supervisor">Supervisor:</label>
-                            <input type="text" name="supervisor" id="supervisor" class="form-control" disabled>
+                            <select name="supervisor" id="supervisor" class="form-control">
+                                @foreach ($supervisores as $supervisor)
+                                    <option value="{{ $supervisor->id }}" {{ $obra->supervisor->id === $supervisor->id ? "selected" : null }}>{{ $supervisor->nome }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group col-md-4 col-sm-6">
                             <label for="fiscal_cliente">Fiscal (Cliente):</label>
@@ -242,7 +251,6 @@
             $('#licenca').val($('#projeto option:selected').attr("data-licenca"));
             $('#inicio_licenca').val($('#projeto option:selected').attr("data-iniciolicenca"));
             $('#termino_licenca').val($('#projeto option:selected').attr("data-terminolicenca"));
-            $('#supervisor').val($('#projeto option:selected').attr("data-supervisor"));
 
             // Carrega do dados quando selecionar o option do select
             $('#projeto').on('change', function() {
@@ -260,7 +268,6 @@
                 $('#licenca').val($('#projeto option:selected').attr("data-licenca"));
                 $('#inicio_licenca').val($('#projeto option:selected').attr("data-iniciolicenca"));
                 $('#termino_licenca').val($('#projeto option:selected').attr("data-terminolicenca"));
-                $('#supervisor').val($('#projeto option:selected').attr("data-supervisor"));
             });
 
 

@@ -7,6 +7,7 @@ use App\Models\Empreiteiro;
 use App\Models\Obra;
 use App\Models\Projeto;
 use App\Models\StatusObra;
+use App\Models\Supervisor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -24,27 +25,42 @@ class ObraController extends Controller
         $filtro = request('filtro');
 
         if($search) {
-            
-            if($filtro === "status") {
-                // Consulta pelo relacionamento statusObra
-                $obras = Obra::whereHas('statusObra', function($query) use ($search) {                    
-                    $query->where('nome', 'like', '%'.$search.'%');
-                })->orderBy('id', 'desc')->get();
 
-            } elseif($filtro === "empreiteiro") {
-                // Consulta pelo relacionamento empreiteiro
-                $obras = Obra::whereHas('empreiteiro', function($query) use ($search) {                    
-                    $query->where('nome', 'like', '%'.$search.'%');
-                })->orderBy('id', 'desc')->get();
-            } else {
-                // Consulta pelo relacionamento projeto
-                $obras = Obra::whereHas('projeto', function($query) use($search, $filtro) {
-                    $query->where($filtro, 'like', '%'.$search.'%');
-                })->orderBy('id', 'desc')->get();
+            switch ($filtro) {
+                case 'status':
+                    // Consulta pelo relacionamento statusObra
+                    $obras = Obra::whereHas('statusObra', function($query) use ($search) {                    
+                        $query->where('nome', 'like', '%'.$search.'%');
+                    })->get();
+                    break;
+                case 'empreiteiro':
+                    // Consulta pelo relacionamento empreiteiro
+                    $obras = Obra::whereHas('empreiteiro', function($query) use ($search) {                    
+                        $query->where('nome', 'like', '%'.$search.'%');
+                    })->get();
+                    break;
+                case 'supervisor':
+                    // Consulta pelo relacionamento empreiteiro
+                    $obras = Obra::whereHas('supervisor', function($query) use ($search) {                    
+                        $query->where('nome', 'like', '%'.$search.'%');
+                    })->get();
+                    break;                
+                default:
+                    // Consulta pelo relacionamento projeto com filtro
+                    $obras = Obra::whereHas('projeto', function($query) use($search, $filtro) {
+                        if($filtro) {
+                            $query->where($filtro, 'like', '%'.$search.'%');
+                        } else {
+                            $query->where('num_projeto', 'like', '%'.$search.'%')
+                                ->orWhere('numero_oe_oc', 'like', '%'.$search.'%')
+                                ->orWhere('pc_rv', 'like', '%'.$search.'%');
+                        }
+                    })->get();
+                    break;
             }
 
         } else {
-            $obras = Obra::with('projeto', 'statusObra', 'empreiteiro')->orderBy('id', 'desc')->get();
+            $obras = Obra::with('projeto', 'statusObra', 'empreiteiro')->get();
         }
 
         return view('sistema.operacional.obra.home', [
@@ -57,11 +73,13 @@ class ObraController extends Controller
         $projetos = Projeto::get();
         $statusObras = StatusObra::get();
         $empreiteiros = Empreiteiro::get();
+        $supervisores = Supervisor::get();  
 
         return view('sistema.operacional.obra.create', [
             'projetos' => $projetos,
             'statusObras' => $statusObras,
-            'empreiteiros' => $empreiteiros
+            'empreiteiros' => $empreiteiros,
+            'supervisores' => $supervisores
         ]);
     }
 
@@ -75,6 +93,7 @@ class ObraController extends Controller
             'data_fotos_emergencia',
             'fotos_anexo_xiii',
             'data_fotos_anexo_xiii',
+            'supervisor',
             'empreiteiro',
             'fiscal_cliente',
             'inicio_real',
@@ -90,6 +109,7 @@ class ObraController extends Controller
             'fotos_anexo_xiii' => ['nullable', 'string'],
             'data_fotos_anexo_xiii' => ['nullable', 'date'],
             'empreiteiro' => ['nullable', 'integer'],
+            'supervisor' => ['nullable', 'integer'],
             'fiscal_cliente' => ['nullable', 'string', 'max:50'],
             'inicio_real' => ['nullable', 'date'],
             'termino_real' => ['nullable', 'date'],
@@ -110,6 +130,7 @@ class ObraController extends Controller
         $obra->fiscal_cliente = $data['fiscal_cliente'];
         $obra->observacao = $data['observacao'];
         $obra->id_projeto = $data['projeto'];
+        $obra->id_supervisor = $data['supervisor'];
         $obra->id_empreiteiro = $data['empreiteiro'];
         $obra->id_status_obra = $data['statusObra'];
         $obra->id_usuario = $loggedUser;
@@ -123,6 +144,7 @@ class ObraController extends Controller
         $obra = Obra::with('empreiteiro')->find($id);
         $projetos = Projeto::get();
         $statusObras = StatusObra::get();
+        $supervisores = Supervisor::get(); 
         $empreiteiros = Empreiteiro::get();
 
         if($obra) {
@@ -130,6 +152,7 @@ class ObraController extends Controller
                 'obra' => $obra,
                 'projetos' => $projetos,
                 'statusObras' => $statusObras,
+                'supervisores' => $supervisores,
                 'empreiteiros' => $empreiteiros
             ]);
         }        
@@ -151,6 +174,7 @@ class ObraController extends Controller
                 'fotos_anexo_xiii',
                 'data_fotos_anexo_xiii',
                 'empreiteiro',
+                'supervisor',
                 'fiscal_cliente',
                 'inicio_real',
                 'termino_real',
@@ -167,6 +191,7 @@ class ObraController extends Controller
                 'fotos_anexo_xiii' => ['nullable', 'string'],
                 'data_fotos_anexo_xiii' => ['nullable', 'date'],
                 'empreiteiro' => ['nullable', 'integer'],
+                'supervisor' => ['nullable', 'integer'],
                 'fiscal_cliente' => ['nullable', 'string', 'max:50'],
                 'inicio_real' => ['nullable', 'date'],
                 'termino_real' => ['nullable', 'date'],
@@ -189,6 +214,7 @@ class ObraController extends Controller
                 $obra->observacao = $data['observacao'];
                 $obra->id_projeto = $data['projeto'];
                 $obra->id_empreiteiro = $data['empreiteiro'];
+                $obra->id_supervisor = $data['supervisor'];
                 $obra->id_status_obra = $data['statusObra'];
                 $obra->save();
 

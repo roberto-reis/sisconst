@@ -7,7 +7,6 @@ use App\Models\Cliente;
 use App\Models\Estacao;
 use App\Models\Obra;
 use App\Models\Projeto;
-use App\Models\Supervisor;
 use App\Models\TipoServico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -18,13 +17,6 @@ class ProjetoController extends Controller
     public function __construct() {
         $this->middleware('auth');
         $this->middleware('can:permission-operacional');
-    }
-
-    // Formata numero para guadar no BD
-    public function format_num($valor) {
-        $valor = str_replace(".", "", $valor);
-        $valor = str_replace(",", ".", $valor);
-        return $valor;
     }
 
     public function index() {
@@ -47,14 +39,12 @@ class ProjetoController extends Controller
     public function create() {
         $estacoes = Estacao::get();
         $clientes = Cliente::get();
-        $tipoServicos = TipoServico::get();
-        $supervisores = Supervisor::get();        
+        $tipoServicos = TipoServico::get();      
 
         return view('sistema.operacional.projeto.create', [
             'estacoes' => $estacoes,
             'clientes' => $clientes,
-            'tipoServicos' => $tipoServicos,
-            'supervisores' => $supervisores
+            'tipoServicos' => $tipoServicos
         ]);
     }
 
@@ -75,7 +65,6 @@ class ProjetoController extends Controller
             'descricao_servico',
             'inicio_previsto',
             'termino_previsto',
-            'supervisor',
             'licenca',
             'inicio_licenca',
             'termino_licenca',
@@ -120,7 +109,6 @@ class ProjetoController extends Controller
         $projeto->descricao_servico = $data['descricao_servico'];
         $projeto->inicio_previsto = $data['inicio_previsto'];
         $projeto->termino_previsto = $data['termino_previsto'];
-        $projeto->id_supervisor = $data['supervisor'];
         $projeto->licenca = $data['licenca'];
         $projeto->inicio_licenca = $data['inicio_licenca'];
         $projeto->termino_licenca = $data['termino_licenca'];
@@ -142,7 +130,6 @@ class ProjetoController extends Controller
         $estacoes = Estacao::get();
         $clientes = Cliente::get();
         $tipoServicos = TipoServico::get();
-        $supervisores = Supervisor::get();
 
         if($projeto) {
 
@@ -150,8 +137,7 @@ class ProjetoController extends Controller
                 'projeto' => $projeto,
                 'estacoes' => $estacoes,
                 'clientes' => $clientes,
-                'tipoServicos' => $tipoServicos,
-                'supervisores' => $supervisores
+                'tipoServicos' => $tipoServicos
             ]);
         }
         
@@ -179,7 +165,6 @@ class ProjetoController extends Controller
                 'descricao_servico',
                 'inicio_previsto',
                 'termino_previsto',
-                'supervisor',
                 'licenca',
                 'inicio_licenca',
                 'termino_licenca',
@@ -237,7 +222,6 @@ class ProjetoController extends Controller
                 $projeto->descricao_servico = $data['descricao_servico'];
                 $projeto->inicio_previsto = $data['inicio_previsto'];
                 $projeto->termino_previsto = $data['termino_previsto'];
-                $projeto->id_supervisor = $data['supervisor'];
                 $projeto->licenca = $data['licenca'];
                 $projeto->inicio_licenca = $data['inicio_licenca'];
                 $projeto->termino_licenca = $data['termino_licenca'];
@@ -271,10 +255,15 @@ class ProjetoController extends Controller
             
             return redirect()->route('projetos.index');
 
-        }       
-
-            
+        }           
     }
 
+
+    // Formata numero para guadar no BD
+    public function format_num($valor) {
+        $valor = str_replace(".", "", $valor);
+        $valor = str_replace(",", ".", $valor);
+        return $valor;
+    }
 
 }

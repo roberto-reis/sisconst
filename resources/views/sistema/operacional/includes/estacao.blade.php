@@ -16,15 +16,15 @@
                     <div class="form-row">
                         <div class="col-md-3 col-lg-2 mb-2">
                             <label for="sigla">Sigla*:</label>
-                            <input type="text" class="form-control" name="sigla" id="sigla" placeholder="Exemp.: COP">
+                            <input type="text" class="form-control" name="sigla" id="siglaEstacaoAdd" placeholder="Exemp.: COP">
                         </div>
                         <div class="col-md-3 col-lg-4 mb-2">
                             <label for="descricao">Descrição*:</label>
-                            <input type="text" class="form-control" name="descricao" id="descricao" placeholder="Exemp.: Copacabana">
+                            <input type="text" class="form-control" name="descricao" id="descricaoEstacaoAdd" placeholder="Exemp.: Copacabana">
                         </div>
                         <div class="col-md-3 col-lg-4 mb-2">
                             <label for="municipio">Município*:</label>
-                            <input type="text" class="form-control" name="municipio" id="municipio" placeholder="Qual o município?">
+                            <input type="text" class="form-control" name="municipio" id="municipioEstacaoAdd" placeholder="Qual o município?">
                         </div>
                         <div class="col-md-3 col-lg-2 mb-2 align-self-end">
                             <button type="submit" class="btn btn-info">Cadastrar</button>
@@ -70,20 +70,20 @@
                 </div>
                 {{-- Form cadstrar Estação --}}
                 <form class="form_custom" id="form_estacaoUpdate">
-                    <input type="hidden" name="id" id="input_id">
+                    <input type="hidden" name="id" id="estacao_id">
                     
                     <div class="form-group">
                         <label for="sigla">Sigla*:</label>
-                        <input type="text" class="form-control" name="sigla" id="sigla">
+                        <input type="text" class="form-control" name="sigla" id="siglaEstacaoUpdate">
                     </div>
 
                     <div class="form-group">
                         <label for="descricao">Descrição*:</label>
-                        <input type="text" class="form-control" name="descricao" id="descricao">
+                        <input type="text" class="form-control" name="descricao" id="descricaoEstacaoUpdate">
                     </div>
                     <div class="form-group">
                         <label for="municipio">Município*:</label>
-                        <input type="text" class="form-control" name="municipio" id="municipio">
+                        <input type="text" class="form-control" name="municipio" id="municipioEstacaoUpdate">
                     </div>
 
                       <button class="btn btn-info" type="submit">Alterar</button>

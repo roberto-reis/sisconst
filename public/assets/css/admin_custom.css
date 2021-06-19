@@ -38,9 +38,10 @@
 .card_custom h3 {
     font-size: 24px;
 }
-.card_custom span {
+.card_custom a {
     font-size: 48px;
     font-weight: 600;
+    color: #fff;
 }
 
 /* modal_custom */

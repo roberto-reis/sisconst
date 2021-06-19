@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.main')
 
 @section('title', 'Projeto')
 
@@ -12,7 +12,7 @@
                 <input type="text" name="search" class="form-control" value="{{ $search }}" placeholder="O que deseja pesquisar?">
                 <div class="input-group-append">
                     <select name="filtro" class="custom-select rounded-0">
-                        <option value="num_projeto" selected>Filtro...</option>
+                        <option value="" selected>Filtro...</option>
                         <option value="bairro">Bairro</option>
                         <option value="endereco">Endereço</option>
                         <option value="licenca">licença</option>
@@ -26,7 +26,7 @@
     </div>
 @stop
 
-@section('content')
+@section('content_main')
 
     @if (session('mensagem_sucesso'))
         <div class="alert alert-success alert-dismissible alerta_custom">
@@ -124,7 +124,7 @@
 @stop
 
 @section('plugins.Datatables', true)
-@section('js')
+@section('js_custom')
     <script>
         $(document).ready(function () {
             $('.table-projetos').DataTable({
@@ -134,9 +134,4 @@
             });
         });
     </script>
-@stop
-
-
-@section('css')
-    <link rel="stylesheet" href="/assets/css/admin_custom.css">
 @stop

@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.main')
 
 @section('title', 'Clientes')
 
@@ -24,7 +24,7 @@
         </div>
 @stop
 
-@section('content')
+@section('content_main')
 
     @if (session('mensagem_sucesso'))
         <div class="alert alert-success alert-dismissible alerta_custom">
@@ -111,7 +111,7 @@
 @stop
 
 @section('plugins.Datatables', true)
-@section('js')
+@section('js_custom')
     <script>
         $(document).ready(function () {
             $('.table-clientes').DataTable({
@@ -121,9 +121,4 @@
             });
         });
     </script>
-@stop
-
-
-@section('css')
-    <link rel="stylesheet" href="/assets/css/admin_custom.css">
 @stop

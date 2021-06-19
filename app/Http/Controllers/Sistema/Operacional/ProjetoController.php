@@ -24,9 +24,15 @@ class ProjetoController extends Controller
         $filtro = request('filtro');
 
         if($search) {
-            $projetos = Projeto::where($filtro, 'like', '%'.$search.'%')->orderBy('id', 'desc')->get();
+            if ($filtro) {
+                $projetos = Projeto::where($filtro, 'like', '%'.$search.'%')->get();
+            }else {
+                $projetos = Projeto::where('num_projeto', 'like', '%'.$search.'%')
+                                ->orWhere('numero_oe_oc', 'like', '%'.$search.'%')
+                                ->orWhere('pc_rv', 'like', '%'.$search.'%')->get();
+            }
         } else {
-            $projetos = Projeto::orderBy('id', 'desc')->get();
+            $projetos = Projeto::get();
         }
         
 

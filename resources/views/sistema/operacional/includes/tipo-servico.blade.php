@@ -14,7 +14,7 @@
                 {{-- Form cadstrar status --}}
                 <form class="form_custom" id="form_tipoServicoAdd">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o Tipo de Serviço aqui...">
+                        <input type="text" class="form-control" id="nomeTipoServicoAdd" name="nome" placeholder="Digite o Tipo de Serviço aqui...">
                         <div class="input-group-append">
                         <button class="btn btn-info" type="submit">Cadastrar</button>
                         </div>
@@ -55,9 +55,9 @@
                 </div>
                 {{-- Form cadstrar status --}}
                 <form class="form_custom" id="form_tipoServicoUpdate">
-                    <input type="hidden" name="id" id="input_id">
+                    <input type="hidden" name="id" id="tipoServico_id">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="nome" name="nome">
+                        <input type="text" class="form-control" id="nomeTipoServicoUpdate" name="nome">
                         <div class="input-group-append">
                             <button class="btn btn-info" type="submit">Alterar</button>
                         </div>

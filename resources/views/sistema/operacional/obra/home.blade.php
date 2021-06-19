@@ -1,34 +1,34 @@
-@extends('adminlte::page')
+@extends('layouts.main')
 
 @section('title', 'Obras')
 
 
 @section('content_header')
-        <div class="row align-items-center">
-            <nav class="col-md-5 col-sm-5 breadcrumb_custom pb-2 p-sm-0"><div><a href="{{ route('operacional.index') }}">Operacional</a> > Obras</div></nav>
-            {{-- Form de pesquisar --}}
-            <form class="col-md-7 col-sm-7 p-0" action="{{ route('obras.index') }}" method="GET">
-                <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="O que deseja pesquisar?">
-                    <div class="input-group-append">
-                        <select name="filtro" class="custom-select rounded-0">
-                            <option value="" selected>Filtro...</option>
-                            <option value="bairro">Bairro</option>                            
-                            <option value="endereco">Endereço</option>
-                            <option value="empreiteiro">Empreiteiro</option>
-                            <option value="numero_oe_oc">OE/OC</option>
-                            <option value="num_projeto">Projeto</option>
-                            <option value="status">Status</option>
-                            <option value="supervisor">Supervisor</option>
-                        </select>
-                    <button type="submit" class="btn btn-outline-info"><i class="fas fa-search"></i></button>
-                    </div>
+    <div class="row align-items-center">
+        <nav class="col-md-5 col-sm-5 breadcrumb_custom pb-2 p-sm-0"><div><a href="{{ route('operacional.index') }}">Operacional</a> > Obras</div></nav>
+        {{-- Form de pesquisar --}}
+        <form class="col-md-7 col-sm-7 p-0" action="{{ route('obras.index') }}" method="GET">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="O que deseja pesquisar?">
+                <div class="input-group-append">
+                    <select name="filtro" class="custom-select rounded-0">
+                        <option value="" selected>Filtro...</option>
+                        <option value="bairro">Bairro</option>                            
+                        <option value="endereco">Endereço</option>
+                        <option value="empreiteiro">Empreiteiro</option>
+                        <option value="numero_oe_oc">OE/OC</option>
+                        <option value="num_projeto">Projeto</option>
+                        <option value="status">Status</option>
+                        <option value="supervisor">Supervisor</option>
+                    </select>
+                <button type="submit" class="btn btn-outline-info"><i class="fas fa-search"></i></button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
+    </div>
 @stop
 
-@section('content')
+@section('content_main')
 
     @if (session('mensagem_sucesso'))
         <div class="alert alert-success alert-dismissible alerta_custom">
@@ -117,11 +117,10 @@
             </div>
         </div>
     </div>
-
 @stop
 
 @section('plugins.Datatables', true)
-@section('js')
+@section('js_custom')
     <script>
         $(document).ready(function () {
             $('.table-obras').DataTable({
@@ -131,9 +130,4 @@
             });
         });
     </script>
-@stop
-
-
-@section('css')
-    <link rel="stylesheet" href="/assets/css/admin_custom.css">
 @stop

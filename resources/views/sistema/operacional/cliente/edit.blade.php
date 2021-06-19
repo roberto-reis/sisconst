@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.main')
 
 @section('title', 'Editar Cliente')
 
@@ -9,7 +9,7 @@
         </div>
 @stop
 
-@section('content')
+@section('content_main')
 
     @if ($errors->any())
         <div class="alert alert-danger alert-dismissible fade show alerta_custom" role="alert">
@@ -109,9 +109,4 @@
         
     </div>
 
-@stop
-
-
-@section('css')
-    <link rel="stylesheet" href="/assets/css/admin_custom.css">
 @stop

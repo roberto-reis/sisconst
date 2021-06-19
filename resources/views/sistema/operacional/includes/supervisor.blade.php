@@ -15,7 +15,7 @@
                 {{-- Form cadstrar status --}}
                 <form class="form_custom" id="form_supervisorAdd">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do Supervisor">
+                        <input type="text" class="form-control" id="nomeSupervisorAdd" name="nome" placeholder="Nome do Supervisor">
                         <div class="input-group-append">
                         <button class="btn btn-info" type="submit">Cadastrar</button>
                         </div>
@@ -57,9 +57,9 @@
                 </div>
                 {{-- Form cadstrar status --}}
                 <form class="form_custom" id="form_supervisorUpdate">
-                    <input type="hidden" name="id" id="input_id">
+                    <input type="hidden" name="id" id="supervisor_id">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="nome" name="nome">
+                        <input type="text" class="form-control" id="nomeSupervisorUpdate" name="nome">
                         <div class="input-group-append">
                             <button class="btn btn-info" type="submit">Alterar</button>
                         </div>

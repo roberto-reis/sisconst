@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.main')
 
 @section('title', 'Operacional')
 
@@ -10,7 +10,7 @@
 @stop
 
 
-@section('content')
+@section('content_main')
 
     <!-- Seção Operacional -->
     <div class="row my-4">
@@ -18,7 +18,7 @@
         <div class="col-md-3 col-sm-6">
             <div class="card card_custom">
                 <div class="card-body text-center">
-                    <span>{{ $obraFaltaAnexoIII }}</span>
+                    <a href="{{ url('/sistema/operacional/obras?search=n&filtro=fotos_anexo_xiii') }}">{{ $obraFaltaAnexoIII }}</a>
                     <h3>Obras Falta Anexo III</h3>
                 </div>
             </div>
@@ -26,7 +26,7 @@
         <div class="col-md-3 col-sm-6">
             <div class="card card_custom">
                 <div class="card-body text-center">
-                    <span>{{ $obrasEmAndamentoCount }}</span>
+                    <a href="{{ url('/sistema/operacional/obras?search=em+andamento&filtro=status') }}">{{ $obrasEmAndamentoCount }}</a>
                     <h3>Obras em andamento</h3>
                 </div>
             </div>
@@ -34,7 +34,7 @@
         <div class="col-md-3 col-sm-6">
             <div class="card card_custom">
                 <div class="card-body text-center">
-                    <span>{{ $obrasFinalizadaCount }}</span>
+                    <a href="{{ url('/sistema/operacional/obras?search=finalizada&filtro=status') }}">{{ $obrasFinalizadaCount }}</a>
                     <h3>Obras Finalizadas</h3>
                 </div>
             </div>
@@ -42,7 +42,7 @@
         <div class="col-md-3 col-sm-6">
             <div class="card card_custom">
                 <div class="card-body text-center">
-                    <span>{{ $obrasFaturadaCount }}</span>
+                    <a href="{{ url('/sistema/operacional/obras?search=faturada&filtro=status') }}">{{ $obrasFaturadaCount }}</a>
                     <h3>Obras Faturadas</h3>
                 </div>
             </div>
@@ -85,29 +85,4 @@
         </div>
     </div>
 
-    {{-- Include modal supervisor --}}
-    @include('sistema.operacional.includes.supervisor')
-
-    {{-- Modal Cadastrar Empreiteiro --}}
-    @include('sistema.operacional.includes.empreiteiro')
-
-    {{-- Modal Cadastrar Estação --}}
-    @include('sistema.operacional.includes.estacao')    
-
-    {{-- Modal Cadastrar status --}}
-    @include('sistema.operacional.includes.status')
-
-    {{-- Modal Cadastrar Tipo serviços --}}
-    @include('sistema.operacional.includes.tipo-servico')
-
 @stop
-
-
-@section('css')
-    <link rel="stylesheet" href="{{ asset('assets/css/admin_custom.css') }}">
-@stop
-
-@section('js')
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
-@stop
-

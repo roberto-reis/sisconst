@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Sistema\Operacional;
 
 use App\Http\Controllers\Controller;
+use App\Models\Obra;
 use App\Models\Supervisor;
-use App\Models\Projeto;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -96,7 +96,7 @@ class SupervisorController extends Controller
 
     public function destroy($id) {
         $mensagem = [];
-        $hasRelationship = Projeto::where('id_supervisor', $id)->get();
+        $hasRelationship = Obra::where('id_supervisor', $id)->get();
         
         if(count($hasRelationship) > 0) {
 

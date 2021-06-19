@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.main')
 
 @section('title', 'Editar Projeto')
 
@@ -9,7 +9,7 @@
         </div>
 @stop
 
-@section('content')
+@section('content_main')
 
     @if ($errors->any())
         <div class="alert alert-danger alert-dismissible fade show alerta_custom" role="alert">
@@ -42,7 +42,7 @@
                             <label for="estacao">Estação*:</label>
                             <select name="estacao" id="estacao" class="form-control @error('estacao') is-invalid @enderror" id="estacao">
                                 @foreach ($estacoes as $estacao)
-                                    <option value="{{ $estacao->id }}" {{ $estacao->id === $projeto->estacao->id ? "selected" : null }} >{{ $estacao->sigla ." - ". $estacao->descricao }}</option>
+                                    <option value="{{ $estacao->id }}" {{ $estacao->id === $projeto->estacao->id ? "selected" : null }} >{{ $estacao->sigla }} - {{ $estacao->descricao }}</option>
                                 @endforeach                                
                             </select>
                         </div>
@@ -160,16 +160,14 @@
         </div>
 
     </div>
-
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/assets/css/admin_custom.css">
+@section('css_custom')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"> <!-- Select2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css"> <!-- Select2 -->
 @stop
 
-@section('js')
+@section('js_custom')
     <!-- select2 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>

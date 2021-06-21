@@ -15,7 +15,7 @@ class PasswordResetLinkController extends Controller
      */
     public function create()
     {
-        return view('sistema.reset-senha');
+        return view('sistema.auth.forgot-password');
     }
 
     /**

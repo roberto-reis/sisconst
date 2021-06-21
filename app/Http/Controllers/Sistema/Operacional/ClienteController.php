@@ -55,7 +55,7 @@ class ClienteController extends Controller
         $validator = Validator::make($data, [
             'contrato' => ['required', 'string', 'max:50'],
             'rasao_social' => ['required', 'string', 'max:80'],
-            'cnpj' => ['string'],
+            'cnpj' => ['required', 'string', 'max:20'],
             'endereco' => ['required', 'string', 'max:60'],
             'bairro' => ['required', 'string', 'max:50'],
             'cidade' => ['required', 'string', 'max:50'],
@@ -122,7 +122,7 @@ class ClienteController extends Controller
             $validator = Validator::make($data, [
                 'contrato' => ['required', 'string', 'max:50'],
                 'rasao_social' => ['required', 'string', 'max:80'],
-                'cnpj' => ['string'],
+                'cnpj' => ['required', 'string', 'max:20'],
                 'endereco' => ['required', 'string', 'max:60'],
                 'bairro' => ['required', 'string', 'max:50'],
                 'cidade' => ['required', 'string', 'max:50'],
@@ -182,7 +182,7 @@ class ClienteController extends Controller
     public function format_num($valor) {
         $valor = str_replace(".", "", $valor);
         $valor = str_replace(",", ".", $valor);
-        return $valor;
+        return $valor ? $valor : 0;
     }
 
     // Formata cnpj para guadar no BD

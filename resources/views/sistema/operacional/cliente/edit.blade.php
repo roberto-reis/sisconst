@@ -5,7 +5,7 @@
 
 @section('content_header')
         <div class="row">
-            <nav class="col breadcrumb_custom"><a href="{{ route('operacional.index') }}">Operacional</a> > <a href="{{ route('clientes.index') }}">Clientes</a> > Editar Cliente</nav>
+            <nav class="col breadcrumb_custom"><a href="{{ route('operacional.index') }}">Dashboard</a> > <a href="{{ route('clientes.index') }}">Clientes</a> > Editar Cliente</nav>
         </div>
 @stop
 
@@ -51,7 +51,7 @@
                             <input type="text" name="rasao_social" class="form-control @error('rasao_social') is-invalid @enderror" id="contrato" value="{{ $cliente->rasao_social }}">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="cnpj">CNPJ:</label>
+                            <label for="cnpj">CNPJ*:</label>
                             <input type="text" name="cnpj" class="form-control @error('cnpj') is-invalid @enderror" id="contrato" value="{{ $cliente->cnpj }}">
                         </div>
                     </div>

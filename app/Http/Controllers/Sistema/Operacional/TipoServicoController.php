@@ -37,7 +37,7 @@ class TipoServicoController extends Controller
 
         } else {
             TipoServico::create([
-                'nome' => $data['nome']
+                'nome' => strtoupper($data['nome'])
             ]);
             $mensagem['sucesso'] = "Cadastrado com sucesso!";
         }
@@ -64,7 +64,7 @@ class TipoServicoController extends Controller
 
             $hasName = TipoServico::where('nome', $data['nome'])->get();
             if(count($hasName) === 0) {
-                $tipoServico->nome = $data['nome'];
+                $tipoServico->nome = strtoupper($data['nome']);
             } else {
                 // Se o nome digitado já existe no bd add validation.unique 
                 $validator->errors()->add('nome', __('validation.unique', [

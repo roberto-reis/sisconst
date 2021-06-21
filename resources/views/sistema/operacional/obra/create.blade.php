@@ -5,7 +5,7 @@
 
 @section('content_header')
         <div class="row">
-            <nav class="col breadcrumb_custom"><a href="{{ route('operacional.index') }}">Operacional</a> > <a href="{{ route('obras.index') }}">Obras</a> > Nova Obra</nav>
+            <nav class="col breadcrumb_custom"><a href="{{ route('operacional.index') }}">Dashboard</a> > <a href="{{ route('obras.index') }}">Obras</a> > Nova Obra</nav>
         </div>
 @stop
 

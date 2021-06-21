@@ -60,7 +60,7 @@ class ObraController extends Controller
             }
 
         } else {
-            $obras = Obra::with('projeto', 'statusObra', 'empreiteiro')->get();
+            $obras = Obra::with('projeto', 'statusObra', 'empreiteiro')->orderBy('id','desc')->get();
         }
 
         return view('sistema.operacional.obra.home', [

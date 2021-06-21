@@ -65,10 +65,13 @@
 .form_custom textarea,
 .select2-selection,
 .input-group-text {
-    border: 2px solid var(--blue-primary) !important;
+    border: 2px solid var(--blue-primary);
 }
 .input-group-text{
     border-right: 0 !important;
+}
+.select2-selection {
+    border: 2px solid var(--blue-primary) !important;
 }
 
 /* table_custom */

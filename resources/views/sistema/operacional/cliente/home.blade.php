@@ -5,7 +5,7 @@
 
 @section('content_header')
         <div class="row align-items-center">
-            <nav class="col-md-5 col-sm-5 breadcrumb_custom pb-2 p-sm-0"><div><a href="{{ route('operacional.index') }}">Operacional</a> > Clientes</div></nav>
+            <nav class="col-md-5 col-sm-5 breadcrumb_custom pb-2 p-sm-0"><div><a href="{{ route('operacional.index') }}">Dashboard</a> > Clientes</div></nav>
             {{-- Form de pesquisar --}}
             <form class="col-md-7 col-sm-7 p-0" action="{{ route('clientes.index') }}" method="GET">
                 <div class="input-group">

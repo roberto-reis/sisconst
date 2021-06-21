@@ -32,7 +32,7 @@ class ProjetoController extends Controller
                                 ->orWhere('pc_rv', 'like', '%'.$search.'%')->get();
             }
         } else {
-            $projetos = Projeto::get();
+            $projetos = Projeto::orderBy('id','desc')->get();
         }
         
 
@@ -269,7 +269,7 @@ class ProjetoController extends Controller
     public function format_num($valor) {
         $valor = str_replace(".", "", $valor);
         $valor = str_replace(",", ".", $valor);
-        return $valor;
+        return $valor ? $valor : 0;
     }
 
 }

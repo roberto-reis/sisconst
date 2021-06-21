@@ -14,7 +14,7 @@ class DashboardOperacionalController extends Controller
     }
 
     public function index() {
-        $obras = Obra::get();
+        $obras = Obra::orderBy('id','desc')->take(10)->get();
 
         //Contar obras com determinado status
         $obrasEmAndamentoCount = Obra::whereHas('statusObra', function($query) {                    

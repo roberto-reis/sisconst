@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return view('sistema.auth.login');
+        return view('auth.login');
     }
 
     /**
@@ -32,6 +32,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Redireciona o user após autenticação
         $user = Auth::user();
         switch($user->nivel) {
             case "admin":
@@ -44,7 +45,6 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->intended(RouteServiceProvider::CONVIDADO);
                 break;
         }
-
     }
 
     /**

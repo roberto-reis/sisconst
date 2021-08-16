@@ -21,4 +21,4 @@
 <br />
 
 ## License
-`app-tasks` é um software de código aberto licenciado sob a [MIT license](https://opensource.org/licenses/MIT).
+`SisConst` é um software de código aberto licenciado sob a [MIT license](https://opensource.org/licenses/MIT).
